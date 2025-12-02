@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Администрирование — Союз Застройщиков</title>
+  <link rel="stylesheet" href="{% static 'listings/styles.css' %}">
+</head>
+<body>
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Администрирование</p>
+      <h1>Операционная сводка</h1>
+      <div class="hero__tags">
+        {% for card in dashboard_cards %}
+          <article>
+            <p class="tag__value">{{ card.value }}</p>
+            <h3>{{ card.title }}</h3>
+            <p>{{ card.hint }}</p>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="section partners">
+    <div class="container partners__grid">
+      <div>
+        <h2>Партнёрская сеть</h2>
+        <p>{{ partner_intro }}</p>
+      </div>
+      <ul class="partners__list">
+        {% for point in partner_points %}
+          <li>{{ point }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--contrast">
+    <div class="container consult">
+      <div class="consult__content">
+        <h2>Контроль этапов</h2>
+        <ul class="consult__steps">
+          {% for step in steps %}
+            <li>
+              <span>{{ forloop.counter|stringformat:"02" }}</span>
+              <div>
+                <h3>{{ step.title }}</h3>
+                <p>{{ step.text }}</p>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

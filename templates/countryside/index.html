@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Загородное жильё — Союз Застройщиков</title>
+  <link rel="stylesheet" href="{% static 'listings/styles.css' %}">
+</head>
+<body class="country">
+  <section class="section section--contrast country" id="countryside">
+    <div class="container country__grid">
+      <div>
+        <p class="eyebrow">Загородное жильё</p>
+        <h1>Экологичные проекты рядом с городом</h1>
+        <p>{{ countryside_text }}</p>
+        <ul class="country__programs">
+          {% for program in countryside_programs %}
+            <li>{{ program }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="country__card">
+        <h3>Поддержка экспертов</h3>
+        <p>Получите подборку объектов и расчёт ипотеки по нужной программе.</p>
+        <a class="btn btn--ghost" href="/#consult">Получить подборку</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Основные преимущества</h2>
+      <div class="hero__benefits hero__benefits--light">
+        {% for benefit in countryside_benefits %}
+          <article>
+            <span>{{ benefit.title }}</span>
+            <p>{{ benefit.text }}</p>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</body>
+</html>

@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>База недвижимости — служебный раздел</title>
+  <link rel="stylesheet" href="{% static 'listings/styles.css' %}">
+</head>
+<body class="dashboard">
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Служебный модуль</p>
+      <h1>База недвижимости Setl</h1>
+      <form class="filters" method="get">
+        <input type="text" name="q" placeholder="Адрес или ЖК" value="{{ filters.q }}">
+        <input type="text" name="region" placeholder="Регион" value="{{ filters.region }}">
+        <input type="text" name="district" placeholder="Район" value="{{ filters.district }}">
+        <input type="text" name="type" placeholder="Тип" value="{{ filters.type }}">
+        <select name="category">
+          <option value="">Категория</option>
+          <option value="new" {% if filters.category == 'new' %}selected{% endif %}>Новостройка</option>
+          <option value="secondary" {% if filters.category == 'secondary' %}selected{% endif %}>Вторичка</option>
+          <option value="land" {% if filters.category == 'land' %}selected{% endif %}>Земельный участок</option>
+          <option value="house" {% if filters.category == 'house' %}selected{% endif %}>Дома</option>
+          <option value="other" {% if filters.category == 'other' %}selected{% endif %}>Прочее</option>
+        </select>
+        <input type="number" name="rooms" placeholder="Комнат" value="{{ filters.rooms }}">
+        <input type="number" name="price_min" placeholder="Цена от" value="{{ filters.price_min }}">
+        <input type="number" name="price_max" placeholder="Цена до" value="{{ filters.price_max }}">
+        <select name="order">
+          {% for key, label in sort_options.items %}
+            <option value="{{ key }}" {% if order == key %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+        <label class="checkbox-inline">
+          <input type="checkbox" name="photo" {% if filters.photo == 'on' %}checked{% endif %}>
+          Только с фото
+        </label>
+        <button class="btn btn--primary" type="submit">Найти</button>
+        <a class="btn btn--ghost" href="">Сбросить</a>
+      </form>
+
+      <div class="table-wrapper">
+        <table class="realty-table">
+          <thead>
+            <tr>
+              <th>Адрес / Метро / Район</th>
+              <th>Тип / Объект</th>
+              <th>Фото</th>
+              <th>Цена</th>
+              <th>Площади</th>
+              <th>Комнат</th>
+              <th>Этаж</th>
+              <th>Обновлено</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for offer in offers %}
+              <tr>
+                <td>
+                  <div class="info-list">
+                    <span>{{ offer.address|default:'—' }}</span>
+                    {% if offer.metro_name %}<span>Метро: {{ offer.metro_name }}</span>{% endif %}
+                    {% if offer.district %}<span>Район: {{ offer.district }}</span>{% endif %}
+                  </div>
+                </td>
+                <td>
+                  <div class="info-list">
+                    {% if offer.property_type %}<span>{{ offer.property_type }}</span>{% endif %}
+                    {% if offer.building_name %}<span>{{ offer.building_name }}</span>{% endif %}
+                    {% if not offer.property_type and not offer.building_name %}—{% endif %}
+                  </div>
+                </td>
+                <td class="photos-cell">
+                  {% if offer.photos %}
+                    {% for photo in offer.photos.splitlines|slice:":3" %}
+                      <a href="{{ photo }}" target="_blank">Фото {{ forloop.counter }}</a>
+                    {% endfor %}
+                  {% else %}
+                    —
+                  {% endif %}
+                </td>
+                <td>{{ offer.price|default:'—' }}</td>
+                <td>
+                  <div class="area-list">
+                    {% if offer.area_total %}<span>Общая: {{ offer.area_total }}</span>{% endif %}
+                    {% if offer.area_living %}<span>Жилая: {{ offer.area_living }}</span>{% endif %}
+                    {% if offer.area_kitchen %}<span>Кухня: {{ offer.area_kitchen }}</span>{% endif %}
+                    {% if offer.area_lot %}<span>Участок: {{ offer.area_lot }}</span>{% endif %}
+                    {% if offer.area_balcony %}<span>Балкон: {{ offer.area_balcony }}</span>{% endif %}
+                  </div>
+                </td>
+                <td>{{ offer.rooms|default:'—' }}</td>
+                <td>{% if offer.floor %}{{ offer.floor }}/{{ offer.floors_total|default:'?' }}{% else %}—{% endif %}</td>
+                <td>{{ offer.last_update_date|date:"d.m.Y" }}</td>
+              </tr>
+            {% empty %}
+              <tr><td colspan="8" class="empty">Ничего не найдено</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <p class="muted">Показаны первые 200 записей. Используйте фильтры для уточнения запроса.</p>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Новостройки — Союз Застройщиков</title>
+  <link rel="stylesheet" href="{% static 'listings/styles.css' %}">
+</head>
+<body class="projects">
+  <div class="container section__head">
+    <p class="eyebrow">Новостройки</p>
+    <h1>Полный каталог Петербурга</h1>
+    <p>Работаем только с проверенными застройщиками и обновляем базу ежедневно.</p>
+  </div>
+
+  <div class="container hero__tags">
+    {% for highlight in highlights %}
+      <article>
+        <p class="tag__value">{{ highlight.value }}</p>
+        <h3>{{ highlight.title }}</h3>
+        <p>{{ highlight.text }}</p>
+      </article>
+    {% endfor %}
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <h2>Почему мы</h2>
+      <ul class="hero__benefits hero__benefits--light">
+        {% for benefit in benefits %}
+          <li>
+            <span>{{ benefit.title }}</span>
+            <p>{{ benefit.text }}</p>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Как мы работаем</h2>
+      <ul class="workflow">
+        {% for step in workflow %}
+          <li>
+            <span>{{ forloop.counter|stringformat:"02" }}</span>
+            <div>
+              <h4>{{ step.title }}</h4>
+              <p>{{ step.text }}</p>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section projects">
+    <div class="container">
+      <h2>Сервисы и опции</h2>
+      <div class="focus-grid">
+        {% for focus in focus_blocks %}
+          <article class="focus-card">
+            <h3>{{ focus.title }}</h3>
+            <p>{{ focus.text }}</p>
+            <ul>
+              {% for item in focus.items %}
+                <li>{{ item }}</li>
+              {% endfor %}
+            </ul>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</body>
+</html>
