@@ -9,99 +9,162 @@
 <body class="dashboard">
   <section class="section">
     <div class="container">
+      {% if messages %}
+        <div class="messages">
+          {% for message in messages %}
+            <div class="message {{ message.tags }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+      <div class="info-header">
+        <div class="info-header__stats">
+          <span>Всего в базе: <strong>{{ offers_total }}</strong></span>
+          <span>По фильтру: <strong>{{ filtered_total }}</strong></span>
+        </div>
+        <div class="info-header__actions">
+          <a class="btn btn--ghost" href="/">Главная</a>
+          <form class="action-form" method="get" action="{% url 'realestate:clean_photos' %}">
+            <button class="btn btn--ghost action-form__btn" type="submit" data-loading-text="Чистим фото...">Чистка фото</button>
+            <span class="action-form__status" hidden>Чистим фото...</span>
+          </form>
+          <form class="action-form" method="get" action="{% url 'realestate:clean_duplicates' %}">
+            <button class="btn btn--ghost action-form__btn" type="submit" data-loading-text="Чистка дублей...">Чистка дублей</button>
+            <span class="action-form__status" hidden>Чистка дублей...</span>
+          </form>
+          <form class="action-form action-form--import" method="post" enctype="multipart/form-data" action="{% url 'realestate:import_setl' %}">
+            {% csrf_token %}
+            <label class="btn btn--ghost file-upload-btn">
+              <input type="file" name="file" accept=".xml,text/xml" hidden>
+              <span>Загрузить XML</span>
+            </label>
+            <button class="btn btn--ghost action-form__btn" type="submit" data-loading-text="Импорт...">Импорт данных</button>
+            <span class="action-form__status" hidden>Импортируем...</span>
+          </form>
+        </div>
+      </div>
       <p class="eyebrow">Служебный модуль</p>
       <h1>База недвижимости Setl</h1>
+      <div class="view-switch">
+        <a class="view-switch__btn {% if view_mode == 'cards' %}is-active{% endif %}"
+           href="{% url 'realestate:cards' %}{% if request.GET %}?{{ request.GET.urlencode }}{% endif %}">Карточки</a>
+        <a class="view-switch__btn {% if view_mode == 'table' %}is-active{% endif %}"
+           href="{% url 'realestate:dashboard' %}{% if request.GET %}?{{ request.GET.urlencode }}{% endif %}">Таблица</a>
+      </div>
       <form class="filters" method="get">
-        <input type="text" name="q" placeholder="Адрес или ЖК" value="{{ filters.q }}">
-        <input type="text" name="region" placeholder="Регион" value="{{ filters.region }}">
-        <input type="text" name="district" placeholder="Район" value="{{ filters.district }}">
-        <input type="text" name="type" placeholder="Тип" value="{{ filters.type }}">
-        <select name="category">
-          <option value="">Категория</option>
-          <option value="new" {% if filters.category == 'new' %}selected{% endif %}>Новостройка</option>
-          <option value="secondary" {% if filters.category == 'secondary' %}selected{% endif %}>Вторичка</option>
-          <option value="land" {% if filters.category == 'land' %}selected{% endif %}>Земельный участок</option>
-          <option value="house" {% if filters.category == 'house' %}selected{% endif %}>Дома</option>
-          <option value="other" {% if filters.category == 'other' %}selected{% endif %}>Прочее</option>
-        </select>
-        <input type="number" name="rooms" placeholder="Комнат" value="{{ filters.rooms }}">
-        <input type="number" name="price_min" placeholder="Цена от" value="{{ filters.price_min }}">
-        <input type="number" name="price_max" placeholder="Цена до" value="{{ filters.price_max }}">
-        <select name="order">
-          {% for key, label in sort_options.items %}
-            <option value="{{ key }}" {% if order == key %}selected{% endif %}>{{ label }}</option>
+        <select name="district">
+          <option value="">Все районы</option>
+          {% for option in district_options %}
+            <option value="{{ option }}" {% if filters.district == option %}selected{% endif %}>{{ option }}</option>
           {% endfor %}
         </select>
-        <label class="checkbox-inline">
-          <input type="checkbox" name="photo" {% if filters.photo == 'on' %}checked{% endif %}>
-          Только с фото
-        </label>
+        <select name="metro">
+          <option value="">Все метро</option>
+          {% for option in metro_options %}
+            <option value="{{ option }}" {% if filters.metro == option %}selected{% endif %}>{{ option }}</option>
+          {% endfor %}
+        </select>
+        <select name="property_type">
+          <option value="">Все типы недвижимости</option>
+          {% for option in property_type_options %}
+            <option value="{{ option }}" {% if filters.property_type == option %}selected{% endif %}>{{ option }}</option>
+          {% endfor %}
+        </select>
         <button class="btn btn--primary" type="submit">Найти</button>
         <a class="btn btn--ghost" href="">Сбросить</a>
       </form>
 
-      <div class="table-wrapper">
-        <table class="realty-table">
-          <thead>
-            <tr>
-              <th>Адрес / Метро / Район</th>
-              <th>Тип / Объект</th>
-              <th>Фото</th>
-              <th>Цена</th>
-              <th>Площади</th>
-              <th>Комнат</th>
-              <th>Этаж</th>
-              <th>Обновлено</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for offer in offers %}
-              <tr>
-                <td>
-                  <div class="info-list">
-                    <span>{{ offer.address|default:'—' }}</span>
-                    {% if offer.metro_name %}<span>Метро: {{ offer.metro_name }}</span>{% endif %}
-                    {% if offer.district %}<span>Район: {{ offer.district }}</span>{% endif %}
-                  </div>
-                </td>
-                <td>
-                  <div class="info-list">
-                    {% if offer.property_type %}<span>{{ offer.property_type }}</span>{% endif %}
-                    {% if offer.building_name %}<span>{{ offer.building_name }}</span>{% endif %}
-                    {% if not offer.property_type and not offer.building_name %}—{% endif %}
-                  </div>
-                </td>
-                <td class="photos-cell">
+      <div class="plain-table">
+        <div class="plain-row plain-row--head">
+          <div class="plain-cell"><strong>Объект</strong></div>
+          <div class="plain-cell"><strong>Тех. параметры</strong></div>
+          <div class="plain-cell"><strong>Детали</strong></div>
+          <div class="plain-cell"><strong>Фото / Планы</strong></div>
+        </div>
+        {% for offer in offers %}
+          {% with plan=offer.extra.plan_image floor_img=offer.extra.floor_image photo1=offer.photos.splitlines|first photo2=offer.extra.photos|first %}
+            {% with hero=plan|default:floor_img|default:photo1|default:photo2 %}
+              <div class="plain-row">
+                <div class="plain-cell">
+                  {% if offer.is_parking %}
+                    <div><strong>Парковка{% if offer.extra.number_flat or offer.number_flat %} № {{ offer.number_flat|default:offer.extra.number_flat }}{% endif %}</strong></div>
+                  {% elif offer.is_commercial %}
+                    <div><strong>Коммерческое помещение{% if offer.extra.number_flat or offer.number_flat %} № {{ offer.number_flat|default:offer.extra.number_flat }}{% endif %}</strong></div>
+                  {% elif offer.is_apartments %}
+                    <div><strong>{% if offer.rooms|default:offer.extra.rooms %}{{ offer.rooms|default:offer.extra.rooms }}-комнатные {% endif %}апартаменты{% if offer.extra.number_flat %} № {{ offer.extra.number_flat }}{% endif %}</strong></div>
+                  {% else %}
+                    <div><strong>{% if offer.rooms|default:offer.extra.rooms %}{{ offer.rooms|default:offer.extra.rooms }}-комнатная {% endif %}{{ offer.property_type|default:offer.extra.property_type|default:"квартира" }}{% if offer.extra.number_flat %} № {{ offer.extra.number_flat }}{% endif %}</strong></div>
+                  {% endif %}
+                  {% if offer.price or offer.extra.price_value %}
+                    <div>Цена: {{ offer.price|default:offer.extra.price_value }} {% if offer.extra.currency %}{{ offer.extra.currency }}{% endif %}</div>
+                  {% endif %}
+                  {% if offer.extra.price_base %}<div>База: {{ offer.extra.price_base }}</div>{% endif %}
+                  {% if offer.address %}<div>{{ offer.address }}</div>{% endif %}
+                  {% if offer.metro_name or offer.extra.metro_name %}
+                    <div>Метро: {{ offer.metro_name|default:offer.extra.metro_name }}{% if offer.metro_time_on_foot or offer.extra.metro_time_on_foot %} — {{ offer.metro_time_on_foot|default:offer.extra.metro_time_on_foot }} мин пешком{% elif offer.metro_time_on_transport or offer.extra.metro_time_on_transport %} — {{ offer.metro_time_on_transport|default:offer.extra.metro_time_on_transport }} мин транспорт{% endif %}</div>
+                  {% endif %}
+                  {% if offer.district or offer.extra.district %}<div>Район: {{ offer.district|default:offer.extra.district }}</div>{% endif %}
+                </div>
+
+                <div class="plain-cell">
+                  {% if offer.area_total or offer.extra.area_total %}<div>Общая: {{ offer.area_total|default:offer.extra.area_total }} м²</div>{% endif %}
+                  {% if offer.area_living or offer.extra.area_living %}<div>Жилая: {{ offer.area_living|default:offer.extra.area_living }} м²</div>{% endif %}
+                  {% if offer.area_kitchen or offer.extra.area_kitchen %}<div>Кухня: {{ offer.area_kitchen|default:offer.extra.area_kitchen }} м²</div>{% endif %}
+                  {% if offer.extra.ceiling_height %}<div>Потолок: {{ offer.extra.ceiling_height }} м</div>{% endif %}
+                  {% if offer.floor or offer.extra.floor %}<div>Этаж: {{ offer.floor|default:offer.extra.floor }} из {{ offer.floors_total|default:offer.extra.floors_total|default:"?" }}</div>{% endif %}
+                </div>
+
+                <div class="plain-cell">
+                  {% if offer.extra.section %}<div>Секция: {{ offer.extra.section }}</div>{% endif %}
+                  {% if offer.extra.entrance %}<div>Подъезд: {{ offer.extra.entrance }}</div>{% endif %}
+                  {% if offer.decoration_type or offer.extra.decoration_type %}<div>Отделка: {{ offer.decoration_type|default:offer.extra.decoration_type }}</div>{% endif %}
+                  {% if offer.extra.renovation %}<div>Ремонт: {{ offer.extra.renovation }}</div>{% endif %}
+                  {% if offer.deal_state or offer.extra.deal_state %}<div>Статус: {{ offer.deal_state|default:offer.extra.deal_state }}</div>{% endif %}
+                  {% if offer.extra.deal_type %}<div>Тип сделки: {{ offer.extra.deal_type }}</div>{% endif %}
+                  {% if offer.extra.building_type %}<div>Дом: {{ offer.extra.building_type }}</div>{% endif %}
+                  {% if offer.extra.assignment and offer.extra.assignment|stringformat:"s" not in "0,0.0,0.0000" %}<div>Назначение: {{ offer.extra.assignment }}</div>{% endif %}
+                  {% if offer.extra.new_flat and offer.extra.new_flat|stringformat:"s" not in "0,0.0,0.0000" %}<div>Новостройка: {{ offer.extra.new_flat }}</div>{% endif %}
+                  {% if offer.extra.apartments and offer.extra.apartments|stringformat:"s" not in "0,0.0,0.0000" %}<div>Апартаменты: {{ offer.extra.apartments }}</div>{% endif %}
+                  {% if offer.extra.studio and offer.extra.studio|stringformat:"s" not in "0,0.0,0.0000" %}<div>Студия: {{ offer.extra.studio }}</div>{% endif %}
+                </div>
+
+                <div class="plain-cell">
                   {% if offer.photos %}
                     {% for photo in offer.photos.splitlines|slice:":3" %}
-                      <a href="{{ photo }}" target="_blank">Фото {{ forloop.counter }}</a>
+                      <div><a href="{{ photo }}" target="_blank">Фото {{ forloop.counter }}</a></div>
                     {% endfor %}
                   {% else %}
-                    —
+                    {% if hero %}<div><a href="{{ hero }}" target="_blank">Планировка</a></div>{% endif %}
+                    {% if floor_img %}<div><a href="{{ floor_img }}" target="_blank">План этажа</a></div>{% endif %}
                   {% endif %}
-                </td>
-                <td>{{ offer.price|default:'—' }}</td>
-                <td>
-                  <div class="area-list">
-                    {% if offer.area_total %}<span>Общая: {{ offer.area_total }}</span>{% endif %}
-                    {% if offer.area_living %}<span>Жилая: {{ offer.area_living }}</span>{% endif %}
-                    {% if offer.area_kitchen %}<span>Кухня: {{ offer.area_kitchen }}</span>{% endif %}
-                    {% if offer.area_lot %}<span>Участок: {{ offer.area_lot }}</span>{% endif %}
-                    {% if offer.area_balcony %}<span>Балкон: {{ offer.area_balcony }}</span>{% endif %}
-                  </div>
-                </td>
-                <td>{{ offer.rooms|default:'—' }}</td>
-                <td>{% if offer.floor %}{{ offer.floor }}/{{ offer.floors_total|default:'?' }}{% else %}—{% endif %}</td>
-                <td>{{ offer.last_update_date|date:"d.m.Y" }}</td>
-              </tr>
-            {% empty %}
-              <tr><td colspan="8" class="empty">Ничего не найдено</td></tr>
-            {% endfor %}
-          </tbody>
-        </table>
-        <p class="muted">Показаны первые 200 записей. Используйте фильтры для уточнения запроса.</p>
+                  <div class="note">Обновлено: {{ offer.last_update_date|date:"d.m.Y"|default:offer.extra.last_update_date }}</div>
+                </div>
+              </div>
+            {% endwith %}
+          {% endwith %}
+        {% empty %}
+          <p class="empty">Ничего не найдено</p>
+        {% endfor %}
       </div>
+      <p class="muted">Показаны первые 200 записей. Используйте фильтры для уточнения запроса.</p>
     </div>
   </section>
+  <script>
+    (function() {
+      const forms = document.querySelectorAll('.action-form');
+      forms.forEach((form) => {
+        form.addEventListener('submit', () => {
+          form.classList.add('is-loading');
+          const btn = form.querySelector('.action-form__btn');
+          const status = form.querySelector('.action-form__status');
+          if (btn) {
+            btn.disabled = true;
+            const text = btn.getAttribute('data-loading-text');
+            if (text) btn.textContent = text;
+          }
+          if (status) status.hidden = false;
+        });
+      });
+    })();
+  </script>
 </body>
 </html>

@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Вход — Союз Застройщиков</title>
+  <link rel="stylesheet" href="{% static 'listings/styles.css' %}">
+</head>
+<body class="auth-mini">
+  <div class="auth-mini__card">
+    <div class="auth-mini__head">
+      <p class="auth-mini__eyebrow">Служебный вход</p>
+      <h1>Войти</h1>
+    </div>
+    <form method="post" class="auth-mini__form">
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+        <div class="message error">{{ form.non_field_errors }}</div>
+      {% endif %}
+      <label>
+        <span>Логин</span>
+        {{ form.username }}
+      </label>
+      <label>
+        <span>Пароль</span>
+        {{ form.password }}
+      </label>
+      <button class="btn btn--primary btn--full" type="submit">Войти</button>
+    </form>
+    <a class="auth-mini__back" href="/">← На главную</a>
+  </div>
+</body>
+</html>

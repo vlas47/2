@@ -1,0 +1,347 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>База недвижимости - карточки</title>
+  <link rel="stylesheet" href="{% static 'listings/styles.css' %}">
+</head>
+<body class="dashboard">
+  <section class="section">
+    <div class="container">
+      {% if messages %}
+        <div class="messages">
+          {% for message in messages %}
+            <div class="message {{ message.tags }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+      <div class="info-header">
+        <div class="info-header__stats">
+          <span>Всего в базе: <strong>{{ offers_total }}</strong></span>
+          <span>По фильтру: <strong>{{ filtered_total }}</strong></span>
+        </div>
+        <div class="info-header__actions">
+          <a class="btn btn--ghost" href="/">Главная</a>
+          <form class="action-form" method="get" action="{% url 'realestate:clean_photos' %}">
+            <button class="btn btn--ghost action-form__btn" type="submit" data-loading-text="Чистим фото...">Чистка фото</button>
+            <span class="action-form__status" hidden>Чистим фото...</span>
+          </form>
+          <form class="action-form" method="get" action="{% url 'realestate:clean_duplicates' %}">
+            <button class="btn btn--ghost action-form__btn" type="submit" data-loading-text="Чистка дублей...">Чистка дублей</button>
+            <span class="action-form__status" hidden>Чистка дублей...</span>
+          </form>
+          <form class="action-form action-form--import" method="post" enctype="multipart/form-data" action="{% url 'realestate:import_setl' %}">
+            {% csrf_token %}
+            <label class="btn btn--ghost file-upload-btn">
+              <input type="file" name="file" accept=".xml,text/xml" hidden>
+              <span>Загрузить XML</span>
+            </label>
+            <button class="btn btn--ghost action-form__btn" type="submit" data-loading-text="Импорт...">Импорт данных</button>
+            <span class="action-form__status" hidden>Импортируем...</span>
+          </form>
+        </div>
+      </div>
+      <div class="view-switch">
+        <a class="view-switch__btn {% if view_mode == 'cards' %}is-active{% endif %}"
+           href="{% url 'realestate:cards' %}{% if request.GET %}?{{ request.GET.urlencode }}{% endif %}">Карточки</a>
+        <a class="view-switch__btn {% if view_mode == 'table' %}is-active{% endif %}"
+           href="{% url 'realestate:dashboard' %}{% if request.GET %}?{{ request.GET.urlencode }}{% endif %}">Таблица</a>
+      </div>
+
+      <form class="filters" method="get">
+        <select name="district">
+          <option value="">Все районы</option>
+          {% for option in district_options %}
+            <option value="{{ option }}" {% if filters.district == option %}selected{% endif %}>{{ option }}</option>
+          {% endfor %}
+        </select>
+        <select name="metro">
+          <option value="">Все метро</option>
+          {% for option in metro_options %}
+            <option value="{{ option }}" {% if filters.metro == option %}selected{% endif %}>{{ option }}</option>
+          {% endfor %}
+        </select>
+        <select name="property_type">
+          <option value="">Все типы недвижимости</option>
+          {% for option in property_type_options %}
+            <option value="{{ option }}" {% if filters.property_type == option %}selected{% endif %}>{{ option }}</option>
+          {% endfor %}
+        </select>
+        <button class="btn btn--primary" type="submit">Найти</button>
+        <a class="btn btn--ghost" href="">Сбросить</a>
+      </form>
+
+      <div class="cards-grid cards-grid--wide">
+        {% for offer in offers %}
+          {% with plan=offer.extra.plan_image floor_img=offer.extra.floor_image photo1=offer.photos.splitlines|first photo2=offer.extra.photos|first %}
+            {% with hero=plan|default:floor_img|default:photo1|default:photo2 %}
+              <article class="realty-card realty-card--wide">
+                <div class="realty-card__layout">
+                  <div class="realty-card__info">
+                    {% if offer.is_parking %}
+                      <p class="small-label">
+                        Парковка{% if offer.extra.number_flat or offer.number_flat %} · № {{ offer.number_flat|default:offer.extra.number_flat }}{% endif %}
+                      </p>
+                      <h3>
+                        Парковка {% if offer.number_flat or offer.extra.number_flat %}№ {{ offer.number_flat|default:offer.extra.number_flat }}{% endif %}
+                        в жилом комплексе {{ offer.building_name|default:offer.extra.building_name|default:"(ЖК не указан)" }}
+                        {% if offer.metro_name or offer.extra.metro_name %}
+                          , до метро {{ offer.metro_name|default:offer.extra.metro_name }}
+                          {% if offer.metro_time_on_foot or offer.extra.metro_time_on_foot %}
+                            {{ offer.metro_time_on_foot|default:offer.extra.metro_time_on_foot }} мин пешком
+                          {% elif offer.metro_time_on_transport or offer.extra.metro_time_on_transport %}
+                            {{ offer.metro_time_on_transport|default:offer.extra.metro_time_on_transport }} мин транспорт
+                          {% endif %}
+                        {% endif %}
+                      </h3>
+                    {% elif offer.is_commercial %}
+                      <p class="small-label">
+                        Коммерция{% if offer.extra.number_flat or offer.number_flat %} · № {{ offer.number_flat|default:offer.extra.number_flat }}{% endif %}
+                      </p>
+                      <h3>
+                        Коммерческое помещение {% if offer.number_flat or offer.extra.number_flat %}№ {{ offer.number_flat|default:offer.extra.number_flat }}{% endif %}
+                        в жилом комплексе {{ offer.building_name|default:offer.extra.building_name|default:"(ЖК не указан)" }}
+                        {% if offer.metro_name or offer.extra.metro_name %}
+                          , до метро {{ offer.metro_name|default:offer.extra.metro_name }}
+                          {% if offer.metro_time_on_foot or offer.extra.metro_time_on_foot %}
+                            {{ offer.metro_time_on_foot|default:offer.extra.metro_time_on_foot }} мин пешком
+                          {% elif offer.metro_time_on_transport or offer.extra.metro_time_on_transport %}
+                            {{ offer.metro_time_on_transport|default:offer.extra.metro_time_on_transport }} мин транспорт
+                          {% endif %}
+                        {% endif %}
+                      </h3>
+                    {% elif offer.is_apartments %}
+                      <p class="small-label">
+                        Апартаменты{% if offer.rooms|default:offer.extra.rooms %} · {{ offer.rooms|default:offer.extra.rooms }}-комнатные{% endif %}{% if offer.extra.number_flat %} · № {{ offer.extra.number_flat }}{% endif %}
+                      </p>
+                      <h3>
+                        {% if offer.rooms|default:offer.extra.rooms %}{{ offer.rooms|default:offer.extra.rooms }}-комнатные {% endif %}апартаменты
+                        {% if offer.extra.number_flat %}№ {{ offer.extra.number_flat }}{% endif %}
+                        в жилом комплексе {{ offer.building_name|default:offer.extra.building_name|default:"(ЖК не указан)" }}
+                        {% if offer.district or offer.extra.district %}в {{ offer.district|default:offer.extra.district }} районе{% endif %}
+                        {% if offer.metro_name or offer.extra.metro_name %}
+                          , до метро {{ offer.metro_name|default:offer.extra.metro_name }}
+                          {% if offer.metro_time_on_foot or offer.extra.metro_time_on_foot %}
+                            {{ offer.metro_time_on_foot|default:offer.extra.metro_time_on_foot }} мин пешком
+                          {% elif offer.metro_time_on_transport or offer.extra.metro_time_on_transport %}
+                            {{ offer.metro_time_on_transport|default:offer.extra.metro_time_on_transport }} мин транспорт
+                          {% endif %}
+                        {% endif %}
+                      </h3>
+                    {% else %}
+                      <p class="small-label">
+                        {% if offer.rooms|default:offer.extra.rooms %}{{ offer.rooms|default:offer.extra.rooms }}-комнатная{% endif %} {{ offer.property_type|default:offer.extra.property_type|default:"квартира" }}
+                        {% if offer.extra.number_flat %} · № {{ offer.extra.number_flat }}{% endif %}
+                      </p>
+                      <h3>
+                        {% if offer.rooms|default:offer.extra.rooms %}{{ offer.rooms|default:offer.extra.rooms }}-комнатная {% endif %}квартира
+                        {% if offer.extra.number_flat %}№ {{ offer.extra.number_flat }}{% endif %}
+                        в жилом комплексе {{ offer.building_name|default:offer.extra.building_name|default:"(ЖК не указан)" }}
+                        {% if offer.district or offer.extra.district %}в {{ offer.district|default:offer.extra.district }} районе{% endif %}
+                        {% if offer.metro_name or offer.extra.metro_name %}
+                          , до метро {{ offer.metro_name|default:offer.extra.metro_name }}
+                          {% if offer.metro_time_on_foot or offer.extra.metro_time_on_foot %}
+                            {{ offer.metro_time_on_foot|default:offer.extra.metro_time_on_foot }} мин пешком
+                          {% elif offer.metro_time_on_transport or offer.extra.metro_time_on_transport %}
+                            {{ offer.metro_time_on_transport|default:offer.extra.metro_time_on_transport }} мин транспорт
+                          {% endif %}
+                        {% endif %}
+                      </h3>
+                    {% endif %}
+
+                    <ul class="info-stack">
+                      <li>
+                        <span class="info-stack__label">Цена</span>
+                        <span class="info-stack__value">
+                          {{ offer.price|default:offer.extra.price_value|default:"-" }} {% if offer.extra.currency %}{{ offer.extra.currency }}{% endif %}
+                          {% if offer.extra.price_base %}<span class="info-stack__note">База: {{ offer.extra.price_base }}</span>{% endif %}
+                        </span>
+                      </li>
+                      <li class="info-stack__group info-stack__group--compact">
+                        <div class="info-stack__group-head">Технические параметры</div>
+                        <ul class="tech-grid">
+                          {% if offer.area_total or offer.extra.area_total %}
+                            <li>
+                              <p class="tech-grid__value">{{ offer.area_total|default:offer.extra.area_total }} м²</p>
+                              <p class="tech-grid__label">Общая площадь</p>
+                            </li>
+                          {% endif %}
+                          {% if offer.area_living or offer.extra.area_living %}
+                            <li>
+                              <p class="tech-grid__value">{{ offer.area_living|default:offer.extra.area_living }} м²</p>
+                              <p class="tech-grid__label">Площадь комнат</p>
+                            </li>
+                          {% endif %}
+                          {% if offer.area_kitchen or offer.extra.area_kitchen %}
+                            <li>
+                              <p class="tech-grid__value">{{ offer.area_kitchen|default:offer.extra.area_kitchen }} м²</p>
+                              <p class="tech-grid__label">Площадь кухни</p>
+                            </li>
+                          {% endif %}
+                          {% if offer.extra.ceiling_height %}
+                            <li>
+                              <p class="tech-grid__value">{{ offer.extra.ceiling_height }} м</p>
+                              <p class="tech-grid__label">Высота потолка</p>
+                            </li>
+                          {% endif %}
+                          {% if offer.floor or offer.extra.floor %}
+                            <li>
+                              <p class="tech-grid__value">
+                                {{ offer.floor|default:offer.extra.floor }} из {{ offer.floors_total|default:offer.extra.floors_total|default:"?" }}
+                              </p>
+                              <p class="tech-grid__label">Этаж</p>
+                            </li>
+                          {% endif %}
+                        </ul>
+                      </li>
+                      {% if offer.district or offer.extra.district %}
+                        <li>
+                          <span class="info-stack__label">Район</span>
+                          <span class="info-stack__value">{{ offer.district|default:offer.extra.district }}</span>
+                        </li>
+                      {% endif %}
+                      <li>
+                        <span class="info-stack__label sr-only">Детали</span>
+                        <span class="info-stack__value info-stack__chips">
+                          {% if offer.extra.section %}<span class="pill">Секция: {{ offer.extra.section }}</span>{% endif %}
+                          {% if offer.extra.entrance %}<span class="pill">Подъезд: {{ offer.extra.entrance }}</span>{% endif %}
+                          {% if offer.decoration_type or offer.extra.decoration_type %}<span class="pill">Отделка: {{ offer.decoration_type|default:offer.extra.decoration_type }}</span>{% endif %}
+                          {% if offer.extra.renovation %}<span class="pill">Ремонт: {{ offer.extra.renovation }}</span>{% endif %}
+                          {% if offer.deal_state or offer.extra.deal_state %}<span class="pill">Статус: {{ offer.deal_state|default:offer.extra.deal_state }}</span>{% endif %}
+                          {% if offer.extra.deal_type %}<span class="pill">Тип сделки: {{ offer.extra.deal_type }}</span>{% endif %}
+                          {% if offer.extra.building_type %}<span class="pill">Дом: {{ offer.extra.building_type }}</span>{% endif %}
+                          {% if offer.extra.building_material %}<span class="pill">Материал: {{ offer.extra.building_material }}</span>{% endif %}
+                      {% if offer.extra.assignment and offer.extra.assignment|stringformat:"s" not in "0,0.0,0.0000" %}<span class="pill">Назначение: {{ offer.extra.assignment }}</span>{% endif %}
+                      {% if offer.extra.new_flat and offer.extra.new_flat|stringformat:"s" not in "0,0.0,0.0000" %}<span class="pill">Новостройка: {{ offer.extra.new_flat }}</span>{% endif %}
+                      {% if offer.extra.apartments and offer.extra.apartments|stringformat:"s" not in "0,0.0,0.0000" %}<span class="pill">Апартаменты: {{ offer.extra.apartments }}</span>{% endif %}
+                      {% if offer.extra.studio and offer.extra.studio|stringformat:"s" not in "0,0.0,0.0000" %}<span class="pill">Студия: {{ offer.extra.studio }}</span>{% endif %}
+                        </span>
+                      </li>
+                      <li>
+                        <span class="info-stack__label">Планы и фото</span>
+                        <span class="info-stack__value info-stack__links">
+                          {% if floor_img %}
+                            <a href="{{ floor_img }}" target="_blank">План этажа</a>
+                          {% endif %}
+                          {% if offer.extra.photos %}
+                            {% for photo in offer.extra.photos|slice:":3" %}
+                              <a href="{{ photo }}" target="_blank">Фото {{ forloop.counter }}</a>
+                            {% endfor %}
+                          {% endif %}
+                          {% if hero %}<a href="{{ hero }}" target="_blank">Планировка</a>{% endif %}
+                          <span class="info-stack__note">Обновлено: {{ offer.last_update_date|date:"d.m.Y"|default:offer.extra.last_update_date }}</span>
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  {% if hero %}
+                    <div class="realty-card__visual">
+                      <div class="realty-card__hero realty-card__hero--wide">
+                        <img class="js-zoom-image"
+                             src="{{ hero }}"
+                             data-full="{{ hero }}"
+                             alt="Планировка {{ offer.address|default:offer.extra.address }}">
+                      </div>
+                      <div class="realty-card__visual-actions">
+                        <a class="pill pill--ghost js-zoom-trigger" href="{{ hero }}">Планировка</a>
+                        {% if floor_img %}<a class="pill pill--ghost" href="{{ floor_img }}" target="_blank">План этажа</a>{% endif %}
+                      </div>
+                    </div>
+                  {% endif %}
+                </div>
+              </article>
+            {% endwith %}
+          {% endwith %}
+        {% empty %}
+          <p class="empty">Ничего не найдено</p>
+        {% endfor %}
+      </div>
+      {% if page_obj %}
+        <nav class="pagination">
+          <div class="pagination__summary">
+            Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+          </div>
+          <div class="pagination__controls">
+            {% if page_obj.has_previous %}
+              <a class="btn btn--ghost" href="?{% if query_without_page %}{{ query_without_page }}&{% endif %}page={{ page_obj.previous_page_number }}">← Предыдущая</a>
+            {% else %}
+              <span class="btn btn--ghost is-disabled">← Предыдущая</span>
+            {% endif %}
+            {% if page_obj.has_next %}
+              <a class="btn btn--primary" href="?{% if query_without_page %}{{ query_without_page }}&{% endif %}page={{ page_obj.next_page_number }}">Следующая →</a>
+            {% else %}
+              <span class="btn btn--primary is-disabled">Следующая →</span>
+            {% endif %}
+          </div>
+        </nav>
+      {% endif %}
+      <p class="muted">Отображается по 10 карточек на страницу.</p>
+    </div>
+  </section>
+
+  <script>
+    (function() {
+      const forms = document.querySelectorAll('.action-form');
+      forms.forEach((form) => {
+        form.addEventListener('submit', () => {
+          form.classList.add('is-loading');
+          const btn = form.querySelector('.action-form__btn');
+          const status = form.querySelector('.action-form__status');
+          if (btn) {
+            btn.disabled = true;
+            const text = btn.getAttribute('data-loading-text');
+            if (text) btn.textContent = text;
+          }
+          if (status) status.hidden = false;
+        });
+      });
+    })();
+  </script>
+  <script>
+    (() => {
+      const overlay = document.createElement('div');
+      overlay.className = 'zoom-overlay';
+      overlay.hidden = true;
+      document.body.appendChild(overlay);
+
+      const clearZoom = () => {
+        document.querySelectorAll('.realty-card__hero.is-zoomed').forEach((hero) => {
+          hero.classList.remove('is-zoomed');
+        });
+        overlay.hidden = true;
+        document.body.classList.remove('zoom-locked');
+      };
+
+      const toggleZoom = (hero) => {
+        if (!hero) return;
+        const already = hero.classList.contains('is-zoomed');
+        clearZoom();
+        if (!already) {
+          hero.classList.add('is-zoomed');
+          overlay.hidden = false;
+          document.body.classList.add('zoom-locked');
+        }
+      };
+
+      document.addEventListener('click', (e) => {
+        const trigger = e.target.closest('.js-zoom-image, .js-zoom-trigger');
+        if (!trigger) return;
+        e.preventDefault();
+        let hero = trigger.closest('.realty-card__hero');
+        if (!hero) {
+          const visual = trigger.closest('.realty-card__visual');
+          hero = visual ? visual.querySelector('.realty-card__hero') : null;
+        }
+        toggleZoom(hero);
+      });
+
+      overlay.addEventListener('click', clearZoom);
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') clearZoom();
+      });
+    })();
+  </script>
+</body>
+</html>
