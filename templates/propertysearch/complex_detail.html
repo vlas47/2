@@ -196,7 +196,8 @@
           </article>
 
           <template id="offer-card-{{ offer.internal_id }}">
-            {% with plan=offer.extra.plan_image floor_img=offer.extra.floor_image hero=offer.hero_image|default:plan|default:floor_img %}
+            {% with plan=offer.extra.plan_image floor_img=offer.extra.floor_image %}
+            {% with hero=offer.hero_image|default:plan|default:floor_img %}
             <article class="realty-card realty-card--wide">
               <div class="realty-card__layout">
                 <div class="realty-card__info">
@@ -206,7 +207,7 @@
                   </p>
                   <h3>
                     {% if offer.rooms %}{{ offer.rooms }}-комнатная {% endif %}{{ offer.property_type|default:"квартира" }}
-                    в ЖК {{ offer.building_name|default:complex.name }}
+                    в жилом комплексе {{ offer.building_name|default:complex.name }}
                     {% if offer.metro_name or offer.extra.metro_name %}
                       , до метро {{ offer.metro_name|default:offer.extra.metro_name }}
                       {% if offer.metro_time_on_foot or offer.extra.metro_time_on_foot %}
@@ -342,6 +343,7 @@
                 </div>
               </div>
             </article>
+            {% endwith %}
             {% endwith %}
           </template>
         {% endfor %}
