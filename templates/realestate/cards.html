@@ -5,6 +5,9 @@
   <meta charset="utf-8">
   <title>База недвижимости - карточки</title>
   <link rel="stylesheet" href="{% static 'listings/styles.css' %}">
+  <style>
+    .realty-card__details {margin-top:8px; padding-top:8px; border-top:1px solid #e6eef7;}
+  </style>
 </head>
 <body class="dashboard">
   <section class="section">
@@ -23,6 +26,7 @@
         </div>
         <div class="info-header__actions">
           <a class="btn btn--ghost" href="/">Главная</a>
+          <a class="btn btn--primary" href="{% url 'complexes:index' %}">Жилищные комплексы</a>
           <form class="action-form" method="get" action="{% url 'realestate:clean_photos' %}">
             <button class="btn btn--ghost action-form__btn" type="submit" data-loading-text="Чистим фото...">Чистка фото</button>
             <span class="action-form__status" hidden>Чистим фото...</span>
@@ -68,6 +72,21 @@
             <option value="{{ option }}" {% if filters.property_type == option %}selected{% endif %}>{{ option }}</option>
           {% endfor %}
         </select>
+        <div>
+          <input
+            id="filter-complex"
+            list="complexes-list"
+            name="complex"
+            placeholder="Жилищный квартал"
+            value="{{ filters.complex }}"
+            autocomplete="off">
+          <datalist id="complexes-list">
+            {% for option in complex_options %}
+              <option value="{{ option }}"></option>
+            {% endfor %}
+          </datalist>
+          <small class="muted">только актуальные ЖК</small>
+        </div>
         <button class="btn btn--primary" type="submit">Найти</button>
         <a class="btn btn--ghost" href="">Сбросить</a>
       </form>
@@ -150,90 +169,93 @@
                       </h3>
                     {% endif %}
 
-                    <ul class="info-stack">
-                      <li>
-                        <span class="info-stack__label">Цена</span>
-                        <span class="info-stack__value">
-                          {{ offer.price|default:offer.extra.price_value|default:"-" }} {% if offer.extra.currency %}{{ offer.extra.currency }}{% endif %}
-                          {% if offer.extra.price_base %}<span class="info-stack__note">База: {{ offer.extra.price_base }}</span>{% endif %}
-                        </span>
-                      </li>
-                      <li class="info-stack__group info-stack__group--compact">
-                        <div class="info-stack__group-head">Технические параметры</div>
-                        <ul class="tech-grid">
-                          {% if offer.area_total or offer.extra.area_total %}
-                            <li>
-                              <p class="tech-grid__value">{{ offer.area_total|default:offer.extra.area_total }} м²</p>
-                              <p class="tech-grid__label">Общая площадь</p>
-                            </li>
-                          {% endif %}
-                          {% if offer.area_living or offer.extra.area_living %}
-                            <li>
-                              <p class="tech-grid__value">{{ offer.area_living|default:offer.extra.area_living }} м²</p>
-                              <p class="tech-grid__label">Площадь комнат</p>
-                            </li>
-                          {% endif %}
-                          {% if offer.area_kitchen or offer.extra.area_kitchen %}
-                            <li>
-                              <p class="tech-grid__value">{{ offer.area_kitchen|default:offer.extra.area_kitchen }} м²</p>
-                              <p class="tech-grid__label">Площадь кухни</p>
-                            </li>
-                          {% endif %}
-                          {% if offer.extra.ceiling_height %}
-                            <li>
-                              <p class="tech-grid__value">{{ offer.extra.ceiling_height }} м</p>
-                              <p class="tech-grid__label">Высота потолка</p>
-                            </li>
-                          {% endif %}
-                          {% if offer.floor or offer.extra.floor %}
-                            <li>
-                              <p class="tech-grid__value">
-                                {{ offer.floor|default:offer.extra.floor }} из {{ offer.floors_total|default:offer.extra.floors_total|default:"?" }}
-                              </p>
-                              <p class="tech-grid__label">Этаж</p>
-                            </li>
-                          {% endif %}
-                        </ul>
-                      </li>
-                      {% if offer.district or offer.extra.district %}
+                    <p class="small-label">Цена: {{ offer.price|default:offer.extra.price_value|default:"-" }} {% if offer.extra.currency %}{{ offer.extra.currency }}{% endif %}</p>
+                    <div class="realty-card__details">
+                      <ul class="info-stack">
                         <li>
-                          <span class="info-stack__label">Район</span>
-                          <span class="info-stack__value">{{ offer.district|default:offer.extra.district }}</span>
+                          <span class="info-stack__label">Цена</span>
+                          <span class="info-stack__value">
+                            {{ offer.price|default:offer.extra.price_value|default:"-" }} {% if offer.extra.currency %}{{ offer.extra.currency }}{% endif %}
+                            {% if offer.extra.price_base %}<span class="info-stack__note">База: {{ offer.extra.price_base }}</span>{% endif %}
+                          </span>
                         </li>
-                      {% endif %}
-                      <li>
-                        <span class="info-stack__label sr-only">Детали</span>
-                        <span class="info-stack__value info-stack__chips">
-                          {% if offer.extra.section %}<span class="pill">Секция: {{ offer.extra.section }}</span>{% endif %}
-                          {% if offer.extra.entrance %}<span class="pill">Подъезд: {{ offer.extra.entrance }}</span>{% endif %}
-                          {% if offer.decoration_type or offer.extra.decoration_type %}<span class="pill">Отделка: {{ offer.decoration_type|default:offer.extra.decoration_type }}</span>{% endif %}
-                          {% if offer.extra.renovation %}<span class="pill">Ремонт: {{ offer.extra.renovation }}</span>{% endif %}
-                          {% if offer.deal_state or offer.extra.deal_state %}<span class="pill">Статус: {{ offer.deal_state|default:offer.extra.deal_state }}</span>{% endif %}
-                          {% if offer.extra.deal_type %}<span class="pill">Тип сделки: {{ offer.extra.deal_type }}</span>{% endif %}
-                          {% if offer.extra.building_type %}<span class="pill">Дом: {{ offer.extra.building_type }}</span>{% endif %}
-                          {% if offer.extra.building_material %}<span class="pill">Материал: {{ offer.extra.building_material }}</span>{% endif %}
-                      {% if offer.extra.assignment and offer.extra.assignment|stringformat:"s" not in "0,0.0,0.0000" %}<span class="pill">Назначение: {{ offer.extra.assignment }}</span>{% endif %}
-                      {% if offer.extra.new_flat and offer.extra.new_flat|stringformat:"s" not in "0,0.0,0.0000" %}<span class="pill">Новостройка: {{ offer.extra.new_flat }}</span>{% endif %}
-                      {% if offer.extra.apartments and offer.extra.apartments|stringformat:"s" not in "0,0.0,0.0000" %}<span class="pill">Апартаменты: {{ offer.extra.apartments }}</span>{% endif %}
-                      {% if offer.extra.studio and offer.extra.studio|stringformat:"s" not in "0,0.0,0.0000" %}<span class="pill">Студия: {{ offer.extra.studio }}</span>{% endif %}
-                        </span>
-                      </li>
-                      <li>
-                        <span class="info-stack__label">Планы и фото</span>
-                        <span class="info-stack__value info-stack__links">
-                          {% if floor_img %}
-                            <a href="{{ floor_img }}" target="_blank">План этажа</a>
-                          {% endif %}
-                          {% if offer.extra.photos %}
-                            {% for photo in offer.extra.photos|slice:":3" %}
-                              <a href="{{ photo }}" target="_blank">Фото {{ forloop.counter }}</a>
-                            {% endfor %}
-                          {% endif %}
-                          {% if hero %}<a href="{{ hero }}" target="_blank">Планировка</a>{% endif %}
-                          <span class="info-stack__note">Обновлено: {{ offer.last_update_date|date:"d.m.Y"|default:offer.extra.last_update_date }}</span>
-                        </span>
-                      </li>
-                    </ul>
+                        <li class="info-stack__group info-stack__group--compact">
+                          <div class="info-stack__group-head">Технические параметры</div>
+                          <ul class="tech-grid">
+                            {% if offer.area_total or offer.extra.area_total %}
+                              <li>
+                                <p class="tech-grid__value">{{ offer.area_total|default:offer.extra.area_total }} м²</p>
+                                <p class="tech-grid__label">Общая площадь</p>
+                              </li>
+                            {% endif %}
+                            {% if offer.area_living or offer.extra.area_living %}
+                              <li>
+                                <p class="tech-grid__value">{{ offer.area_living|default:offer.extra.area_living }} м²</p>
+                                <p class="tech-grid__label">Площадь комнат</p>
+                              </li>
+                            {% endif %}
+                            {% if offer.area_kitchen or offer.extra.area_kitchen %}
+                              <li>
+                                <p class="tech-grid__value">{{ offer.area_kitchen|default:offer.extra.area_kitchen }} м²</p>
+                                <p class="tech-grid__label">Площадь кухни</p>
+                              </li>
+                            {% endif %}
+                            {% if offer.extra.ceiling_height %}
+                              <li>
+                                <p class="tech-grid__value">{{ offer.extra.ceiling_height }} м</p>
+                                <p class="tech-grid__label">Высота потолка</p>
+                              </li>
+                            {% endif %}
+                            {% if offer.floor or offer.extra.floor %}
+                              <li>
+                                <p class="tech-grid__value">
+                                  {{ offer.floor|default:offer.extra.floor }} из {{ offer.floors_total|default:offer.extra.floors_total|default:"?" }}
+                                </p>
+                                <p class="tech-grid__label">Этаж</p>
+                              </li>
+                            {% endif %}
+                          </ul>
+                        </li>
+                        {% if offer.district or offer.extra.district %}
+                          <li>
+                            <span class="info-stack__label">Район</span>
+                            <span class="info-stack__value">{{ offer.district|default:offer.extra.district }}</span>
+                          </li>
+                        {% endif %}
+                        <li>
+                          <span class="info-stack__label sr-only">Детали</span>
+                          <span class="info-stack__value info-stack__chips">
+                            {% if offer.extra.section %}<span class="pill">Секция: {{ offer.extra.section }}</span>{% endif %}
+                            {% if offer.extra.entrance %}<span class="pill">Подъезд: {{ offer.extra.entrance }}</span>{% endif %}
+                            {% if offer.decoration_type or offer.extra.decoration_type %}<span class="pill">Отделка: {{ offer.decoration_type|default:offer.extra.decoration_type }}</span>{% endif %}
+                            {% if offer.extra.renovation %}<span class="pill">Ремонт: {{ offer.extra.renovation }}</span>{% endif %}
+                            {% if offer.deal_state or offer.extra.deal_state %}<span class="pill">Статус: {{ offer.deal_state|default:offer.extra.deal_state }}</span>{% endif %}
+                            {% if offer.extra.deal_type %}<span class="pill">Тип сделки: {{ offer.extra.deal_type }}</span>{% endif %}
+                            {% if offer.extra.building_type %}<span class="pill">Дом: {{ offer.extra.building_type }}</span>{% endif %}
+                            {% if offer.extra.building_material %}<span class="pill">Материал: {{ offer.extra.building_material }}</span>{% endif %}
+                        {% if offer.extra.assignment and offer.extra.assignment|stringformat:"s" not in "0,0.0,0.0000" %}<span class="pill">Назначение: {{ offer.extra.assignment }}</span>{% endif %}
+                        {% if offer.extra.new_flat and offer.extra.new_flat|stringformat:"s" not in "0,0.0,0.0000" %}<span class="pill">Новостройка: {{ offer.extra.new_flat }}</span>{% endif %}
+                        {% if offer.extra.apartments and offer.extra.apartments|stringformat:"s" not in "0,0.0,0.0000" %}<span class="pill">Апартаменты: {{ offer.extra.apartments }}</span>{% endif %}
+                        {% if offer.extra.studio and offer.extra.studio|stringformat:"s" not in "0,0.0,0.0000" %}<span class="pill">Студия: {{ offer.extra.studio }}</span>{% endif %}
+                          </span>
+                        </li>
+                        <li>
+                          <span class="info-stack__label">Планы и фото</span>
+                          <span class="info-stack__value info-stack__links">
+                            {% if floor_img %}
+                              <a href="{{ floor_img }}" target="_blank">План этажа</a>
+                            {% endif %}
+                            {% if offer.extra.photos %}
+                              {% for photo in offer.extra.photos|slice:":3" %}
+                                <a href="{{ photo }}" target="_blank">Фото {{ forloop.counter }}</a>
+                              {% endfor %}
+                            {% endif %}
+                            {% if hero %}<a href="{{ hero }}" target="_blank">Планировка</a>{% endif %}
+                            <span class="info-stack__note">Обновлено: {{ offer.last_update_date|date:"d.m.Y"|default:offer.extra.last_update_date }}</span>
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
 
                   {% if hero %}
