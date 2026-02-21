@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>ЖК — Поиск недвижимости</title>
+  <link rel="stylesheet" href="{% static 'listings/styles.css' %}">
+  <style>
+    body {margin:0; padding-top:130px; background: linear-gradient(180deg, #f7f9fc 0%, #eef3f8 100%);}
+    #custom-header {
+      position: fixed; top:0; left:0; right:0; height:120px;
+      display: grid; grid-template-columns: 1fr 2fr 1fr;
+      align-items: center; padding: 0 30px; background:#ffffff; z-index:5000;
+    }
+    #custom-header .logo {display:flex; justify-content:flex-start; padding:8px 12px;}
+    #custom-header a {font-family:"ralewey",Arial,sans-serif; font-size:20px; font-weight:700; text-transform:uppercase; color:#00ceb1; text-decoration:none; text-align:center; padding:6px 8px;}
+    #custom-header .nav {display:flex; justify-content:center; align-items:center; gap:18px; padding:10px 14px;}
+    #custom-header .nav a {font-size:18px; padding:10px 14px; border-radius:10px; border:2px solid #00ceb1; background:#e6fffb; min-width:150px; display:inline-flex; justify-content:center;}
+    #custom-header .nav a:hover {background:#00ceb1; color:#ffffff;}
+    #custom-header .logo img {height:90px;}
+    #custom-header .phone {display:flex; justify-content:flex-end; padding:8px 12px;}
+    @media (max-width:1200px){#custom-header{padding:0 16px; grid-template-columns:1fr 2fr 1fr;} #custom-header a{font-size:18px;}}
+    @media (max-width:959px){
+      #custom-header{grid-template-columns:1fr; row-gap:10px; height:auto; padding:10px 16px;}
+      #custom-header .logo{justify-content:center;}
+      #custom-header .nav{justify-content:center; flex-wrap:wrap;}
+      #custom-header .phone{justify-content:center;}
+      body{padding-top:170px;}
+    }
+    .grid {max-width:1200px; margin:0 auto; padding:20px; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px;}
+    .card {background:#ffffff; border-radius:18px; overflow:hidden; box-shadow:0 14px 30px rgba(0,0,0,0.08); display:flex; flex-direction:column;}
+    .card__img {height:180px; background-size:cover; background-position:center;}
+    .card__body {padding:16px 18px; display:flex; flex-direction:column; gap:6px;}
+    .card__title {margin:0; color:#0f172a; font-size:18px; font-weight:700;}
+    .card__meta {margin:0; color:#475569; font-size:14px;}
+    .card__price {color:#0f172a; font-weight:700; margin-top:4px;}
+  </style>
+</head>
+<body>
+  <div id="custom-header">
+    <div class="logo">
+      <a href="/"><img src="/static/logo.png?v=1" alt="Союз Застройщиков"></a>
+    </div>
+    <div class="nav">
+      <a href="/search/complexes/">ЖК</a>
+      <a href="/#rec634479152">Районы</a>
+      <a href="/search/">Поиск</a>
+      <a href="/">На главную</a>
+    </div>
+    <div class="phone"><a href="tel:+79668552929">8(966) 855 29 29</a></div>
+  </div>
+
+  <main style="padding:40px 20px;">
+    <div style="max-width:1200px; margin:0 auto 18px;">
+      <p class="eyebrow" style="color:#00ceb1; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin:0 0 8px;">Публичный поиск</p>
+      <h1 style="margin:0 0 8px; color:#0f172a;">ЖК Петербурга и области</h1>
+      <p style="margin:0; color:#475569;">Главные фото и ключевая информация по активным жилым комплексам.</p>
+    </div>
+    <section class="grid">
+      {% for card in cards %}
+        <a class="card" href="{% url 'propertysearch:complex_detail' card.slug %}" style="text-decoration:none; color:inherit;">
+          <div class="card__img" style="background-image:url('{{ card.image }}');"></div>
+          <div class="card__body">
+            <h3 class="card__title">{{ card.name }}</h3>
+            <p class="card__price">{{ card.price_from|default:"Цена уточняется" }}</p>
+            <p class="card__meta">Квартир: {{ card.units|default:"—" }}</p>
+            <p class="card__meta">Район: {{ card.district }}</p>
+            <p class="card__meta">Метро: {{ card.metro }}</p>
+            <p class="card__meta">Статус: {{ card.status }}</p>
+          </div>
+        </a>
+      {% empty %}
+        <p>Нет активных ЖК для отображения.</p>
+      {% endfor %}
+    </section>
+  </main>
+</body>
+</html>

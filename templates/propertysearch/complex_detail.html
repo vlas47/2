@@ -1,0 +1,419 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>{{ complex.name }} — ЖК</title>
+  <link rel="stylesheet" href="{% static 'listings/styles.css' %}">
+  <style>
+    body {margin:0; padding-top:130px; background:#f7f9fc;}
+    #custom-header {
+      position: fixed; top:0; left:0; right:0; height:120px;
+      display:grid; grid-template-columns:1fr 2fr 1fr;
+      align-items:center; padding:0 30px; background:#ffffff; z-index:5000;
+    }
+    #custom-header .logo {display:flex; justify-content:flex-start; padding:8px 12px;}
+    #custom-header a {font-family:"ralewey",Arial,sans-serif; font-size:20px; font-weight:700; text-transform:uppercase; color:#00ceb1; text-decoration:none; text-align:center; padding:6px 8px;}
+    #custom-header .nav {display:flex; justify-content:center; align-items:center; gap:18px; padding:10px 14px;}
+    #custom-header .nav a {font-size:18px; padding:10px 14px; border-radius:10px; border:2px solid #00ceb1; background:#e6fffb; min-width:150px; display:inline-flex; justify-content:center;}
+    #custom-header .nav a:hover {background:#00ceb1; color:#ffffff;}
+    #custom-header .logo img {height:90px;}
+    #custom-header .phone {display:flex; justify-content:flex-end; padding:8px 12px;}
+    @media (max-width:959px){#custom-header{grid-template-columns:1fr; row-gap:10px; height:auto; padding:10px 16px;} #custom-header .logo{justify-content:center;} #custom-header .nav{justify-content:center; flex-wrap:wrap;} #custom-header .phone{justify-content:center;} body{padding-top:170px;}}
+    .hero {max-width:1200px; margin:0 auto 24px; background:#fff; border-radius:24px; box-shadow:0 20px 45px rgba(0,0,0,0.1); overflow:hidden;}
+    .hero__img {height:320px; background-size:cover; background-position:center;}
+    .hero__body {padding:24px;}
+    .eyebrow {color:#00ceb1; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin:0 0 8px;}
+    .hero h1 {margin:0 0 12px; color:#0f172a;}
+    .hero p {margin:0 0 8px; color:#475569;}
+    .gallery {display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;}
+    .gallery__thumb {border:none; padding:0; background:transparent; cursor:pointer; border-radius:12px; overflow:hidden; box-shadow:0 6px 14px rgba(0,0,0,0.08); transition:transform .15s ease, box-shadow .15s ease;}
+    .gallery__thumb img {display:block; width:120px; height:80px; object-fit:cover;}
+    .gallery__thumb:hover {transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,0.12);}
+    .gallery__thumb.is-active {outline:3px solid #00ceb1; box-shadow:0 12px 26px rgba(0,0,0,0.14);}
+    .filters {max-width:1200px; margin:0 auto; background:#fff; border-radius:12px; padding:10px; box-shadow:0 12px 30px rgba(0,0,0,0.08); display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:8px;}
+    .filter-card {border:1px solid #e2e8f0; border-radius:10px; padding:8px; display:flex; flex-direction:column; gap:8px;}
+    .filter-card h4 {margin:0; font-size:13px; color:#0f172a;}
+    .filter-group {display:flex; flex-direction:column; gap:4px;}
+    .filter-line {display:flex; flex-wrap:wrap; gap:8px; align-items:center;}
+    .filter-line .grow {flex:1 1 140px;}
+    .filter-card input[type="number"], .filter-card select {height:34px; padding:6px 8px;}
+    .rooms-grid {display:flex; flex-wrap:wrap; gap:6px;}
+    .rooms-grid label {display:inline-flex; align-items:center; gap:4px; padding:4px 8px; border:1px solid #e2e8f0; border-radius:8px; cursor:pointer; background:#f8fafc; min-width:48px; justify-content:center; transition:all .15s ease; font-size:12px;}
+    .rooms-grid input {width:13px; height:13px;}
+    .rooms-grid label:hover {background:#e6f6ff; border-color:#b6dcff;}
+    .offers {max-width:1200px; margin:16px auto 40px; display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:12px;}
+    .offer {background:linear-gradient(180deg,#f6fbff 0%,#ffffff 70%); border-radius:14px; padding:12px; box-shadow:0 8px 20px rgba(0,0,0,0.05); display:flex; flex-direction:column; gap:4px; border:1px solid #e5f0ff; transition:transform .18s ease, box-shadow .18s ease; cursor:pointer;}
+    .offer:hover {transform:translateY(-4px); box-shadow:0 14px 28px rgba(0,0,0,0.1);}
+    .offer h3 {margin:0; color:#0f172a; font-size:15px;}
+    .offer p {margin:0; color:#475569; font-size:12px; line-height:1.35;}
+    .offer__meta {display:flex; flex-wrap:wrap; gap:8px; font-size:13px; color:#0f172a; font-weight:700;}
+    .badge {display:inline-flex; align-items:center; padding:4px 8px; border-radius:10px; background:#e6fffb; color:#0f172a; font-weight:600; font-size:12px;}
+    .offer__header {display:flex; justify-content:space-between; align-items:flex-start; gap:8px;}
+    .offer__details {padding-top:4px; border-top:1px solid #e5f0ff; gap:4px; display:flex; flex-direction:column;}
+    .offer-modal {position:fixed; inset:0; background:rgba(15,23,42,0.6); display:none; align-items:center; justify-content:center; padding:18px; z-index:7000;}
+    .offer-modal.is-open {display:flex;}
+    .offer-modal__dialog {background:#f6fbff; border-radius:18px; padding:16px; width:min(1180px, 96vw); max-height:90vh; overflow-y:auto; box-shadow:0 22px 60px rgba(0,0,0,0.25); position:relative;}
+    .offer-modal__close {position:absolute; top:12px; right:12px; border:none; background:#0f172a; color:#fff; width:34px; height:34px; border-radius:50%; cursor:pointer; font-size:18px; display:flex; align-items:center; justify-content:center;}
+    .mini-gallery {display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;}
+    .mini-gallery button {border:1px solid #d7e3f1; background:#fff; padding:4px; border-radius:10px; cursor:pointer; box-shadow:0 6px 18px rgba(0,0,0,0.06); transition:transform .12s ease, box-shadow .12s ease;}
+    .mini-gallery button img {width:96px; height:72px; object-fit:cover; display:block; border-radius:8px;}
+    .mini-gallery button:hover {transform:translateY(-2px); box-shadow:0 10px 22px rgba(0,0,0,0.12);}
+    .mini-gallery button.is-active {border-color:#00ceb1;}
+  </style>
+</head>
+<body>
+  <div id="custom-header">
+    <div class="logo">
+      <a href="/"><img src="/static/logo.png?v=1" alt="Союз Застройщиков"></a>
+    </div>
+    <div class="nav">
+      <a href="/search/complexes/">ЖК</a>
+      <a href="/#rec634479152">Районы</a>
+      <a href="/search/">Поиск</a>
+      <a href="/">На главную</a>
+    </div>
+    <div class="phone"><a href="tel:+79668552929">8(966) 855 29 29</a></div>
+  </div>
+
+  <main style="padding:32px 20px;">
+    <section class="hero">
+      <div class="hero__img" style="background-image:url('{{ hero_image }}');"></div>
+      <div class="hero__body">
+        <p class="eyebrow">ЖК</p>
+        <h1>{{ complex.name }}</h1>
+        <p>Район: {{ complex.district|default:"уточняется" }} · Метро: {{ complex.metro|default:"уточняется" }} · Статус: {{ complex.status|default:"уточняется" }}</p>
+        <p>{{ complex.description|default:"Описание уточняется" }}</p>
+        {% if gallery %}
+          <div class="gallery">
+            {% for photo in gallery %}
+              <button type="button"
+                      class="gallery__thumb {% if photo.url == hero_image %}is-active{% endif %}"
+                      data-hero-src="{{ photo.url }}">
+                <img src="{{ photo.url }}" alt="{{ complex.name }} фото {{ forloop.counter }}">
+              </button>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </section>
+
+    <form class="filters" method="get">
+      <div class="filter-card">
+        <h4>Комнаты, этаж, тип</h4>
+        <div class="filter-group">
+          <label>Комнаты</label>
+          <div class="rooms-grid">
+            {% for r in '12345' %}
+              <label>
+                <input type="checkbox" name="rooms" value="{{ r }}" {% if r in rooms_selected %}checked{% endif %}>
+                {{ r }}
+              </label>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="filter-line">
+          <div class="filter-group grow">
+            <label>Этаж от</label>
+            <input type="number" name="floor_min" value="{{ floor_min }}">
+          </div>
+          <div class="filter-group grow">
+            <label>Этаж до</label>
+            <input type="number" name="floor_max" value="{{ floor_max }}">
+          </div>
+        </div>
+        <div class="filter-line">
+          <label style="display:flex; align-items:center; gap:6px;">
+            <input type="checkbox" name="only_new" {% if only_new %}checked{% endif %}>
+            Новостройка
+          </label>
+          <label style="display:flex; align-items:center; gap:6px;">
+            <input type="checkbox" name="only_apartments" {% if only_apartments %}checked{% endif %}>
+            Апартаменты
+          </label>
+          <label style="display:flex; align-items:center; gap:6px;">
+            <input type="checkbox" name="only_studio" {% if only_studio %}checked{% endif %}>
+            Студия
+          </label>
+          <label style="display:flex; align-items:center; gap:6px;">
+            <input type="checkbox" name="with_decoration" {% if with_decoration %}checked{% endif %}>
+            С отделкой
+          </label>
+        </div>
+      </div>
+
+      <div class="filter-card">
+        <h4>Цена, площадь, сортировка</h4>
+        <div class="filter-line">
+          <div class="filter-group grow">
+            <label>Цена от</label>
+            <input type="number" name="price_min" value="{{ price_min }}" placeholder="например 3000000">
+          </div>
+          <div class="filter-group grow">
+            <label>Цена до</label>
+            <input type="number" name="price_max" value="{{ price_max }}">
+          </div>
+        </div>
+        <div class="filter-line" style="gap:6px;">
+          <div class="filter-group" style="flex:1;">
+            <label>Площадь от (м²)</label>
+            <input type="number" step="0.1" name="area_min" value="{{ area_min }}">
+          </div>
+          <div class="filter-group" style="flex:1;">
+            <label>Площадь до (м²)</label>
+            <input type="number" step="0.1" name="area_max" value="{{ area_max }}">
+          </div>
+          <div class="filter-group" style="flex:1;">
+            <label>Сортировка</label>
+            <select name="sort">
+              {% for value, title in sort_options %}
+                <option value="{{ value }}" {% if sort == value %}selected{% endif %}>{{ title }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <button class="btn btn--primary" type="submit" style="height:32px; padding:0 10px; align-self:end; white-space:nowrap;">Искать</button>
+        </div>
+      </div>
+    </form>
+
+    <section class="offers">
+      {% if offers %}
+        {% for offer in offers %}
+          <article class="offer" data-offer="{{ offer.internal_id }}">
+            <div class="offer__header">
+              <h3>{{ offer.building_name|default:complex.name }}</h3>
+            </div>
+            <div class="offer__meta">
+              {% if offer.is_new_flat %}<span class="badge">Новостройка</span>{% endif %}
+              {% if offer.is_apartments %}<span class="badge">Апартаменты</span>{% endif %}
+              {% if offer.is_studio %}<span class="badge">Студия</span>{% endif %}
+            </div>
+            <p><strong>Цена:</strong> {{ offer.price|default:"-" }} {{ offer.currency|default:"₽" }}</p>
+            <p><strong>Планировка:</strong> {{ offer.rooms|default:"-" }}к · {{ offer.area_total|default:"-" }} м² · кухня {{ offer.area_kitchen|default:"-" }} м²</p>
+            <p><strong>Этаж:</strong> {{ offer.floor|default:"-" }}/{{ offer.floors_total|default:"-" }}{% if offer.ceiling_height %} · потолок {{ offer.ceiling_height }} м{% endif %}</p>
+            <p><strong>Адрес:</strong> {{ offer.address|default:"-" }}{% if offer.metro_name %} · метро {{ offer.metro_name }}{% endif %}</p>
+            <p class="muted">Клик по карточке — полная информация и фото</p>
+          </article>
+
+          <template id="offer-card-{{ offer.internal_id }}">
+            {% with plan=offer.extra.plan_image floor_img=offer.extra.floor_image %}
+            {% with hero=offer.hero_image|default:plan|default:floor_img %}
+            <article class="realty-card realty-card--wide">
+              <div class="realty-card__layout">
+                <div class="realty-card__info">
+                  <p class="small-label">
+                    {% if offer.rooms %}{{ offer.rooms }}-комнатная{% endif %} {{ offer.property_type|default:"квартира" }}
+                    {% if offer.extra.number_flat %} · № {{ offer.extra.number_flat }}{% endif %}
+                  </p>
+                  <h3>
+                    {% if offer.rooms %}{{ offer.rooms }}-комнатная {% endif %}{{ offer.property_type|default:"квартира" }}
+                    в жилом комплексе {{ offer.building_name|default:complex.name }}
+                    {% if offer.metro_name or offer.extra.metro_name %}
+                      , до метро {{ offer.metro_name|default:offer.extra.metro_name }}
+                      {% if offer.metro_time_on_foot or offer.extra.metro_time_on_foot %}
+                        {{ offer.metro_time_on_foot|default:offer.extra.metro_time_on_foot }} мин пешком
+                      {% elif offer.metro_time_on_transport or offer.extra.metro_time_on_transport %}
+                        {{ offer.metro_time_on_transport|default:offer.extra.metro_time_on_transport }} мин транспорт
+                      {% endif %}
+                    {% endif %}
+                  </h3>
+
+                  <div class="realty-card__details">
+                    <ul class="info-stack">
+                      <li>
+                        <span class="info-stack__label">Цена</span>
+                        <span class="info-stack__value">
+                          {{ offer.price|default:offer.extra.price_value|default:"-" }} {% if offer.currency %}{{ offer.currency }}{% endif %}
+                          {% if offer.extra.price_base %}<span class="info-stack__note">База: {{ offer.extra.price_base }}</span>{% endif %}
+                        </span>
+                      </li>
+                      <li class="info-stack__group info-stack__group--compact">
+                        <div class="info-stack__group-head">Технические параметры</div>
+                        <ul class="tech-grid">
+                          {% if offer.area_total or offer.extra.area_total %}
+                            <li>
+                              <p class="tech-grid__value">{{ offer.area_total|default:offer.extra.area_total }} м²</p>
+                              <p class="tech-grid__label">Общая площадь</p>
+                            </li>
+                          {% endif %}
+                          {% if offer.area_living or offer.extra.area_living %}
+                            <li>
+                              <p class="tech-grid__value">{{ offer.area_living|default:offer.extra.area_living }} м²</p>
+                              <p class="tech-grid__label">Площадь комнат</p>
+                            </li>
+                          {% endif %}
+                          {% if offer.area_kitchen or offer.extra.area_kitchen %}
+                            <li>
+                              <p class="tech-grid__value">{{ offer.area_kitchen|default:offer.extra.area_kitchen }} м²</p>
+                              <p class="tech-grid__label">Площадь кухни</p>
+                            </li>
+                          {% endif %}
+                          {% if offer.ceiling_height or offer.extra.ceiling_height %}
+                            <li>
+                              <p class="tech-grid__value">{{ offer.ceiling_height|default:offer.extra.ceiling_height }} м</p>
+                              <p class="tech-grid__label">Высота потолка</p>
+                            </li>
+                          {% endif %}
+                          {% if offer.floor or offer.extra.floor %}
+                            <li>
+                              <p class="tech-grid__value">
+                                {{ offer.floor|default:offer.extra.floor }} из {{ offer.floors_total|default:offer.extra.floors_total|default:"?" }}
+                              </p>
+                              <p class="tech-grid__label">Этаж</p>
+                            </li>
+                          {% endif %}
+                        </ul>
+                      </li>
+                      <li class="info-stack__group info-stack__group--compact">
+                        <div class="info-stack__group-head">Локация</div>
+                        <div style="display:flex; flex-direction:column; gap:4px; font-size:13px; color:#0f172a;">
+                          {% if offer.address or offer.extra.address %}
+                            <div><strong>Адрес:</strong> {{ offer.address|default:offer.extra.address }}</div>
+                          {% endif %}
+                          {% if offer.metro_name or offer.extra.metro_name %}
+                            <div>
+                              <strong>Метро:</strong> {{ offer.metro_name|default:offer.extra.metro_name }}
+                              {% if offer.metro_time_on_foot or offer.extra.metro_time_on_foot %} · {{ offer.metro_time_on_foot|default:offer.extra.metro_time_on_foot }} мин пешком{% endif %}
+                              {% if offer.metro_time_on_transport or offer.extra.metro_time_on_transport %} · {{ offer.metro_time_on_transport|default:offer.extra.metro_time_on_transport }} мин транспорт{% endif %}
+                            </div>
+                          {% endif %}
+                          {% if offer.district or offer.extra.district %}
+                            <div><strong>Район:</strong> {{ offer.district|default:offer.extra.district }}</div>
+                          {% endif %}
+                        </div>
+                      </li>
+                      <li class="info-stack__group info-stack__group--compact">
+                        <div class="info-stack__group-head">Статусы</div>
+                        <ul class="pill-list">
+                          {% if offer.deal_status or offer.extra.deal_status %}<li class="pill">Статус сделки: {{ offer.deal_status|default:offer.extra.deal_status }}</li>{% endif %}
+                          {% if offer.deal_state or offer.extra.deal_state %}<li class="pill">Состояние: {{ offer.deal_state|default:offer.extra.deal_state }}</li>{% endif %}
+                          {% if offer.deal_type or offer.extra.deal_type %}<li class="pill pill--ghost">Тип сделки: {{ offer.deal_type|default:offer.extra.deal_type }}</li>{% endif %}
+                          {% if offer.decoration_type or offer.extra.decoration_type %}<li class="pill pill--ghost">Отделка: {{ offer.decoration_type|default:offer.extra.decoration_type }}</li>{% endif %}
+                          {% if offer.assignment or offer.extra.assignment %}<li class="pill pill--ghost">Назначение: {{ offer.assignment|default:offer.extra.assignment }}</li>{% endif %}
+                          <li class="pill pill--ghost">Новостройка: {% if offer.is_new_flat %}да{% else %}нет{% endif %}</li>
+                          <li class="pill pill--ghost">Апартаменты: {% if offer.is_apartments %}да{% else %}нет{% endif %}</li>
+                          <li class="pill pill--ghost">Студия: {% if offer.is_studio %}да{% else %}нет{% endif %}</li>
+                        </ul>
+                      </li>
+                      {% if offer.description %}
+                        <li>
+                          <span class="info-stack__label">Описание</span>
+                          <span class="info-stack__value">{{ offer.description }}</span>
+                        </li>
+                      {% endif %}
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="realty-card__visual">
+                  {% if hero %}
+                    <div class="realty-card__hero realty-card__hero--wide" data-hero>
+                      <img src="{{ hero }}" alt="Планировка или фото" loading="lazy">
+                    </div>
+                  {% endif %}
+                  {% if offer.gallery %}
+                    <div class="mini-gallery" data-gallery>
+                      {% for photo in offer.gallery %}
+                        <button type="button" data-photo="{{ photo }}" {% if forloop.first %}class="is-active"{% endif %}>
+                          <img src="{{ photo }}" alt="{{ offer.building_name|default:complex.name }} фото {{ forloop.counter }}" loading="lazy">
+                        </button>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            </article>
+            {% endwith %}
+            {% endwith %}
+          </template>
+        {% endfor %}
+      {% else %}
+        <p style="grid-column:1/-1;">Пока нет предложений по этому ЖК.</p>
+      {% endif %}
+    </section>
+
+    <div class="offer-modal" id="offer-modal" aria-hidden="true">
+      <div class="offer-modal__dialog">
+        <button class="offer-modal__close" type="button" aria-label="Закрыть">×</button>
+        <div class="offer-modal__body"></div>
+      </div>
+    </div>
+  </main>
+  <script>
+    (function () {
+      const hero = document.querySelector('.hero__img');
+      const thumbs = Array.from(document.querySelectorAll('.gallery__thumb'));
+      if (!hero || !thumbs.length) return;
+
+      const setActive = (thumb) => {
+        const src = thumb.getAttribute('data-hero-src');
+        if (!src) return;
+        hero.style.backgroundImage = `url('${src}')`;
+        thumbs.forEach((btn) => btn.classList.toggle('is-active', btn === thumb));
+      };
+
+      thumbs.forEach((thumb) => {
+        thumb.addEventListener('click', () => setActive(thumb));
+      });
+    })();
+
+    (function () {
+      const modal = document.getElementById('offer-modal');
+      const modalBody = modal ? modal.querySelector('.offer-modal__body') : null;
+      const closeBtn = modal ? modal.querySelector('.offer-modal__close') : null;
+
+      const wireGallery = (root) => {
+        const heroWrapper = root.querySelector('[data-hero] img');
+        const buttons = Array.from(root.querySelectorAll('[data-gallery] button[data-photo]'));
+        if (!heroWrapper || !buttons.length) return;
+        buttons.forEach((btn) => {
+          btn.addEventListener('click', () => {
+            buttons.forEach((b) => b.classList.toggle('is-active', b === btn));
+            heroWrapper.src = btn.getAttribute('data-photo');
+          });
+        });
+      };
+
+      const openCard = (id) => {
+        if (!modal || !modalBody) return;
+        const tpl = document.getElementById(`offer-card-${id}`);
+        if (!tpl) return;
+        modalBody.innerHTML = tpl.innerHTML;
+        modal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+        wireGallery(modalBody);
+      };
+
+      const closeCard = () => {
+        if (!modal) return;
+        modal.classList.remove('is-open');
+        document.body.style.overflow = '';
+      };
+
+      if (closeBtn) {
+        closeBtn.addEventListener('click', closeCard);
+      }
+      if (modal) {
+        modal.addEventListener('click', (event) => {
+          if (event.target === modal) {
+            closeCard();
+          }
+        });
+      }
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          closeCard();
+        }
+      });
+
+      document.querySelectorAll('.offer').forEach((card) => {
+        const id = card.getAttribute('data-offer');
+        card.addEventListener('click', (ev) => {
+          if (ev.target.closest('button, a, input')) return;
+          if (id) openCard(id);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

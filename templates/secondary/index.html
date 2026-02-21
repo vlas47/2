@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Вторичка и Trade-in — Союз Застройщиков</title>
+  <link rel="stylesheet" href="{% static 'listings/styles.css' %}">
+</head>
+<body class="secondary">
+  <section class="section secondary" id="secondary">
+    <div class="container secondary__grid">
+      <div>
+        <p class="eyebrow">С вашей старой квартирой</p>
+        <h1>Вторичка и Trade-in</h1>
+        <p>{{ secondary_intro }}</p>
+        <ul class="secondary__list">
+          {% for item in secondary_points %}
+            <li>
+              <strong>{{ item.title }}</strong>
+              <span>{{ item.text }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="secondary__note">
+        <h3>Поддержка экспертов</h3>
+        <p>{{ secondary_note }}</p>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

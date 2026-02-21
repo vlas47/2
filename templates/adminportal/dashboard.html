@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Администрирование — Союз Застройщиков</title>
+  <link rel="stylesheet" href="{% static 'listings/styles.css' %}">
+  <style>
+    .demo-banner {
+      background: #eef2ff;
+      border: 1px solid #cbd5ff;
+      border-radius: 12px;
+      padding: 0.85rem 1rem;
+      margin: 0.75rem 0 1.25rem;
+      color: #1e2a45;
+      font-size: 0.95rem;
+    }
+    .manager-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Администрирование</p>
+      <h1>Операционная сводка</h1>
+      {% if is_demo %}
+        <div class="demo-banner">
+          <strong>Кабинет главного менеджера.</strong> Вы просматриваете раздел без авторизации.
+        </div>
+      {% endif %}
+      <div class="manager-actions">
+        <a class="btn btn--primary" href="{% url 'complexes:index' %}" target="_blank">ЖК</a>
+        <a class="btn btn--ghost" href="{% url 'realestate:cards' %}" target="_blank">Квартиры</a>
+        <a class="btn btn--ghost" href="/">Выйти</a>
+      </div>
+      <div class="hero__tags">
+        {% for card in dashboard_cards %}
+          <article>
+            <p class="tag__value">{{ card.value }}</p>
+            <h3>{{ card.title }}</h3>
+            <p>{{ card.hint }}</p>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="section partners">
+    <div class="container partners__grid">
+      <div>
+        <h2>Партнёрская сеть</h2>
+        <p>{{ partner_intro }}</p>
+      </div>
+      <ul class="partners__list">
+        {% for point in partner_points %}
+          <li>{{ point }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--contrast">
+    <div class="container consult">
+      <div class="consult__content">
+        <h2>Контроль этапов</h2>
+        <ul class="consult__steps">
+          {% for step in steps %}
+            <li>
+              <span>{{ forloop.counter|stringformat:"02" }}</span>
+              <div>
+                <h3>{{ step.title }}</h3>
+                <p>{{ step.text }}</p>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

@@ -1,0 +1,996 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Жилищные комплексы - Союз Застройщиков</title>
+  <link rel="stylesheet" href="{% static 'listings/styles.css' %}">
+  <style>
+    .upload-meta {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+
+    .upload-status {
+      min-height: 1.2em;
+      color: #3b3b3b;
+      transition: color 0.2s ease;
+    }
+
+    .upload-status.is-error {
+      color: #bf0000;
+    }
+
+    .upload-status.is-success {
+      color: #0f7d00;
+    }
+
+    .upload-progress {
+      margin-top: 0.35rem;
+      width: 100%;
+      background: #e7e7e7;
+      border-radius: 999px;
+      height: 4px;
+      overflow: hidden;
+    }
+
+    .upload-progress__bar {
+      height: 100%;
+      width: 0;
+      background: #0f62ff;
+      transition: width 0.3s ease;
+    }
+    .info-header__actions form {
+      margin: 0;
+    }
+    .complexes-overview {
+      margin: 0.75rem 0 1.8rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.95rem;
+      color: #0c1d2c;
+    }
+    .complexes-overview strong {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #111e2b;
+    }
+    .complexes-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: flex-end;
+      margin-bottom: 1.5rem;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 1rem;
+    }
+    .complexes-controls label {
+      display: flex;
+      flex-direction: column;
+      font-size: 0.85rem;
+      color: #475569;
+      gap: 0.35rem;
+    }
+    .complexes-controls select {
+      min-width: 220px;
+      padding: 0.4rem 0.6rem;
+      border-radius: 10px;
+      border: 1px solid #cbd5f5;
+      font-size: 0.95rem;
+      background: white;
+    }
+    .complexes-controls__actions {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .upload-log {
+      margin-top: 0.5rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 0.5rem;
+      max-height: 150px;
+      overflow-y: auto;
+      background: #f7f9fb;
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+    .upload-log__line {
+      margin-bottom: 0.35rem;
+    }
+    .upload-log__line.is-success {
+      color: #0f7d00;
+    }
+    .upload-log__line.is-error {
+      color: #bf0000;
+    }
+    .upload-files {
+      margin-top: 0.65rem;
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+    .upload-files__list {
+      margin: 0.35rem 0 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+    .upload-files__list li {
+      background: #fff;
+      border: 1px solid #d5dbe5;
+      border-radius: 999px;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.8rem;
+    }
+    .upload-files__list li a {
+      color: #0f62ff;
+      text-decoration: none;
+    }
+    .upload-files__badge {
+      margin-left: 0.4rem;
+      padding: 0 0.35rem;
+      background: #0f62ff;
+      color: white;
+      border-radius: 999px;
+      font-size: 0.7rem;
+    }
+    .upload-gallery {
+      margin-top: 0.5rem;
+      display: grid;
+      gap: 0.35rem;
+      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    }
+    .upload-gallery__item {
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+      border: 1px solid #eef2f7;
+      box-shadow: 0 2px 6px rgba(15, 32, 80, 0.1);
+      position: relative;
+    }
+    .upload-gallery__item img {
+      width: 100%;
+      height: 70px;
+      object-fit: cover;
+      display: block;
+    }
+    .upload-gallery__label {
+      position: absolute;
+      bottom: 0.35rem;
+      left: 0.35rem;
+      right: 0.35rem;
+      font-size: 0.65rem;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 0.1rem 0.35rem;
+      border-radius: 4px;
+      text-align: center;
+    }
+    .gallery-thumbs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .gallery-thumb {
+      width: calc(33.333% - 6px);
+      max-width: 120px;
+      height: 90px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease;
+      position: relative;
+    }
+    .gallery-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .gallery-thumb.is-main {
+      border-color: rgba(255, 137, 111, 0.8);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
+    .gallery-thumb:hover {
+      transform: translateY(-2px);
+    }
+    .realty-card--wide {
+      padding: 1.2rem 1.4rem;
+    }
+    .realty-card__layout {
+      gap: 1.2rem;
+    }
+    .realty-card--wide .info-stack {
+      gap: 0.4rem;
+    }
+    .realty-card--wide .info-stack li {
+      padding: 0.45rem 0.65rem;
+      margin-bottom: 0.15rem;
+    }
+    .realty-card--wide .info-stack__value {
+      line-height: 1.35;
+    }
+    .info-stack__description .info-stack__value {
+      display: block;
+      max-height: 8rem;
+      overflow: hidden;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #1f2933;
+      white-space: pre-line;
+    }
+    .info-stack__item--editable .info-stack__value {
+      position: relative;
+      padding-right: 3.5rem;
+      min-height: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+    .info-stack__item--editable .info-stack__value-text {
+      display: inline-block;
+      max-width: calc(100% - 2rem);
+      margin: 0;
+    }
+    .info-stack__description .info-stack__value {
+      align-items: flex-start;
+      min-height: 0;
+    }
+    .info-stack__description .info-stack__value-text {
+      display: block;
+      max-width: 100%;
+      margin: 0;
+      line-height: 1.4;
+    }
+    .info-stack__edit {
+      position: absolute;
+      right: 0.6rem;
+      bottom: 0.4rem;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid #cbd5f5;
+      background: #eef2ff;
+      color: #2563eb;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .info-stack__edit svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+    .info-stack__edit:hover {
+      background: #dbeafe;
+      transform: translateY(-1px);
+    }
+    .gallery-thumb__actions {
+      position: absolute;
+      bottom: 6px;
+      right: 6px;
+      display: flex;
+      gap: 6px;
+      z-index: 2;
+    }
+    .gallery-action {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      background: rgba(255, 255, 255, 0.95);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      padding: 0;
+    }
+    .gallery-action svg {
+      width: 16px;
+      height: 16px;
+      fill: #222;
+    }
+    .gallery-action:hover {
+      transform: translateY(-1px);
+      background: #fff;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.18);
+    }
+    .realty-card__gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 20px 0 0;
+      width: 100%;
+      justify-content: flex-start;
+    }
+  </style>
+</head>
+<body class="dashboard">
+  {% if messages %}
+    <div class="messages">
+      {% for message in messages %}
+        <div class="message {{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+  <section class="section">
+    <div class="container">
+      <div class="info-header">
+        <div class="info-header__stats">
+          <span>Подборка: <strong>Жилищные комплексы</strong></span>
+          <span>Петербург и пригороды</span>
+        </div>
+        <div class="info-header__actions">
+          <form method="post" action="{% url 'complexes:refresh' %}">
+            {% csrf_token %}
+            <button class="btn btn--ghost" type="submit">Обновить данные ЖК</button>
+          </form>
+          <a class="btn btn--ghost" href="/">Главная</a>
+          <a class="btn btn--primary" href="{% url 'realestate:cards' %}">База Setl</a>
+        </div>
+      </div>
+
+      <p class="eyebrow">Витрина</p>
+      <h1>Жилищные комплексы партнёров</h1>
+      <p class="lead">Подборка проверенных проектов: статус готовности, цена входа и ключевые преимущества для клиентов.</p>
+      <div class="complexes-overview">
+        <span>Актуальных ЖК: <strong>{{ summary.active_count|default:0 }}</strong></span>
+        <span>Квартир в базе: <strong>{{ summary.apartments_total|default:0 }}</strong></span>
+      </div>
+      <form class="complexes-controls" method="get">
+        <label>
+          Выбрать ЖК
+          <select name="complex">
+            <option value="">Все проекты</option>
+            {% for slug, name in complex_choices %}
+              <option value="{{ slug }}" {% if slug == selected_complex %}selected{% endif %}>{{ name }}</option>
+            {% endfor %}
+          </select>
+        </label>
+        <label>
+          Район
+          <input type="text" name="district" value="{{ selected_district }}" placeholder="Часть названия района">
+        </label>
+        <label>
+          Метро
+          <input type="text" name="metro" value="{{ selected_metro }}" placeholder="Название метро">
+        </label>
+        <label>
+          Сортировка
+          <select name="sort">
+            {% for value, title in sorting_options %}
+              <option value="{{ value }}" {% if value == selected_sort %}selected{% endif %}>{{ title }}</option>
+            {% endfor %}
+          </select>
+        </label>
+        <div class="complexes-controls__actions">
+          <button class="btn btn--primary btn--small" type="submit">Показать</button>
+          {% if has_filters %}
+            <a class="btn btn--ghost btn--small" href="{% url 'complexes:index' %}">Сбросить</a>
+          {% endif %}
+        </div>
+      </form>
+
+      <div class="cards-grid cards-grid--wide complexes-grid">
+        {% for complex in complexes %}
+          <article class="realty-card realty-card--wide" data-slug="{{ complex.slug }}" data-complex-name="{{ complex.name }}">
+            <div class="realty-card__layout">
+              <div class="realty-card__info">
+                <p class="small-label">{{ complex.status }}</p>
+                <h3>{{ complex.name }}</h3>
+                <ul class="info-stack">
+                  <li>
+                    <span class="info-stack__label">Цена</span>
+                    <span class="info-stack__value">{{ complex.price_from }}</span>
+                  </li>
+                  <li class="info-stack__item info-stack__item--editable">
+                    <span class="info-stack__label">Локация</span>
+                    <div class="info-stack__value">
+                      <span class="info-stack__value-text">{{ complex.district }}</span>
+                      <button type="button" class="info-stack__edit" data-field="district" aria-label="Редактировать локацию">
+                        <svg viewBox="0 0 20 20" aria-hidden="true">
+                          <path d="M14.7 2.3a1 1 0 011.4 1.4l-8.5 8.5-2.9.6.6-2.9 8.4-8.6zM4 17h12v1H4z"></path>
+                        </svg>
+                      </button>
+                    </div>
+                  </li>
+                  <li class="info-stack__item info-stack__item--editable">
+                    <span class="info-stack__label">Метро</span>
+                    <div class="info-stack__value">
+                      <span class="info-stack__value-text">{{ complex.metro }}</span>
+                      <button type="button" class="info-stack__edit" data-field="metro" aria-label="Редактировать метро">
+                        <svg viewBox="0 0 20 20" aria-hidden="true">
+                          <path d="M14.7 2.3a1 1 0 011.4 1.4l-8.5 8.5-2.9.6.6-2.9 8.4-8.6zM4 17h12v1H4z"></path>
+                        </svg>
+                      </button>
+                    </div>
+                  </li>
+                  <li class="info-stack__description info-stack__item info-stack__item--editable">
+                    <span class="info-stack__label">Описание</span>
+                    <div class="info-stack__value complex-description">
+                      <span class="info-stack__value-text">{{ complex.description|default:"Описание уточняется"|linebreaksbr }}</span>
+                      <button type="button" class="info-stack__edit" data-field="description" aria-label="Редактировать описание">
+                        <svg viewBox="0 0 20 20" aria-hidden="true">
+                          <path d="M14.7 2.3a1 1 0 011.4 1.4l-8.5 8.5-2.9.6.6-2.9 8.4-8.6zM4 17h12v1H4z"></path>
+                        </svg>
+                      </button>
+                    </div>
+                  </li>
+                  {% if complex.units %}
+                    <li>
+                      <span class="info-stack__label">В базе</span>
+                      <span class="info-stack__value">{{ complex.units }} предложений</span>
+                    </li>
+                  {% endif %}
+                  <li>
+                    <span class="info-stack__label">Особенности</span>
+                    <span class="info-stack__value info-stack__chips">
+                      {% for feat in complex.features %}
+                        <span class="pill">{{ feat }}</span>
+                      {% endfor %}
+                    </span>
+                  </li>
+                </ul>
+              </div>
+              <div class="realty-card__visual">
+                {% if complex.gallery %}
+                  <div class="realty-card__hero realty-card__hero--wide">
+                    <img src="{{ complex.image }}" alt="Визуализация {{ complex.name }}" class="realty-card__hero-img">
+                  </div>
+                {% else %}
+                  <div class="realty-card__hero realty-card__hero--wide is-empty">
+                    <span>Фото пока нет</span>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+            {% if complex.gallery %}
+              <div class="realty-card__gallery">
+                {% for photo in complex.gallery %}
+                  <figure class="gallery-thumb {% if photo.is_main %}is-main{% endif %}" data-file="{{ photo.file }}">
+                    <img src="{{ photo.url }}" alt="Фотография {{ complex.name }}">
+                    <div class="gallery-thumb__actions">
+                      <button type="button" class="gallery-action" data-gallery-action="set-main" title="Сделать главным">
+                        <svg viewBox="0 0 20 20" aria-hidden="true">
+                          <path d="M10 3.5a6.5 6.5 0 016.5 6.5A6.5 6.5 0 0110 16.5 6.5 6.5 0 013.5 10 6.5 6.5 0 0110 3.5zm0 1.4a5.1 5.1 0 00-4.1 2.26l5.84 5.85A5.1 5.1 0 0010 4.9zm3 0.5l-4.6 4.6a2.4 2.4 0 014.6-4.6z"></path>
+                        </svg>
+                      </button>
+                      <button type="button" class="gallery-action" data-gallery-action="delete" title="Удалить фото">
+                        <svg viewBox="0 0 20 20" aria-hidden="true">
+                          <path d="M6 6h8v10a1 1 0 01-1 1H7a1 1 0 01-1-1zM5 4h10v1H5zm3-2h4v2H8zm-1 0H4v2h2z"></path>
+                        </svg>
+                      </button>
+                    </div>
+                    {% if photo.is_main %}
+                      <span class="pill pill--ghost">Главное</span>
+                    {% endif %}
+                  </figure>
+                {% endfor %}
+              </div>
+            {% endif %}
+            <form class="photo-upload-form" method="post" enctype="multipart/form-data" action="{% url 'complexes:upload_photo' %}">
+              {% csrf_token %}
+              <input type="hidden" name="complex_name" value="{{ complex.name }}">
+              <input type="hidden" name="main_index" class="js-main-index" value="0">
+              <input type="file"
+                     name="files"
+                     multiple
+                     class="js-photo-input"
+                     id="files-{{ complex.slug }}"
+                     hidden>
+              <button class="btn btn--ghost btn--small js-open-files" type="button" data-target="files-{{ complex.slug }}">Выбрать фото</button>
+              <div class="upload-preview js-upload-preview"></div>
+              <button class="btn btn--primary btn--small" type="submit">Загрузить</button>
+            </form>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  <script>
+    (function () {
+      try {
+        var getCookie = function (name) {
+          var value = '; ' + document.cookie;
+          var parts = value.split('; ' + name + '=');
+          if (parts.length === 2) return parts.pop().split(';').shift();
+        };
+        var csrfToken = getCookie('csrftoken');
+        var galleryIcons = {
+          'set-main': 'M10 3.5a6.5 6.5 0 016.5 6.5A6.5 6.5 0 0110 16.5 6.5 6.5 0 013.5 10 6.5 6.5 0 0110 3.5zm0 1.4a5.1 5.1 0 00-4.1 2.26l5.84 5.85A5.1 5.1 0 0010 4.9zm3 0.5l-4.6 4.6a2.4 2.4 0 014.6-4.6z',
+          delete: 'M6 6h8v10a1 1 0 01-1 1H7a1 1 0 01-1-1zM5 4h10v1H5zm3-2h4v2H8zm-1 0H4v2h2z',
+        };
+        var fieldDefaults = {
+          district: 'Район уточняется',
+          metro: 'Метро уточняется',
+          description: 'Описание уточняется',
+        };
+        var handleInlineEdit = function (event) {
+          var button = event.target.closest('.info-stack__edit');
+          if (!button) {
+            return;
+          }
+          var field = button.getAttribute('data-field');
+          if (!field) {
+            return;
+          }
+          event.preventDefault();
+          if (!csrfToken) {
+            alert('CSRF-токен отсутствует, обновите страницу.');
+            return;
+          }
+          var card = button.closest('.realty-card');
+          if (!card) {
+            return;
+          }
+          var slug = card.getAttribute('data-slug');
+          if (!slug) {
+            return;
+          }
+          var valueNode = button.parentElement.querySelector('.info-stack__value-text');
+          var currentValue = valueNode ? valueNode.textContent.trim() : '';
+          var promptTitle = button.getAttribute('aria-label') || 'Введите значение';
+          var nextValue = window.prompt(promptTitle, currentValue);
+          if (nextValue === null) {
+            return;
+          }
+          button.disabled = true;
+          fetch('/complexes/' + slug + '/update-field/', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRFToken': csrfToken,
+              'X-Requested-With': 'XMLHttpRequest',
+            },
+            body: JSON.stringify({ field: field, value: nextValue }),
+          })
+            .then(function (response) {
+              if (!response.ok) {
+                return response
+                  .json()
+                  .catch(function () {
+                    return {};
+                  })
+                  .then(function (payload) {
+                    var message = (payload && payload.message) || 'Не удалось обновить.';
+                    throw new Error(message);
+                  });
+              }
+              return response.json();
+            })
+            .then(function (payload) {
+              if (!payload || !payload.success) {
+                throw new Error((payload && payload.message) || 'Не удалось обновить.');
+              }
+              var displayValue = payload.display_value || fieldDefaults[field] || '';
+              if (valueNode) {
+                if (field === 'description') {
+                  valueNode.innerHTML = displayValue.replace(/\n/g, '<br>');
+                } else {
+                  valueNode.textContent = displayValue;
+                }
+              }
+            })
+            .catch(function (error) {
+              alert(error.message || 'Ошибка обновления.');
+            })
+            .finally(function () {
+              button.disabled = false;
+            });
+        };
+        document.addEventListener('click', handleInlineEdit);
+
+        var forms = document.querySelectorAll('.photo-upload-form');
+        if (!forms || !forms.length) {
+          return;
+        }
+        Array.prototype.forEach.call(forms, function (form) {
+          var input = form.querySelector('.js-photo-input');
+          var preview = form.querySelector('.js-upload-preview');
+          var mainField = form.querySelector('.js-main-index');
+          var openBtn = form.querySelector('.js-open-files');
+          var status = form.querySelector('.js-upload-status');
+          var progressBar = form.querySelector('.js-progress-bar');
+          var submitBtn = form.querySelector('button[type=submit]');
+          var logArea = form.querySelector('.js-upload-log');
+          var filesList = form.querySelector('.js-upload-files-list');
+          var card = form.closest('.realty-card');
+          var cardGallery = card ? card.querySelector('.realty-card__gallery') : null;
+
+          if (!input || !preview || !mainField) {
+            return;
+          }
+
+          var lastProgress = 0;
+          var ensureCardGallery = function () {
+            if (!card) {
+              return null;
+            }
+            if (!cardGallery) {
+              cardGallery = document.createElement('div');
+              cardGallery.className = 'realty-card__gallery';
+              card.insertBefore(cardGallery, form);
+            }
+            return cardGallery;
+          };
+          var createGalleryThumb = function (file) {
+            var figure = document.createElement('figure');
+            figure.className = 'gallery-thumb' + (file.is_main ? ' is-main' : '');
+            figure.dataset.file = file.file || file.name || '';
+            var img = document.createElement('img');
+            img.src = file.url;
+            img.alt = 'Фотография ' + complexLabel;
+            figure.appendChild(img);
+            var actions = document.createElement('div');
+            actions.className = 'gallery-thumb__actions';
+            ['set-main', 'delete'].forEach(function (actionType) {
+              var btn = document.createElement('button');
+              btn.type = 'button';
+              btn.className = 'gallery-action';
+              btn.dataset.galleryAction = actionType;
+              btn.title = actionType === 'set-main' ? 'Сделать главным' : 'Удалить фото';
+              btn.innerHTML = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="' +
+                galleryIcons[actionType] + '"></path></svg>';
+              actions.appendChild(btn);
+            });
+            figure.appendChild(actions);
+            if (file.is_main) {
+              var badge = document.createElement('span');
+              badge.className = 'pill pill--ghost';
+              badge.textContent = 'Главное';
+              figure.appendChild(badge);
+            }
+            return figure;
+          };
+          var renderCardGallery = function (files) {
+            var container = ensureCardGallery();
+            if (!container) {
+              return;
+            }
+            container.innerHTML = '';
+            if (!files || !files.length) {
+              var info = document.createElement('div');
+              info.className = 'gallery-empty';
+              info.textContent = 'Фото пока нет';
+              container.appendChild(info);
+              return;
+            }
+            files.forEach(function (file) {
+              container.appendChild(createGalleryThumb(file));
+            });
+          };
+
+          var logLine = function (text, variant) {
+            if (!logArea) {
+              return;
+            }
+            var line = document.createElement('div');
+            line.className = 'upload-log__line';
+            if (variant) {
+              line.classList.add('is-' + variant);
+            }
+            line.textContent = text;
+            logArea.appendChild(line);
+            logArea.scrollTop = logArea.scrollHeight;
+          };
+
+          var resetLog = function () {
+            if (!logArea) {
+              return;
+            }
+            logArea.innerHTML = '';
+            logLine('Система готова к загрузке файла.');
+          };
+
+          var renderFilesList = function (files) {
+            if (!filesList) {
+              return;
+            }
+            filesList.innerHTML = '';
+            if (!files || !files.length) {
+              var empty = document.createElement('li');
+              empty.textContent = 'Пока нет файлов.';
+              filesList.appendChild(empty);
+              return;
+            }
+            files.forEach(function (file) {
+              var item = document.createElement('li');
+              var link = document.createElement('a');
+              link.href = file.url;
+              link.target = '_blank';
+              link.rel = 'noopener noreferrer';
+              link.textContent = file.file || file.name || 'файл';
+              item.appendChild(link);
+              if (file.is_main) {
+                var badge = document.createElement('span');
+                badge.className = 'upload-files__badge';
+                badge.textContent = 'Главное';
+                item.appendChild(badge);
+              }
+              filesList.appendChild(item);
+            });
+          };
+
+          var handleGalleryAction = function (event) {
+            var action = event.target.closest('[data-gallery-action]');
+            if (!action) {
+              return;
+            }
+            event.preventDefault();
+            var figure = action.closest('.gallery-thumb');
+            if (!figure) {
+              return;
+            }
+            var filename = figure.dataset.file;
+            if (!filename) {
+              return;
+            }
+            var actionType = action.dataset.galleryAction;
+            galleryActionRequest(actionType, filename);
+          };
+          if (card) {
+            card.addEventListener('click', handleGalleryAction);
+          }
+
+          var galleryActionRequest = function (actionType, filename) {
+            if (!csrfToken) {
+              logLine('CSRF-token отсутствует.', 'error');
+              return;
+            }
+            var slug = card ? card.dataset.slug : null;
+            if (!slug) {
+              return;
+            }
+            var endpoint = actionType === 'delete' ? 'delete' : 'set-main';
+            var url = '/complexes/photos/' + slug + '/' + filename + '/' + endpoint + '/';
+            return fetch(url, {
+              method: 'POST',
+              headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': csrfToken,
+              },
+            })
+              .then(function (res) {
+                if (!res.ok) throw new Error('Сервер вернул ' + res.status);
+                return res.json();
+              })
+              .then(function (payload) {
+                if (payload && payload.success) {
+                  logLine(payload.message, 'success');
+                  if (payload.files_on_server) {
+                    renderFilesList(payload.files_on_server);
+                    renderCardGallery(payload.files_on_server);
+                    refreshCardHero(payload.slug, payload.files_on_server);
+                  }
+                } else {
+                  throw new Error((payload && payload.message) ? payload.message : 'Ошибка запроса.');
+                }
+              })
+              .catch(function (err) {
+                logLine('Ошибка: ' + err.message, 'error');
+              });
+          };
+
+          var refreshCardHero = function (slug, files) {
+            if (!slug || !files || !files.length) {
+              return;
+            }
+            var selector = '.realty-card[data-slug=\"' + slug + '\"]';
+            var card = document.querySelector(selector);
+            if (!card) {
+              return;
+            }
+            var hero = card.querySelector('.realty-card__hero');
+            var heroImg = hero ? hero.querySelector('img') : null;
+            var main = files.find(function (file) {
+              return file.is_main;
+            }) || files[0];
+            if (!main) {
+              return;
+            }
+            if (!hero) {
+              hero = document.createElement('div');
+              hero.className = 'realty-card__hero realty-card__hero--wide';
+              card.querySelector('.realty-card__visual').insertBefore(hero, card.querySelector('.gallery-thumbs'));
+            }
+            if (heroImg) {
+              heroImg.src = main.url;
+            } else {
+              hero.innerHTML = '<img src=\"' + main.url + '\" alt=\"Визуализация ' + complexLabel + '\" class=\"realty-card__hero-img\">';
+            }
+            hero.classList.remove('is-empty');
+          };
+
+          var formatErrors = function (errors) {
+            if (!errors) {
+              return '';
+            }
+            return Object.entries(errors)
+              .map(function (entry) {
+                var value = entry[1];
+                var text = Array.isArray(value) ? value.join(', ') : value;
+                return entry[0] + ': ' + text;
+              })
+              .join(' | ');
+          };
+
+          if (openBtn) {
+            openBtn.addEventListener('click', function () {
+              input.click();
+            });
+          }
+
+          input.addEventListener('change', function () {
+            renderPreview();
+            resetProgress();
+            if (input.files && input.files.length) {
+              logLine('Выбрано файлов: ' + input.files.length);
+            }
+            if (status) {
+              status.textContent = '';
+            }
+          });
+
+          var complexInput = form.querySelector('input[name=complex_name]');
+          var complexSlug = complexInput ? complexInput.value.replace(/\s+/g, '-').toLowerCase() : 'complex';
+          form.dataset.complex = complexSlug;
+          var complexLabel = complexInput ? complexInput.value : 'комплекс';
+
+          function renderPreview() {
+            var files = Array.prototype.slice.call(input.files || []);
+            preview.innerHTML = '';
+            files.forEach(function (file, idx) {
+              var row = document.createElement('div');
+              row.className = 'upload-preview__item';
+              row.innerHTML = '\n                <span>' + file.name + '</span>\n                <label><input type="radio" name="' + form.dataset.complex + '-main" value="' + idx + '"' + (idx === 0 ? ' checked' : '') + '>Главная</label>\n              ';
+              preview.appendChild(row);
+            });
+          };
+
+          var resetProgress = function () {
+            if (progressBar) {
+              progressBar.style.width = '0';
+            }
+            lastProgress = 0;
+          };
+
+          var showStatus = function (text, variant) {
+            if (!status) {
+              return;
+            }
+            status.textContent = text || '';
+            status.classList.toggle('is-error', variant === 'error');
+            status.classList.toggle('is-success', variant === 'success');
+          };
+
+          form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            var files = Array.prototype.slice.call(input.files || []);
+            if (!files.length) {
+              showStatus('Выберите хотя бы одно фото.', 'error');
+              logLine('Ошибка: не выбраны файлы.', 'error');
+              return;
+            }
+            var selected = preview.querySelector('input[type=radio]:checked');
+            mainField.value = selected ? selected.value : 0;
+            var formData = new FormData(form);
+            resetLog();
+            logLine('Формируем и отправляем данные...');
+
+            if (submitBtn) {
+              submitBtn.disabled = true;
+            }
+
+            showStatus('Загрузка файлов...', '');
+            resetProgress();
+            if (progressBar) {
+              progressBar.style.width = '5%';
+            }
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', form.action);
+            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+            xhr.upload.addEventListener('progress', function (evt) {
+              if (!evt.lengthComputable || !progressBar) {
+                return;
+              }
+              var percent = Math.round((evt.loaded / evt.total) * 100);
+              progressBar.style.width = percent + '%';
+              if (percent === 100 || percent - lastProgress >= 15) {
+                logLine('Передано ' + percent + '%');
+                lastProgress = percent;
+              }
+            });
+
+            xhr.addEventListener('load', function () {
+              if (submitBtn) {
+                submitBtn.disabled = false;
+              }
+              var isSuccess = xhr.status >= 200 && xhr.status < 300;
+              var payload = null;
+              try {
+                payload = JSON.parse(xhr.responseText);
+              } catch (error) {
+                payload = null;
+              }
+
+            if (isSuccess) {
+              var successMessage = (payload && payload.message) ? payload.message : 'Фото успешно загружены.';
+              showStatus(successMessage, 'success');
+              if (progressBar) {
+                progressBar.style.width = '100%';
+              }
+              preview.innerHTML = '';
+              input.value = '';
+              mainField.value = 0;
+              if (payload && payload.logs) {
+                payload.logs.forEach(function (line) {
+                  logLine(line, 'success');
+                });
+              }
+                if (payload && payload.files_on_server) {
+                  renderFilesList(payload.files_on_server);
+                  renderCardGallery(payload.files_on_server);
+                  refreshCardHero(payload.slug, payload.files_on_server);
+                }
+            } else {
+                var errorMessage = (payload && payload.message) ? payload.message : 'Ошибка загрузки. Попробуйте снова.';
+                var details = formatErrors(payload && payload.errors);
+                if (details) {
+                  errorMessage += ' ' + details;
+                }
+                showStatus(errorMessage, 'error');
+                if (progressBar) {
+                  progressBar.style.width = '0';
+                }
+                logLine(errorMessage, 'error');
+                if (payload && payload.logs) {
+                  payload.logs.forEach(function (line) {
+                    logLine(line, 'error');
+                  });
+                }
+              }
+            });
+
+            xhr.addEventListener('error', function () {
+              if (submitBtn) {
+                submitBtn.disabled = false;
+              }
+              showStatus('Ошибка сети. Повторите попытку.', 'error');
+              if (progressBar) {
+                progressBar.style.width = '0';
+              }
+              logLine('Ошибка сети при загрузке.', 'error');
+            });
+
+            xhr.send(formData);
+          });
+        });
+      } catch (error) {
+        if (window && window.console && window.console.error) {
+          window.console.error('Ошибка скрипта загрузки ЖК:', error);
+        }
+      }
+    })();
+  </script>
+</body>
+</html>
+    .complexes-controls input[type="text"] {
+      min-width: 220px;
+      padding: 0.4rem 0.6rem;
+      border-radius: 10px;
+      border: 1px solid #cbd5f5;
+      font-size: 0.95rem;
+      background: white;
+    }

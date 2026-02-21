@@ -1,0 +1,7 @@
+from django.apps import AppConfig
+
+
+class ComplexesConfig(AppConfig):
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'complexes'
+    verbose_name = 'Жилищные комплексы'

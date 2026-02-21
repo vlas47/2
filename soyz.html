@@ -1,0 +1,4605 @@
+﻿<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Союз Застройщиков Санкт-Петербург - подбор недвижимости</title>
+    <meta
+      name="description"
+      content="Союз Застройщиков Санкт-Петербург - профессиональный подбор новостроек и сопровождение сделки. Бесплатная консультация и закрытая база объектов."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Союз Застройщиков Санкт-Петербург" />
+    <meta
+      property="og:description"
+      content="Ваш ключ к идеальному жилью. Подбор новостроек, ипотека, сопровождение сделки."
+    />
+    <meta property="og:image" content="/static/landing/hero-building.png" />
+    <link rel="icon" type="image/png" href="/static/landing/logo-mark.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Viaoda+Libre&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --font-display: "Viaoda Libre", "Times New Roman", serif;
+        --font-body: "Montserrat", "Segoe UI", sans-serif;
+        --page-width: 1240px;
+        --page-gutter: 28px;
+        --text-dark: #233247;
+        --text-muted: #6b7b90;
+        --blue-950: #1b2f4a;
+        --blue-900: #2c68a6;
+        --blue-800: #2c68a6;
+        --blue-700: #2c68a6;
+        --blue-600: #4f7fb2;
+        --blue-400: #b7cbe3;
+        --social-color: #8cafd2;
+        --accent: #fdd785;
+        --accent-strong: #f2c96c;
+        --cream: #f7f2e9;
+        --white: #ffffff;
+        --shadow-soft: 0 18px 40px rgba(15, 32, 55, 0.16);
+        --shadow-card: 0 16px 30px rgba(13, 29, 53, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: var(--font-body);
+        color: var(--text-dark);
+        background: rgb(255, 255, 255);
+        min-height: 100vh;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: var(--font-display);
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+        height: auto;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button {
+        font-family: inherit;
+      }
+
+      main {
+        background-repeat: no-repeat;
+        background-position: 0 1000px;
+        background-image: url(/static/landing/about_line.svg);
+      }
+
+      .underline {
+        text-decoration: underline;
+      }
+
+      .page {
+        width: min(var(--page-width), 100%);
+        margin: 0 auto;
+        padding: 0 var(--page-gutter);
+        position: relative;
+      }
+
+      .section {
+        padding: 90px 0 0;
+        position: relative;
+      }
+
+      .section-lines {
+        overflow: hidden;
+      }
+
+      .section-lines::before {
+        top: -110px;
+      }
+
+      .section-lines::after {
+        bottom: -200px;
+        opacity: 0.12;
+        transform: translateX(-50%) scaleX(-1);
+      }
+
+      .section-title {
+        font-family: var(--font-display);
+        font-size: 44px;
+        font-weight: 400;
+        color: var(--blue-900);
+        line-height: 1.1;
+      }
+
+      .section-title.light {
+        color: var(--white);
+      }
+
+      .section-text {
+        margin-top: 14px;
+        font-size: 13px;
+        line-height: 1.65;
+        color: var(--text-muted);
+        font-family: var(--font-body);
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        height: 52px;
+        padding: 15px 26px;
+        border-radius: 999px;
+        border: none;
+        font-size: 15px;
+        font-weight: 500;
+        cursor: pointer;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease,
+          background 0.2s ease;
+      }
+
+      .btn-primary {
+        background: var(--accent);
+        color: #3b2f1b;
+        box-shadow: 0 4px 5px rgba(253, 215, 133, 0.3);
+      }
+
+      .btn-primary:hover {
+        background: var(--accent-strong);
+        transform: translateY(-2px);
+      }
+
+      .btn-blue {
+        background: var(--blue-900);
+        color: var(--white);
+        box-shadow: 0 4px 5px rgba(44, 104, 166, 0.2);
+      }
+
+      .btn-blue:hover {
+        background: #325b93;
+        transform: translateY(-2px);
+      }
+
+      .btn-outline {
+        background: transparent;
+        border: 1px solid rgba(43, 79, 120, 0.2);
+        color: var(--blue-900);
+      }
+
+      .btn-outline:hover {
+        background: rgba(90, 134, 194, 0.12);
+      }
+
+      .btn-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.9);
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+      }
+
+      .btn-icon img {
+        width: 14px;
+        height: 14px;
+      }
+
+      .site-header {
+        padding: 20px 0 0;
+        top: 0;
+        z-index: 10;
+      }
+
+      .header-inner {
+        display: grid;
+        grid-template-columns: max-content 1fr auto;
+        align-items: center;
+        gap: 28px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: var(--blue-900);
+        min-width: max-content;
+      }
+
+      .brand img {
+        height: auto;
+        max-height: 53px;
+        width: auto;
+        max-width: none;
+        border-radius: 5px;
+      }
+
+      .site-nav {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: #7f8fa6;
+        font-weight: 500;
+      }
+
+      .site-nav a {
+        padding: 6px 4px;
+        position: relative;
+      }
+
+      .site-nav a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -2px;
+        height: 2px;
+        background: var(--accent);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.2s ease;
+      }
+
+      .site-nav a:hover::after {
+        transform: scaleX(1);
+      }
+
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        color: #72839a;
+        font-size: 14px;
+      }
+
+      .header-right .phone {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+
+      .phone-icon {
+        width: 18px;
+        height: 18px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.7);
+      }
+
+      .phone-icon svg {
+        width: 12px;
+        height: 12px;
+        stroke: currentColor;
+        stroke-width: 1.8;
+        fill: none;
+      }
+
+      .socials {
+        display: flex;
+        gap: 8px;
+      }
+      .socials a {
+        width: 28px;
+        height: 28px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: var(--social-color);
+        box-shadow: 0 8px 16px rgba(15, 32, 55, 0.08);
+      }
+
+      .nav-toggle {
+        display: none;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1px solid rgba(43, 79, 120, 0.2);
+        background: var(--white);
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        flex-direction: column;
+        cursor: pointer;
+      }
+
+      .nav-toggle span {
+        width: 14px;
+        height: 2px;
+        background: #6f86a3;
+        border-radius: 999px;
+      }
+      .hero {
+        padding: 20px 0 0;
+      }
+      .hero-card {
+        background: linear-gradient(
+          135deg,
+          #7fa3c9 0%,
+          #96b5d5 55%,
+          #c4d6e9 100%
+        );
+        border-radius: 32px;
+        padding: 45px 31px 24px;
+        box-shadow: var(--shadow-soft);
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-card::after {
+        content: "";
+        position: absolute;
+        right: 10%;
+        top: -140px;
+        width: 520px;
+        height: 520px;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.4),
+          rgba(255, 255, 255, 0)
+        );
+        opacity: 0.4;
+        pointer-events: none;
+        z-index: 0;
+      }
+      .hero-grid {
+        display: grid;
+        gap: 18px;
+        position: relative;
+        z-index: 2;
+        width: min(640px, 58%);
+      }
+      .hero-title {
+        font-family: var(--font-display);
+        font-size: 70px;
+        color: var(--white);
+        line-height: 1.02;
+        font-weight: 400;
+      }
+      .hero-subtitle {
+        margin-top: 16px;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: rgba(255, 255, 255, 0.85);
+        line-height: 1.6;
+        font-family: var(--font-body);
+      }
+      .hero-actions {
+        margin-top: 24px;
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .hero-image {
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 44%;
+        overflow: hidden;
+        z-index: 1;
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      .hero-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center right;
+      }
+      .hero-benefits {
+        margin-top: 36px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 16px;
+        position: relative;
+        z-index: 2;
+      }
+      .benefit-card {
+        flex: 1 1 250px;
+        min-width: 204px;
+        background: rgba(255, 255, 255, 0.22);
+        border-radius: 18px;
+        padding: 16px 6px 14px 16px;
+        color: var(--white);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(10px);
+        min-height: 118px;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      }
+
+      .benefit-card h4 {
+        font-size: 16px;
+        margin-bottom: 6px;
+      }
+
+      .benefit-card h4::first-line {
+        color: #f1ecdd;
+      }
+
+      .benefit-card p {
+        font-size: 11px;
+        line-height: 1.35;
+        color: rgba(255, 255, 255, 0.85);
+      }
+      .benefit-card img {
+        width: 54px;
+        height: 54px;
+        padding: 6px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      .about-grid,
+      .regulation-grid,
+      .request-grid,
+      .why-grid,
+      .catalog-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 48px;
+        align-items: center;
+      }
+
+      .about-photo img,
+      .regulation-photo img,
+      .why-image img,
+      .request-photo img {
+        border-radius: 28px;
+        box-shadow: var(--shadow-card);
+      }
+
+      .section-curve {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        width: min(1440px, 100%);
+        height: auto;
+        transform: translateX(-50%);
+        opacity: 0.3;
+        display: block;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      /* .catalog-text {
+        max-width: 350px;
+      } */
+
+      .section-curve--catalog {
+        top: 80px;
+        width: min(1440px, 100%);
+        opacity: 0.2;
+      }
+
+      .section-curve--about {
+        top: 120px;
+        opacity: 0.2;
+      }
+
+      .section-curve--partners {
+        top: 80px;
+        opacity: 0.2;
+      }
+
+      .section-curve--reviews {
+        top: 20px;
+        opacity: 0.25;
+      }
+
+      .reviews .page {
+        position: relative;
+        z-index: 1;
+      }
+
+      #catalog {
+        overflow: hidden;
+      }
+
+      #partners {
+        overflow: hidden;
+      }
+
+      .section .page {
+        position: relative;
+        z-index: 1;
+      }
+
+      #about .about-grid,
+      .section-regulation .regulation-grid {
+        align-items: center;
+      }
+
+      #about .about-grid > .about-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        height: 100%;
+      }
+
+      .section-regulation .regulation-grid {
+        gap: 18px 56px;
+        grid-template-rows: auto 1fr;
+      }
+
+      #about .about-photo,
+      .section-regulation .xregulation-photo {
+        height: 80%;
+      }
+
+      #about .about-photo img,
+      .section-regulation .regulation-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .section-regulation .regulation-title {
+        grid-column: 1 / 2;
+        grid-row: 1;
+      }
+
+      .section-regulation .regulation-photo {
+        grid-column: 1 / 2;
+        grid-row: 2;
+      }
+
+      .section-regulation .regulation-content {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        grid-column: 2 / 3;
+        grid-row: 2;
+      }
+
+      .section-regulation .regulation-content .btn {
+        align-self: flex-end;
+        margin-top: 6px;
+      }
+
+      .section-catalog {
+        --catalog-left: clamp(260px, 28vw, 360px);
+        --catalog-gap: clamp(24px, 4vw, 76px);
+        --catalog-overlap: clamp(120px, 14vw, 320px);
+        --catalog-cards-width: clamp(420px, 58vw, 740px);
+        --catalog-cards-gap: clamp(8px, 1.2vw, 12px);
+        --catalog-visual-min: clamp(240px, 30vw, 360px);
+        --catalog-cutout-w: clamp(120px, 14vw, 170px);
+        --catalog-cutout-h: clamp(44px, 5.4vw, 64px);
+        --catalog-cutout-radius: clamp(20px, 2.6vw, 32px);
+      }
+
+      .section-catalog .catalog-grid {
+        gap: var(--catalog-gap);
+        align-items: flex-start;
+        grid-template-columns: minmax(0, var(--catalog-left)) minmax(0, 1fr);
+        overflow: visible;
+      }
+
+      .catalog-content {
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+        /* justify-content: start; */
+        max-width: 400px;
+        width: 100%;
+        position: relative;
+        z-index: 2;
+      }
+
+      .catalog-content .btn {
+        align-self: flex-start;
+      }
+
+      .catalog-visual {
+        position: relative;
+        z-index: 1;
+        border-radius: 32px;
+        overflow: hidden;
+        background: #ffffff;
+        min-height: var(--catalog-visual-min);
+      }
+
+      .catalog-visual img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        position: relative;
+        z-index: 0;
+      }
+
+      .catalog-cards {
+        margin-block: 6px 10px;
+        width: var(--catalog-cards-width);
+        max-width: none;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: var(--catalog-cards-gap);
+        justify-content: stretch;
+        background: white;
+        padding: 20px;
+        border-radius: 0;
+        box-shadow: none;
+        position: relative;
+        z-index: 3;
+        border-radius: 10px;
+        margin-right: calc(-1 * var(--catalog-overlap));
+      }
+
+      .catalog-card {
+        width: 100%;
+        border-radius: clamp(12px, 1.6vw, 14px);
+        overflow: hidden;
+        box-shadow: 0 12px 22px rgba(15, 32, 55, 0.16);
+      }
+
+      .catalog-card img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .dark-section {
+        margin-top: 20px;
+        background-repeat: no-repeat;
+        background-position: -200px 330px;
+        background-image: url("/static/landing/vector-med.svg");
+        color: var(--text-dark);
+        padding: 80px 0 90px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .dark-section .page {
+        position: relative;
+        z-index: 1;
+      }
+
+      .dark-title {
+        font-family: var(--font-display);
+        font-size: 44px;
+        color: var(--blue-900);
+        line-height: 1.2;
+        font-weight: 300;
+      }
+
+      .services-top {
+        display: grid;
+        grid-template-columns: minmax(0, 360px) minmax(0, 1fr);
+        gap: 36px;
+        align-items: center;
+      }
+
+      .services-copy {
+        max-width: 340px;
+      }
+
+      .services-subtext {
+        margin-top: 14px;
+        font-size: 13px;
+        line-height: 1.55;
+        color: var(--text-muted);
+        font-family: var(--font-body);
+      }
+
+      .start-slider {
+        position: relative;
+        padding-bottom: 44px;
+      }
+
+      .start-viewport {
+        overflow: hidden;
+      }
+
+      .start-track {
+        display: flex;
+        gap: 18px;
+        transition: transform 0.45s ease;
+        will-change: transform;
+      }
+
+      .start-nav {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        transform: none;
+        display: flex;
+        gap: 8px;
+      }
+
+      .services-block {
+        margin-top: 70px;
+      }
+
+      .service-slider {
+        position: relative;
+        padding-bottom: 44px;
+        --service-visible: 3;
+        --service-gap: 24px;
+      }
+
+      .service-viewport {
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .service-nav {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        transform: none;
+        display: flex;
+        gap: 8px;
+      }
+
+      .service-grid {
+        margin-top: 24px;
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: stretch;
+        gap: var(--service-gap);
+        transition: transform 0.45s ease;
+        will-change: transform;
+      }
+
+      .slider-btn {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 1px solid #000000;
+        background: var(--white);
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+        box-shadow: 0 8px 14px rgba(15, 32, 55, 0.1);
+        padding: 0;
+      }
+
+      .slider-btn:disabled {
+        cursor: not-allowed;
+        box-shadow: none;
+      }
+
+      .slider-btn img {
+        width: 12px;
+        height: 12px;
+      }
+
+      .slider-btn--accent {
+        border: 1px solid #000000;
+        background: var(--accent);
+      }
+
+      .start-card {
+        border-radius: 18px;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 16px 26px rgba(15, 32, 55, 0.14);
+        background: var(--white);
+        flex: 0 0 clamp(220px, 26vw, 280px);
+      }
+
+      .start-card img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+      }
+
+      .service-card {
+        height: 560px;
+        display: flex;
+        flex: 0 0
+          calc(
+            (100% - (var(--service-visible) - 1) * var(--service-gap)) /
+              var(--service-visible)
+          );
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: start;
+      }
+
+      .service-card .service-card-block {
+        align-items: start;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        padding: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+      }
+
+      .service-media {
+        position: relative;
+        border-radius: 16px;
+        overflow: hidden;
+      }
+
+      .service-media img {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+      }
+
+      .service-text {
+        font-size: 12px;
+        line-height: 1.6;
+        color: var(--text-muted);
+      }
+
+      .btn-compact {
+        height: 40px;
+        font-size: 13px;
+        gap: 10px;
+        box-shadow: 0 12px 18px rgba(44, 104, 166, 0.2);
+      }
+
+      .btn-compact .btn-icon {
+        width: 26px;
+        height: 26px;
+      }
+
+      .btn-compact .btn-icon img {
+        width: 12px;
+        height: 12px;
+      }
+
+      .start-card .info {
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        background: rgba(92, 103, 118, 0.8);
+        border-radius: 12px;
+        padding: 10px 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        font-size: 12px;
+        color: var(--white);
+      }
+
+      .start-card .info span {
+        display: block;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.9);
+        margin-top: 4px;
+      }
+
+      .card-arrow {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: var(--white);
+        box-shadow: 0 6px 12px rgba(15, 32, 55, 0.12);
+        padding-top: 8px;
+        padding-bottom: 5px;
+      }
+
+      .start-card .info img {
+        margin: auto;
+        width: 10px;
+        height: 10px;
+      }
+
+      .service-label {
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        background: rgba(88, 98, 110, 0.75);
+        border-radius: 6px;
+        padding: 12px 12px;
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--white);
+      }
+
+      .dark-cta {
+        margin-top: 40px;
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+
+      .why-list-title {
+        margin-top: 20px;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--blue-900);
+        text-align: left;
+      }
+
+      .why-list {
+        display: grid;
+        gap: 33px;
+        margin-top: 100px;
+      }
+
+      .why-grid {
+        align-items: start;
+      }
+
+      .why-left {
+        display: grid;
+        gap: 14px;
+        align-content: start;
+      }
+
+      .why-left .section-text {
+        max-width: 360px;
+      }
+
+      .why-image {
+        margin-top: 10px;
+      }
+
+      .why-right {
+        padding-top: 6px;
+      }
+
+      .why-item {
+        display: grid;
+        grid-template-columns: 44px 1fr;
+        gap: 14px;
+        padding-bottom: 33px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+      }
+
+      .why-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      .why-item h4 {
+        font-size: 16px;
+        color: var(--blue-900);
+        margin-bottom: 6px;
+      }
+
+      .why-item p {
+        font-size: 13px;
+        color: var(--text-muted);
+        line-height: 1.5;
+      }
+
+      .reviews {
+        margin-top: 90px;
+        background: linear-gradient(90deg, #2c68a6, #8fb3d6);
+        padding: 70px 0 50px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .reviews-viewport {
+        margin-top: 36px;
+        overflow: hidden;
+      }
+
+      .reviews-grid {
+        display: flex;
+        gap: 20px;
+        transition: transform 0.45s ease;
+        will-change: transform;
+      }
+
+      .review-card {
+        min-width: 290px;
+        background: var(--white);
+        border-radius: 22px;
+        padding: 22px;
+        box-shadow: var(--shadow-card);
+        flex: 0 0 calc((100% - 40px) / 3);
+      }
+
+      .review-card h4 {
+        font-size: 14px;
+        color: var(--blue-900);
+      }
+
+      .review-card span {
+        display: block;
+        margin-top: 6px;
+        font-size: 12px;
+        color: #96a4b8;
+      }
+
+      .review-card p {
+        margin-top: 10px;
+        font-size: 13px;
+        line-height: 1.5;
+        color: #5b6d83;
+      }
+
+      .review-stars {
+        display: none;
+      }
+
+      .reviews-controls {
+        position: static;
+        margin-top: 18px;
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+      }
+
+      .review-btn {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        border: 1px solid black;
+        background: transparent;
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+      }
+
+      .review-btn:disabled {
+        cursor: default;
+      }
+
+      .review-btn.active {
+        border: 1px solid #000000;
+        background: var(--accent);
+        border-color: var(--accent);
+      }
+
+      .review-btn img {
+        width: 12px;
+        height: 12px;
+      }
+
+      .news-viewport {
+        margin-top: 30px;
+        overflow: hidden;
+      }
+
+      .news-grid {
+        display: flex;
+        transition: transform 1.2s ease;
+        will-change: transform;
+      }
+
+      .news-slide {
+        flex: 0 0 100%;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+        gap: 14px;
+        align-items: stretch;
+        --news-gap: 14px;
+        --news-columns: 6;
+        --news-row-height: calc(
+          (
+              min(100vw, var(--page-width)) - (var(--page-gutter) * 2) -
+                (var(--news-gap) * 4)
+            ) /
+            var(--news-columns) * (16 / 9) * 2
+        );
+        grid-auto-rows: var(--news-row-height);
+      }
+
+      .news-card {
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: var(--shadow-card);
+        height: 100%;
+      }
+
+      .news-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 25% center;
+      }
+
+      .news-card--wide img {
+        object-position: left center;
+      }
+
+      .news-card--pos-2 img {
+        object-position: 40% center;
+      }
+
+      .news-card--pos-3 img {
+        object-position: 6% center;
+      }
+
+      .news-card .overlay {
+        background: rgba(88, 98, 110, 0.75);
+        position: absolute;
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        color: var(--white);
+        padding: 12px 14px;
+        border-radius: 6px;
+        font-size: 13px;
+      }
+
+      .news-card .overlay span {
+        font-size: 12px;
+        opacity: 0.8;
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .news-card .news-arrow {
+        padding: 4px;
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: var(--white);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      а .news-arrow img {
+        width: 50%;
+        height: 50%;
+      }
+
+      .news-controls {
+        margin-top: 18px;
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+      }
+
+      .partners-marquee {
+        margin-top: 36px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .partners-track {
+        display: flex;
+        width: max-content;
+        animation: partners-scroll 34s linear infinite;
+      }
+
+      .partners-row {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        padding-right: 28px;
+        flex: 0 0 auto;
+      }
+
+      .partners-row img {
+        height: 48px;
+        width: auto;
+        object-fit: contain;
+        filter: grayscale(0.1);
+      }
+
+      @keyframes partners-scroll {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      .request-form {
+        margin-top: 16px;
+        display: grid;
+        gap: 12px;
+        max-width: 380px;
+      }
+
+      .request-form input {
+        height: 44px;
+        border-radius: 12px;
+        border: none;
+        background: #f4e2bc;
+        padding: 0 14px;
+        font-size: 14px;
+      }
+
+      .request-consent {
+        font-size: 12px;
+        color: var(--text-muted);
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+      }
+
+      .request-consent input {
+        margin-top: 2px;
+      }
+
+      .footer {
+        background-image:
+          url("./static/landing/footer_line.svg"),
+          linear-gradient(120deg, #3b6caa 0%, #3b6caa 50%, #e5f0ff 100%);
+        margin-top: 90px;
+        color: var(--white);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .footer-top {
+        padding: 60px var(--page-gutter) 40px;
+        display: grid;
+        grid-template-columns: 1.15fr 0.9fr 1.1fr 1.1fr;
+        gap: 30px;
+      }
+
+      .footer-logo {
+        width: 200px;
+        margin-bottom: 18px;
+      }
+
+      .footer-col {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        align-items: start;
+      }
+
+      .footer-col h4 {
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 9px;
+      }
+
+      .footer-col p,
+      .footer-col a {
+        font-size: 13px;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.85);
+      }
+
+      .footer-links {
+        display: grid;
+        gap: 8px;
+      }
+
+      .footer-contacts {
+        display: grid;
+        gap: 12px;
+      }
+
+      .footer-contact-item {
+        display: grid;
+        grid-template-columns: 22px 1fr;
+        gap: 12px;
+        align-items: start;
+        font-size: 13px;
+        line-height: 1.5;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .footer-contact-item strong {
+        font-weight: 600;
+        color: var(--white);
+      }
+
+      .footer-icon {
+        width: 20px;
+        height: 20px;
+        display: grid;
+        place-items: center;
+      }
+
+      .footer-icon svg {
+        width: 18px;
+        height: 18px;
+        stroke: rgba(255, 255, 255, 0.9);
+        stroke-width: 1.6;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .footer-map img {
+        width: 100%;
+        border-radius: 0;
+        box-shadow: var(--shadow-card);
+      }
+
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 16px var(--page-gutter) 20px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .modal-open {
+        overflow: hidden;
+      }
+
+      .request-modal {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: clamp(16px, 3vw, 32px);
+        z-index: 9999;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition:
+          opacity 0.28s ease,
+          visibility 0s linear 0.28s;
+      }
+
+      .request-modal.is-open {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transition:
+          opacity 0.28s ease,
+          visibility 0s linear 0s;
+      }
+
+      .request-modal__overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(15, 32, 55, 0.55);
+        backdrop-filter: blur(6px);
+        opacity: 0;
+        transition: opacity 0.28s ease;
+      }
+
+      .request-modal.is-open .request-modal__overlay {
+        opacity: 1;
+      }
+
+      .request-modal__dialog {
+        position: relative;
+        z-index: 1;
+        width: min(720px, 100%);
+        max-height: calc(100vh - 32px);
+        display: flex;
+        flex-direction: column;
+        border-radius: 28px;
+        overflow: hidden;
+        background: var(--cream);
+        box-shadow: var(--shadow-soft);
+        opacity: 0;
+        transform: translateY(16px) scale(0.98);
+        transition:
+          opacity 0.28s ease,
+          transform 0.28s ease;
+      }
+
+      .request-modal.is-open .request-modal__dialog {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+
+      .request-modal__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 18px 24px;
+        background: #f6f1e8;
+        border-bottom: 1px solid rgba(35, 50, 71, 0.12);
+      }
+
+      .request-modal__title {
+        font-family: var(--font-display);
+        font-size: 30px;
+        font-weight: 400;
+        color: var(--blue-900);
+      }
+
+      .request-modal__close {
+        width: 40px;
+        height: 40px;
+        border-radius: 999px;
+        border: none;
+        background: rgba(35, 50, 71, 0.12);
+        color: var(--blue-900);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition:
+          background 0.2s ease,
+          transform 0.2s ease;
+      }
+
+      .request-modal__close:hover {
+        background: rgba(35, 50, 71, 0.2);
+        transform: scale(1.03);
+      }
+
+      .request-modal__close span {
+        font-size: 24px;
+        line-height: 1;
+      }
+
+      .request-modal__body {
+        padding: 24px;
+        overflow: auto;
+        max-height: calc(100vh - 180px);
+      }
+
+      .request-modal__content {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .request-modal__content .section-title {
+        font-size: 34px;
+        color: var(--blue-900);
+      }
+
+      .request-modal__content .section-text {
+        font-size: 13px;
+      }
+
+      .request-modal__content .request-form {
+        max-width: none;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(18px);
+        transition:
+          opacity 0.6s ease,
+          transform 0.6s ease;
+      }
+
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .partners-text-block {
+        max-width: 630px;
+      }
+
+      @keyframes heroFloat {
+        0% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-8px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      /* @media (max-width: 1150px) {
+        .hero-grid {
+          width: 100%;
+          align-self: center;
+        }
+
+        .hero-image {
+          position: relative;
+          top: auto;
+          right: auto;
+          bottom: auto;
+          left: auto;
+          margin-top: 0;
+          width: 100%;
+          height: 260px;
+          margin-top: 24px;
+          border-radius: 24px;
+        }
+
+        .hero-image img {
+          border-radius: 24px;
+        }
+
+        .hero-benefits {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .services-top {
+          grid-template-columns: 1fr;
+        }
+
+        .services-copy {
+          max-width: none;
+        }
+
+        .start-slider {
+          padding-bottom: 0;
+        }
+
+        .start-card {
+          flex-basis: clamp(200px, 40vw, 260px);
+        }
+
+        .service-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .start-nav {
+          position: static;
+          transform: none;
+          justify-content: flex-end;
+          margin-top: 12px;
+        }
+
+        .reviews-controls {
+          position: static;
+          margin-top: 20px;
+        }
+
+        .review-card {
+          flex-basis: calc((100% - 20px) / 2);
+        }
+
+        .news-slide {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .news-slide .news-card:last-child {
+          display: none;
+        }
+
+        .footer-top {
+          grid-template-columns: 1fr;
+        }
+      } */
+
+      @media (max-width: 1200px) {
+        .header-inner {
+          gap: 20px;
+        }
+
+        .brand img {
+          max-height: 44px;
+        }
+
+        .site-nav {
+          gap: 18px;
+          font-size: 10.5px;
+        }
+
+        .header-right {
+          gap: 10px;
+          font-size: 13px;
+        }
+
+        .header-right .phone {
+          font-size: 13px;
+        }
+      }
+
+      @media (max-width: 1030px) {
+        .header-inner {
+          gap: 16px;
+        }
+
+        .header-right {
+          display: none;
+        }
+      }
+
+      @media (max-width: 830px) {
+        :root {
+          --page-gutter: 24px;
+        }
+
+        .site-header {
+          padding: 16px 0 0;
+        }
+
+        .header-inner {
+          grid-template-columns: max-content 1fr;
+          gap: 20px;
+        }
+
+        .brand img {
+          max-height: 36px;
+        }
+
+        .site-nav {
+          justify-content: flex-end;
+          gap: 10px;
+          font-size: 9px;
+        }
+
+        .header-right {
+          display: none;
+        }
+
+        .section {
+          padding-top: 70px;
+        }
+
+        .section-title {
+          font-size: 34px;
+        }
+
+        .section-text {
+          font-size: 12px;
+        }
+
+        .hero {
+          padding: 20px 20px 0;
+        }
+
+        .hero-card {
+          padding: 56px 44px 44px;
+          border-radius: 28px;
+        }
+
+        .hero-title {
+          font-size: 54px;
+        }
+
+        .hero-grid {
+          max-width: 56%;
+        }
+
+        .hero-image {
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: auto;
+          width: 44%;
+          height: auto;
+          margin-top: 0;
+          border-radius: 0;
+        }
+
+        .hero-image img {
+          border-radius: 0;
+        }
+
+        .hero-benefits {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 12px;
+          margin-top: 24px;
+        }
+
+        .benefit-card {
+          min-height: 110px;
+          padding: 12px;
+        }
+
+        .benefit-card img {
+          width: 48px;
+          height: 48px;
+        }
+
+        .about-grid,
+        .regulation-grid,
+        .request-grid,
+        .why-grid,
+        .catalog-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 32px;
+        }
+
+        .why-grid {
+          padding-top: 0;
+        }
+
+        .dark-title {
+          font-size: 33px;
+        }
+
+        .services-subtext {
+          font-size: 11px;
+        }
+
+        .section-regulation .regulation-grid {
+          gap: 0 32px;
+        }
+
+        .services-top {
+          grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+          gap: 24px;
+        }
+
+        .services-copy {
+          max-width: 320px;
+        }
+
+        .start-card {
+          flex-basis: clamp(220px, 32vw, 260px);
+        }
+
+        .service-slider {
+          --service-visible: 2;
+          --service-gap: 20px;
+          padding-bottom: 0;
+        }
+
+        .service-nav {
+          position: static;
+          transform: none;
+          justify-content: flex-end;
+          margin-top: 12px;
+          gap: 12px;
+        }
+
+        .review-card {
+          flex-basis: calc((100% - 20px) / 2);
+        }
+
+        .review-stars {
+          display: flex;
+          position: absolute;
+          top: 14px;
+          right: 14px;
+          gap: 4px;
+          color: #f2c96c;
+        }
+
+        .review-stars svg {
+          width: 12px;
+          height: 12px;
+          fill: currentColor;
+        }
+
+        .news-slide {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 16px;
+          grid-auto-rows: auto;
+        }
+
+        .news-slide.news-slide--wide {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .news-slide .news-card {
+          display: block;
+        }
+
+        .news-card {
+          height: auto;
+          aspect-ratio: 16 / 9;
+        }
+
+        .news-card img {
+          transform: none;
+          transform-origin: center;
+        }
+
+        #news {
+          display: block;
+        }
+
+        .news-controls {
+          display: flex;
+        }
+
+        .partners-row img {
+          height: 34px;
+        }
+
+        .request-form {
+          max-width: 360px;
+        }
+
+        .footer {
+          margin-top: 60px;
+        }
+
+        .footer-top {
+          grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.7fr) minmax(
+              0,
+              1fr
+            );
+          gap: 24px;
+          padding: 40px var(--page-gutter) 32px;
+        }
+
+        .footer-logo {
+          width: 160px;
+        }
+
+        .footer-map {
+          display: none;
+        }
+
+        .footer-col h4 {
+          font-size: 12px;
+        }
+
+        .footer-col p,
+        .footer-col a {
+          font-size: 12px;
+        }
+
+        .footer-bottom {
+          display: none;
+        }
+
+        .section-regulation .regulation-content .btn {
+          display: none;
+        }
+
+        .dark-section {
+          background-position: -200px 330px;
+        }
+      }
+
+      @media (max-width: 650px) {
+        :root {
+          --page-gutter: 20px;
+        }
+
+        body {
+          overflow-x: hidden;
+        }
+
+        main {
+          background-position: -450px 970px;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .site-header {
+          position: relative;
+          background: #ffffff;
+          padding: 8px 0 0;
+          z-index: 30;
+        }
+
+        .header-inner {
+          grid-template-columns: 1fr auto;
+          gap: 12px;
+        }
+
+        .brand img {
+          max-height: 50px;
+        }
+
+        .header-right {
+          display: none;
+        }
+
+        .nav-toggle {
+          display: inline-flex;
+          width: 30px;
+          height: 30px;
+          border: none;
+          background: #a1c3e0;
+          box-shadow: none;
+          z-index: 40;
+          position: relative;
+          cursor: pointer;
+        }
+
+        .nav-toggle span {
+          width: 12px;
+          height: 2px;
+          background: #ffffff;
+        }
+
+        .site-nav {
+          position: fixed;
+          inset: 56px 16px auto 16px;
+          background: var(--white);
+          padding: 20px;
+          border-radius: 20px;
+          flex-direction: column;
+          gap: 14px;
+          box-shadow: var(--shadow-card);
+          z-index: 35;
+          transform: translateY(-20px);
+          opacity: 0;
+          pointer-events: none;
+          transition: all 0.2s ease;
+        }
+
+        .site-nav.open {
+          transform: translateY(0);
+          opacity: 1;
+          pointer-events: auto;
+        }
+
+        .section {
+          padding-top: 40px;
+        }
+
+        .section-title {
+          font-size: 28px;
+          text-align: center;
+        }
+
+        .section-text {
+          font-size: 14px;
+          text-align: center;
+        }
+
+        .dark-title {
+          font-size: 28px;
+        }
+
+        .dark-section {
+          padding: 40px 0 20px;
+          overflow: visible;
+        }
+
+        .btn {
+          height: 48px;
+          font-size: 15px;
+          padding: 14px 22px;
+        }
+
+        .btn-icon {
+          width: 24px;
+          height: 24px;
+        }
+
+        .btn-icon img {
+          width: 12px;
+          height: 12px;
+        }
+
+        .section-regulation .regulation-content .btn {
+          display: inline-flex;
+        }
+
+        /* .section-lines::before,
+        .section-lines::after {
+          display: none;
+        } */
+
+        .hero {
+          order: 1;
+          padding: 0;
+        }
+
+        .hero .page {
+          padding: 30px 15px 0;
+        }
+
+        .hero-card {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+          border-radius: 0 0 28px 28px;
+          padding: 40px var(--page-gutter) 0;
+          margin: 0;
+          background-image:
+            url("/static/landing/hero-building.png"),
+            linear-gradient(135deg, #87a9cc 0%, #91b5d7 55%, #b8d8ee 100%);
+          background-repeat: no-repeat, no-repeat;
+          background-size:
+            75% auto,
+            cover;
+          background-position:
+            right 0 top 18px,
+            center;
+        }
+
+        .hero-card::after {
+          display: none;
+        }
+
+        .hero-grid {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          max-width: clamp(220px, 45%, 320px);
+          position: relative;
+          z-index: 1;
+        }
+
+        .hero-title {
+          font-size: clamp(38px, 7.5vw, 44px);
+          line-height: 1.05;
+        }
+
+        .hero-subtitle {
+          margin-top: 10px;
+          font-size: 13px;
+        }
+
+        .hero-actions {
+          margin-top: 18px;
+        }
+
+        .hero-image {
+          display: none;
+        }
+
+        .hero-image img {
+          display: none;
+        }
+
+        .hero-benefits {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          align-items: stretch;
+          gap: 12px;
+          margin-top: 16px;
+          background: #7ea4cf;
+          padding: 18px var(--page-gutter) 24px;
+          margin-left: calc(-1 * var(--page-gutter));
+          margin-right: calc(-1 * var(--page-gutter));
+          border-radius: 24px 24px 0 0;
+        }
+
+        .benefit-card {
+          background: #8fb2db;
+          border: 1px solid rgba(255, 255, 255, 0.4);
+          border-radius: 20px;
+          min-height: 110px;
+          padding: 12px;
+          box-shadow: none;
+          backdrop-filter: none;
+          flex: 1 1 204px;
+          min-width: 204px;
+        }
+
+        .benefit-card img {
+          width: 44px;
+          height: 44px;
+        }
+
+        .benefit-card h4 {
+          font-size: 15px;
+        }
+
+        .benefit-card p {
+          font-size: 12px;
+        }
+
+        #catalog {
+          order: 2;
+          margin-top: 0;
+          padding-top: 40px;
+          background: transparent;
+          border-radius: 0;
+        }
+
+        .section-curve--catalog {
+          display: none;
+        }
+
+        .section-curve--partners {
+          display: block;
+        }
+
+        .section-catalog .catalog-grid {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .catalog-content {
+          align-items: center;
+          text-align: center;
+          width: 100%;
+          max-width: 100%;
+          margin: 0 auto;
+        }
+
+        .catalog-text {
+          max-width: 360px;
+          margin: 0 auto;
+        }
+
+        .catalog-cards {
+          width: 100%;
+          max-width: 100%;
+          grid-template-columns: 1fr;
+          margin: 16px auto 10px;
+          padding: 0;
+          gap: 12px;
+          background: transparent;
+          box-shadow: none;
+          align-items: center;
+        }
+
+        .catalog-card {
+          width: 100%;
+          border-radius: 18px;
+          box-shadow: var(--shadow-card);
+        }
+
+        .catalog-card picture,
+        .catalog-card img {
+          width: 100%;
+          display: block;
+        }
+
+        .catalog-card img {
+          height: 170px;
+          object-fit: cover;
+          object-position: 20% center;
+        }
+
+        .catalog-visual {
+          display: none;
+        }
+
+        .catalog-content .btn {
+          width: min(520px, 100%);
+          max-width: min(520px, 100%);
+          justify-content: center;
+          align-self: center;
+          margin: 0 auto;
+        }
+
+        #about {
+          order: 3;
+        }
+
+        .about-grid {
+          grid-template-columns: 1fr;
+          gap: 0;
+        }
+
+        .about-content {
+          align-items: center;
+        }
+
+        .about-content .section-text {
+          max-width: 520px;
+          margin-top: 8px;
+        }
+
+        .about-photo img {
+          border-radius: 20px;
+          height: 200px;
+          object-fit: cover;
+        }
+
+        .section-regulation {
+          padding-top: 20px;
+          order: 4;
+        }
+
+        .section-regulation .regulation-grid {
+          grid-template-columns: 1fr;
+          grid-auto-rows: auto;
+          grid-auto-flow: row;
+          gap: 12px;
+          align-items: center;
+          text-align: center;
+        }
+
+        .section-regulation .regulation-title {
+          grid-row: 1;
+          text-align: center;
+        }
+
+        .section-regulation .regulation-photo {
+          grid-row: 5;
+          width: 100%;
+          max-width: 320px;
+          margin: 0 auto;
+        }
+
+        .section-regulation .regulation-photo img {
+          height: 170px;
+          object-fit: cover;
+          border-radius: 16px;
+        }
+
+        .section-regulation .regulation-content {
+          display: contents;
+        }
+
+        .section-regulation .regulation-content .section-text {
+          text-align: center;
+          max-width: 360px;
+          margin: 0 auto;
+          font-size: 13px;
+          grid-column: 1;
+        }
+
+        .section-regulation .regulation-content .section-text:nth-of-type(1) {
+          grid-row: 2;
+        }
+
+        .section-regulation .regulation-content .section-text:nth-of-type(2) {
+          grid-row: 3;
+        }
+
+        .section-regulation .regulation-content .section-text:nth-of-type(3) {
+          grid-row: 4;
+        }
+
+        .section-regulation .regulation-content .btn {
+          grid-row: 6;
+          justify-self: center;
+          width: 80vw;
+        }
+
+        #services {
+          order: 5;
+        }
+
+        .services-top {
+          text-align: center;
+          gap: 16px;
+          grid-template-columns: 1fr;
+          justify-items: center;
+        }
+
+        .services-copy {
+          max-width: 360px;
+          margin: 0 auto;
+        }
+
+        .services-subtext {
+          font-size: 14px;
+        }
+
+        .start-slider {
+          padding-bottom: 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .start-track {
+          gap: 12px;
+          justify-content: flex-start;
+        }
+
+        .start-viewport {
+          max-width: 320px;
+          margin: 0 auto;
+          width: 100%;
+        }
+
+        .start-card {
+          flex: 0 0 100%;
+          max-width: 320px;
+          width: 100%;
+        }
+
+        .start-card img {
+          height: 300px;
+        }
+
+        .start-card .info {
+          font-size: 13px;
+        }
+
+        .start-card .info span {
+          font-size: 13px;
+        }
+
+        .start-nav {
+          position: static;
+          transform: none;
+          justify-content: center;
+          margin-top: 12px;
+          gap: 12px;
+        }
+
+        .services-block {
+          margin-top: 32px;
+        }
+
+        .services-block .dark-title {
+          text-align: center;
+          font-size: 26px;
+        }
+
+        .service-slider {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          --service-visible: 1;
+          --service-gap: 16px;
+          padding-bottom: 0;
+        }
+
+        .service-viewport {
+          width: 100%;
+          max-width: 320px;
+          overflow: hidden;
+        }
+
+        .service-card {
+          flex: 0 0 100%;
+          max-width: 320px;
+          height: 460px;
+          align-items: center;
+          text-align: center;
+          margin: 0;
+        }
+
+        .service-nav {
+          position: static;
+          justify-content: center;
+          margin-top: 12px;
+          gap: 12px;
+        }
+
+        .service-media {
+          width: 100%;
+          border-radius: 20px;
+        }
+
+        .service-media img {
+          height: 300px;
+        }
+
+        .service-text {
+          text-align: center;
+          font-size: 13px;
+        }
+
+        .service-label {
+          font-size: 16px;
+        }
+
+        .service-card .btn {
+          width: 100%;
+          max-width: 100%;
+          justify-content: center;
+        }
+
+        #why {
+          order: 6;
+        }
+
+        .why-grid {
+          grid-template-columns: 1fr;
+          gap: 16px;
+          text-align: center;
+        }
+
+        .why-left {
+          align-items: center;
+        }
+
+        .why-left .section-text {
+          max-width: 360px;
+          margin: 0 auto;
+        }
+
+        .why-image {
+          margin-top: -20px;
+          max-width: 340px;
+          width: 100%;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .why-image img {
+          border-radius: 18px;
+        }
+
+        .why-right {
+          padding-top: 0;
+        }
+
+        .why-list-title {
+          text-align: center;
+          font-size: 14px;
+          color: var(--blue-900);
+          font-weight: 600;
+          text-transform: none;
+          letter-spacing: 0;
+          margin-top: 12px;
+        }
+
+        .why-list {
+          margin-top: 18px;
+          gap: 16px;
+          max-width: 360px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .why-item {
+          grid-template-columns: 28px 1fr;
+          gap: 10px;
+          max-width: 360px;
+          margin: 0 auto;
+          text-align: left;
+          border-bottom: 1px solid rgba(120, 140, 170, 0.35);
+          padding-bottom: 16px;
+        }
+
+        .why-item:last-child {
+          border-bottom: none;
+          padding-bottom: 0;
+        }
+
+        .why-item h4 {
+          font-size: 15px;
+        }
+
+        .why-item p {
+          font-size: 12px;
+        }
+
+        #reviews {
+          order: 7;
+        }
+
+        .reviews {
+          margin-top: 40px;
+          padding: 40px 0 46px;
+          background: #4f7fb2;
+        }
+
+        .reviews .section-title {
+          font-size: 26px;
+        }
+
+        .reviews-viewport {
+          margin-top: 24px;
+        }
+
+        .review-card {
+          flex-basis: 100%;
+          max-width: 320px;
+          margin: 0 auto;
+          border-radius: 18px;
+          padding: 18px;
+          position: relative;
+        }
+
+        .review-card h4 {
+          font-size: 16px;
+        }
+
+        .review-card span {
+          font-size: 14px;
+        }
+
+        .review-card p {
+          font-size: 15px;
+        }
+
+        .review-stars {
+          display: flex;
+          position: absolute;
+          top: 14px;
+          right: 14px;
+          gap: 4px;
+          color: #f2c96c;
+        }
+
+        .review-stars svg {
+          width: 12px;
+          height: 12px;
+          fill: currentColor;
+        }
+
+        .review-btn {
+          background: #ffffff;
+        }
+
+        .reviews-controls {
+          justify-content: center;
+          margin-top: 14px;
+          gap: 12px;
+        }
+
+        #partners {
+          order: 8;
+        }
+
+        .partners-text-block {
+          text-align: center;
+          margin: 0 auto;
+        }
+
+        .partners-marquee {
+          margin-top: 16px;
+          --partners-gap: 16px;
+          --partners-width: min(520px, calc(100vw - 40px));
+          width: var(--partners-width);
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .partners-track {
+          animation: partners-scroll 28s linear infinite;
+          width: max-content;
+        }
+
+        .partners-row {
+          flex-wrap: nowrap;
+          justify-content: flex-start;
+          gap: var(--partners-gap);
+          padding-right: var(--partners-gap);
+        }
+
+        .partners-row[aria-hidden="true"] {
+          display: flex;
+        }
+
+        .partners-row img {
+          margin-top: 15px;
+          flex: 0 0
+            calc((var(--partners-width) - (var(--partners-gap) * 2)) / 3);
+          max-width: calc(
+            (var(--partners-width) - (var(--partners-gap) * 2)) / 3
+          );
+          object-fit: contain;
+        }
+
+        #news {
+          order: 9;
+          display: none;
+        }
+
+        .news-slide {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 12px;
+        }
+
+        .news-slide.news-slide--wide {
+          grid-template-columns: minmax(0, 1.6fr) minmax(0, 0.7fr);
+        }
+
+        .news-slide .news-card {
+          display: block;
+        }
+
+        #request {
+          order: 10;
+        }
+
+        .request-grid {
+          grid-template-columns: 1fr;
+          text-align: center;
+          gap: 18px;
+        }
+
+        .request-form {
+          max-width: none;
+          width: 100%;
+          margin: 0 auto;
+        }
+
+        .request-form input[type="text"],
+        .request-form input[type="email"],
+        .request-form input[type="tel"] {
+          background: #fae7c5;
+          height: 46px;
+          font-size: 14px;
+          width: 100%;
+        }
+
+        .request-consent input[type="checkbox"] {
+          width: 16px;
+          height: 16px;
+          flex: 0 0 16px;
+          margin-top: 2px;
+          padding: 0;
+        }
+
+        .request-consent {
+          font-size: 13px;
+        }
+
+        .request-consent {
+          justify-content: center;
+          text-align: left;
+        }
+
+        .request-form .btn {
+          width: 100%;
+          max-width: none;
+          justify-content: center;
+        }
+
+        .request-photo {
+          display: none;
+        }
+
+        .footer {
+          background-repeat: no-repeat;
+          background-position: bottom;
+          background-image:
+            url("./static/landing/footer_line_650px.svg"),
+            linear-gradient(-30deg, #3b6caa 0%, #3b6caa 50%, #8cafd2 100%);
+          margin-top: 32px;
+        }
+
+        .footer-top {
+          grid-template-columns: minmax(0, 1fr) minmax(0, 320px);
+          gap: 16px;
+          padding: 28px var(--page-gutter) 100px;
+          align-items: start;
+          position: relative;
+        }
+
+        .footer-logo {
+          display: block;
+          justify-self: center;
+          width: 120px;
+          margin: 10px auto 0;
+          position: absolute;
+          bottom: 15px;
+          left: 0;
+          right: 0;
+        }
+
+        .footer-col h4 {
+          display: none;
+        }
+
+        .footer-col:nth-of-type(1) {
+          grid-column: 1;
+          order: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+
+        .footer-col:nth-of-type(2) {
+          grid-column: 1 / -1;
+          order: 3;
+          display: flex;
+          justify-content: center;
+        }
+
+        .footer-col:nth-of-type(2) h4,
+        .footer-col:nth-of-type(2) .footer-links {
+          display: none;
+        }
+
+        .footer-col:nth-of-type(3) {
+          grid-column: 1;
+          order: 2;
+        }
+
+        .footer-col:nth-of-type(2) .socials {
+          position: absolute;
+          top: 360px;
+          left: 45%;
+        }
+
+        .footer-map {
+          display: block;
+          grid-column: 2;
+          grid-row: 1 / span 2;
+          align-self: start;
+          justify-self: end;
+        }
+
+        .footer-col h4 {
+          font-size: 12px;
+        }
+
+        .footer-col p,
+        .footer-col a {
+          font-size: 12px;
+        }
+
+        .footer-contact-item {
+          grid-template-columns: 18px 1fr;
+          gap: 8px;
+          font-size: 12px;
+        }
+
+        .footer-map img {
+          width: 50vw;
+          height: 260px;
+          object-fit: cover;
+          margin-top: 70px;
+        }
+
+        .footer-bottom {
+          display: none;
+        }
+        #news {
+          display: block;
+        }
+
+        .news-slide {
+          grid-template-columns: 1fr;
+          gap: 12px;
+          grid-auto-rows: auto;
+        }
+
+        .news-slide.news-slide--wide {
+          grid-template-columns: 1fr;
+        }
+
+        .news-slide .news-card {
+          display: block;
+        }
+
+        .news-card {
+          height: auto;
+          aspect-ratio: 16 / 9;
+        }
+
+        .news-card img {
+          transform: none;
+          transform-origin: center;
+        }
+
+        .news-controls {
+          display: flex;
+        }
+      }
+
+      @media (max-width: 426px) {
+        .footer-logo {
+          bottom: 10px;
+        }
+
+        .service-card .service-card-block {
+          margin-bottom: 10px;
+        }
+
+        .service-card {
+          height: 485px;
+        }
+
+        .service-slider {
+          align-items: stretch;
+        }
+
+        .service-viewport {
+          max-width: none;
+          overflow: visible;
+        }
+
+        .service-grid {
+          flex-direction: column;
+          gap: 16px;
+          transform: none !important;
+          transition: none !important;
+        }
+
+        .service-card {
+          max-width: none;
+          width: 100%;
+          height: auto;
+        }
+
+        .service-nav {
+          display: none;
+        }
+
+        .btn {
+          height: 55px;
+          font-size: 13px;
+          padding: 20px 20px;
+          width: 80vw;
+        }
+
+        .hero-actions {
+          margin-top: 240px;
+        }
+
+        .hero-card {
+          background-size:
+            120% auto,
+            cover;
+          background-position:
+            right 0 bottom 500px,
+            center;
+        }
+        .footer {
+          margin-top: 26px;
+          background: linear-gradient(
+            0deg,
+            #3b6caa 0%,
+            #3b6caa 50%,
+            #6dabff 100%
+          );
+        }
+
+        .footer-col p,
+        .footer-col a {
+          font-size: 13px;
+        }
+
+        .footer-contact-item {
+          font-size: 13px;
+        }
+        .footer-top {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          align-items: flex-start;
+          padding: 24px var(--page-gutter) 80px;
+          position: relative;
+        }
+
+        .footer-col:nth-of-type(2) {
+          order: 4;
+          align-self: flex-end;
+          margin-top: -45px;
+        }
+
+        .footer-col {
+          display: contents;
+        }
+
+        .footer-col h4 {
+          display: none;
+        }
+
+        .footer-col:first-child h4 {
+          display: block;
+          grid-column: 1;
+          grid-row: 3;
+          margin: 0;
+          font-size: 13px;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          color: rgba(255, 255, 255, 0.7);
+        }
+
+        .footer-col:first-child p {
+          grid-column: 1;
+        }
+
+        .footer-col:first-child p:nth-of-type(1) {
+          grid-row: 4;
+        }
+
+        .footer-col:first-child p:nth-of-type(2) {
+          grid-row: 5;
+        }
+
+        .footer-col:first-child p:nth-of-type(3) {
+          grid-row: 6;
+        }
+
+        .footer-col:first-child p:nth-of-type(4) {
+          grid-row: 1;
+          margin-top: 0 !important;
+        }
+
+        .footer-col:first-child p:nth-of-type(5) {
+          grid-row: 2;
+        }
+
+        .footer-col:nth-of-type(3) h4 {
+          display: none;
+        }
+
+        .footer-contacts {
+          grid-column: 1;
+          grid-row: 7;
+        }
+
+        .footer-col:nth-of-type(2) h4,
+        .footer-col:nth-of-type(2) .footer-links {
+          display: none;
+        }
+
+        .footer-col:nth-of-type(2) .socials {
+          grid-column: 1;
+          grid-row: 8;
+          justify-self: end;
+          align-self: center;
+          margin: 0;
+          position: static;
+        }
+        .footer-map {
+          order: 5;
+          justify-self: center;
+          width: 100%;
+          margin: 10px 0 0;
+        }
+
+        .footer-map img {
+          margin-top: 0;
+          width: 100%;
+          height: 180px;
+          object-fit: cover;
+          border-radius: 12px;
+        }
+      }
+      @media (max-width: 650px) {
+        .section-title,
+        .dark-title {
+          font-weight: 600;
+        }
+
+        .hero-title {
+          font-weight: 600;
+        }
+
+        .request-modal__dialog {
+          border-radius: 20px;
+          max-height: calc(100vh - 24px);
+        }
+
+        .request-modal__header {
+          padding: 14px 16px;
+        }
+
+        .request-modal__title {
+          font-size: 22px;
+        }
+
+        .request-modal__close {
+          width: 36px;
+          height: 36px;
+        }
+
+        .request-modal__body {
+          padding: 18px;
+          max-height: calc(100vh - 140px);
+        }
+
+        .request-modal__content .section-title {
+          font-size: 26px;
+        }
+
+        .reviews-grid {
+          gap: 12px;
+        }
+
+        .review-card {
+          flex: 0 0 100%;
+          min-width: 0;
+          max-width: 100%;
+          width: 100%;
+          margin: 0;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+
+        .partners-track {
+          animation: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="page header-inner">
+        <a class="brand" href="#">
+          <img
+            src="/static/landing/logo.png"
+            alt="Союз Застройщиков Санкт-Петербург"
+          />
+        </a>
+        <nav class="site-nav" aria-label="Основная навигация">
+          <a href="#about">О компании</a>
+          <a href="#catalog">Недвижимость</a>
+          <a href="#services">Услуги</a>
+          <a href="#reviews">Отзывы</a>
+          <a href="#news">Новости</a>
+          <a href="#contacts">Контакты</a>
+        </nav>
+        <div class="header-right">
+          <a class="phone" href="tel:+79668552929">
+            <span class="phone-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M5 4h3l2 5-2 1c1.2 2.4 3 4.3 5.4 5.4l1-2 5 2v3c0 0-1.2 2-4 2-6.6 0-12-5.4-12-12 0-2.8 2-4 2-4z"
+                />
+              </svg>
+            </span>
+            +7 (966) 855 29 29
+          </a>
+          <div class="socials">
+            <a
+              href="https://vk.com/soyz.zastroi"
+              target="_blank"
+              rel="noopener"
+              aria-label="VK"
+            >
+              <img src="/static/landing/social-1.png" alt="" />
+            </a>
+            <a
+              href="https://t.me/soyz_zastroi"
+              target="_blank"
+              rel="noopener"
+              aria-label="Telegram"
+            >
+              <img src="/static/landing/social-2.png" alt="" />
+            </a>
+          </div>
+        </div>
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-label="Открыть меню"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="page hero-card reveal">
+          <div class="hero-grid">
+            <div>
+              <h1 class="hero-title">Ваш ключ к идеальному жилью</h1>
+              <div class="hero-subtitle">
+                ООО «СОЮЗ ЗАСТРОЙЩИКОВ САНКТ-ПЕТЕРБУРГ»<br />СОВРЕМЕННАЯ ЖИЗНЬ И
+                НОВЫЕ ЛОКАЦИИ
+              </div>
+              <div class="hero-actions">
+                <a class="btn btn-primary" href="#request" data-request-modal="open">
+                  Бесплатная консультация
+                  <span class="btn-icon"
+                    ><img src="/static/landing/cta-arrow.svg" alt=""
+                  /></span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="hero-image">
+            <img
+              src="/static/landing/hero-building.png"
+              alt="Современные жилые комплексы"
+            />
+          </div>
+          <div class="hero-benefits">
+            <div class="benefit-card">
+              <img src="/static/landing/benefit-icon-1.png" alt="" />
+              <div>
+                <h4>8 лет на рынке новостроек</h4>
+                <p>Реализованы самые смелые мечты более 750 клиентов</p>
+              </div>
+            </div>
+            <div class="benefit-card">
+              <img src="/static/landing/benefit-icon-2.png" alt="" />
+              <div>
+                <h4>Безопасность сделки</h4>
+                <p>
+                  Юридическая проверка, официальные партнеры, проверенные
+                  застройщики
+                </p>
+              </div>
+            </div>
+            <div class="benefit-card">
+              <img src="/static/landing/benefit-icon-3.png" alt="" />
+              <div>
+                <h4>Min ставка по ипотеке</h4>
+                <p>Компания сертифицированный партнер ведущих банков РФ</p>
+              </div>
+            </div>
+            <div class="benefit-card">
+              <img src="/static/landing/benefit-icon-4.png" alt="" />
+              <div>
+                <h4>146 жилых комплексов</h4>
+                <p>Закрытая база планировок с открытыми скидками.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-lines" id="about">
+        <div class="page about-grid">
+          <div class="about-content">
+            <h2 class="section-title">О компании</h2>
+            <p class="section-text">
+              Агентство недвижимости ООО "Союз Застройщиков Санкт-Петербург"
+              оказывает на протяжении 8 лет услуги в сфере покупки недвижимости
+              для своих клиентов.
+            </p>
+            <p class="section-text">
+              Посетив офис компании, либо виртуально удаленно вы сможете
+              ознакомиться с ценами на новостройки Санкт-Петербурга в режиме
+              онлайн. Выбрать удобную для вас планировку, посмотреть аэросъемку
+              жилого комплекса.
+            </p>
+            <p class="section-text">
+              Профессиональные эксперты посоветуют более перспективный вариант и
+              подберут удобную форму оплаты.
+            </p>
+            <p class="section-text">
+              Ипотечные специалисты оценят ваши шансы на получение ипотеки и
+              сделают вам расчет.
+            </p>
+            <p class="section-text">
+              Если в офисе не удастся прийти к однозначному решению, то на
+              автомобиле компании вам проведут экскурсию по строительным
+              площадкам с посещением демонстрационных квартир.
+            </p>
+          </div>
+          <div class="about-photo reveal">
+            <img
+              src="/static/landing/about-photo-1.png"
+              alt="Команда Союз Застройщиков"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-lines section-regulation">
+        <div class="page regulation-grid">
+          <h2 class="section-title regulation-title">О регламенте работы</h2>
+          <div class="regulation-photo reveal">
+            <img
+              src="/static/landing/about-photo-2.png"
+              alt="Регламент работы"
+            />
+          </div>
+          <div class="regulation-content">
+            <p class="section-text">
+              Для того чтобы получить доступ к закрытой базе новостроек
+              необходимо оставить свой номер телефона и имя в форме заявки.
+            </p>
+            <p class="section-text">
+              В течение 15 минут с вами свяжется эксперт и задаст уточняющие
+              вопросы для более корректной подборки презентаций из всего
+              количества недвижимости, после чего направит вам ссылку с
+              интересующими вас объектами недвижимости по всему Санкт-Петербургу
+              и Ленинградской области.
+            </p>
+            <p class="section-text">
+              Все услуги по подбору и сопровождению сделки в новостройках
+              оказываются бесплатно.
+            </p>
+            <a class="btn btn-blue" href="#request" data-request-modal="open">
+              Получить консультацию
+              <span class="btn-icon"
+                ><img src="/static/landing/cta-arrow.svg" alt=""
+              /></span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-lines section-catalog" id="catalog">
+        <div class="page catalog-grid">
+          <div class="catalog-content">
+            <div class="catalog-text">
+              <h2 class="section-title">Новостройки<br />Петербурга</h2>
+              <p class="section-text">
+                Каталог создан так, чтобы вы чувствовали уверенность: понятные
+                критерии отбора, прозрачные условия покупки и полный пакет
+                документации.
+              </p>
+            </div>
+            <div class="catalog-cards">
+              <div class="catalog-card">
+                <picture>
+                  <source
+                    srcset="/static/landing/catalog-card-650-1.svg"
+                    media="(max-width: 650px)"
+                  />
+                  <img
+                    src="/static/landing/catalog-card-1.png"
+                    alt="База новостроек"
+                  />
+                </picture>
+              </div>
+              <div class="catalog-card">
+                <picture>
+                  <source
+                    srcset="/static/landing/catalog-card-650-2.svg"
+                    media="(max-width: 650px)"
+                  />
+                  <img
+                    src="/static/landing/catalog-card-2.png"
+                    alt="Беспроцентная рассрочка"
+                  />
+                </picture>
+              </div>
+              <div class="catalog-card">
+                <picture>
+                  <source
+                    srcset="/static/landing/catalog-card-650-3.svg"
+                    media="(max-width: 650px)"
+                  />
+                  <img
+                    src="/static/landing/catalog-card-3.png"
+                    alt="Квартиры у моря"
+                  />
+                </picture>
+              </div>
+            </div>
+            <a class="btn btn-primary" href="/search/">
+              Посмотреть каталог
+              <span class="btn-icon"
+                ><img src="/static/landing/cta-arrow.svg" alt=""
+              /></span>
+            </a>
+          </div>
+          <div class="catalog-visual reveal">
+            <img
+              src="/static/landing/catalog-bg.png"
+              alt="Каталог новостроек"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section class="dark-section" id="services">
+        <div class="page">
+          <div class="services-top">
+            <div class="services-copy">
+              <h2 class="dark-title">
+                Ближайшие старты продаж и современные жилые комплексы
+                Санкт-Петербурга
+              </h2>
+              <p class="services-subtext">
+                В базе новостроек находится более 43 000 вариантов планировок.
+              </p>
+            </div>
+            <div class="start-slider">
+              <div class="start-viewport">
+                <div class="start-track">
+                  <div class="start-card reveal" style="--delay: 0.1s">
+                    <img
+                      src="/static/landing/start-card-1.png"
+                      alt="ЖК Дворцовый Фасад"
+                    />
+                    <div class="info">
+                      <div>
+                        ЖК Дворцовый Фасад
+                        <span>Красносельский р-н</span>
+                      </div>
+                      <div class="info-block">
+                        <span class="card-arrow"
+                          ><img src="/static/landing/cta-arrow.svg" alt=""
+                        /></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="start-card reveal" style="--delay: 0.2s">
+                    <img
+                      src="/static/landing/start-card-2.png"
+                      alt="ЖК Парадный Ансамбль"
+                    />
+                    <div class="info">
+                      <div>
+                        ЖК Парадный Ансамбль
+                        <span>Московский р-н</span>
+                      </div>
+                      <span class="card-arrow"
+                        ><img src="/static/landing/cta-arrow.svg" alt=""
+                      /></span>
+                    </div>
+                  </div>
+                  <div class="start-card reveal" style="--delay: 0.3s">
+                    <img
+                      src="/static/landing/start-card-3.png"
+                      alt="ЖК Живи в Рыбацком"
+                    />
+                    <div class="info">
+                      <div>
+                        ЖК Живи в Рыбацком
+                        <span>Невский р-н</span>
+                      </div>
+                      <span class="card-arrow"
+                        ><img src="/static/landing/cta-arrow.svg" alt=""
+                      /></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="start-nav">
+                <button
+                  class="slider-btn slider-btn--prev"
+                  type="button"
+                  aria-label="Предыдущий"
+                >
+                  <img src="static/landing/review-icon-1.png" alt="" />
+                </button>
+                <button
+                  class="slider-btn slider-btn--accent"
+                  type="button"
+                  aria-label="Следующий"
+                >
+                  <img src="static/landing/review-icon-2.png" alt="" />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="services-block">
+            <h2 class="dark-title">Наши услуги</h2>
+            <div class="service-slider">
+              <div class="service-viewport">
+                <div class="service-grid service-track">
+                  <article class="service-card reveal" style="--delay: 0.1s">
+                    <div class="service-card-block">
+                      <div class="service-media">
+                        <img
+                          src="/static/landing/service-photo-1.png"
+                          alt="Дозаказ отделки"
+                        />
+                        <div class="service-label">
+                          Дозаказ отделки и меблировка
+                        </div>
+                      </div>
+                      <p class="service-text">
+                        Квартиры без отделки можно доработать у застройщика или
+                        под нашим авторским надзором. Поможем подобрать
+                        материалы и меблировку в удобную рассрочку.
+                      </p>
+                    </div>
+                    <a class="btn btn-blue" href="#request" data-request-modal="open">
+                      Оставить заявку
+                      <span class="btn-icon"
+                        ><img src="/static/landing/cta-arrow.svg" alt=""
+                      /></span>
+                    </a>
+                  </article>
+                  <article class="service-card reveal" style="--delay: 0.2s">
+                    <div class="service-card-block">
+                      <div class="service-media">
+                        <img
+                          src="/static/landing/service-photo-2.png"
+                          alt="Trade-in"
+                        />
+                        <div class="service-label">
+                          Trade-in с вашей старой квартирой
+                        </div>
+                      </div>
+                      <p class="service-text">
+                        Оценим старую квартиру и поможем быстро ее реализовать.
+                        Подберем программу trade-in, чтобы спокойно купить новое
+                        жилье без спешки продавать текущее.
+                      </p>
+                    </div>
+                    <a class="btn btn-blue" href="#request" data-request-modal="open">
+                      Оставить заявку
+                      <span class="btn-icon"
+                        ><img src="/static/landing/cta-arrow.svg" alt=""
+                      /></span>
+                    </a>
+                  </article>
+                  <article class="service-card reveal" style="--delay: 0.3s">
+                    <div class="service-card-block">
+                      <div class="service-media">
+                        <img
+                          src="/static/landing/service-photo-3.png"
+                          alt="Вторичная недвижимость"
+                        />
+                        <div class="service-label">
+                          Подбор вторичной недвижимости
+                        </div>
+                      </div>
+                      <p class="service-text">
+                        Проверяем объекты по собственной методике и берем на
+                        себя юридическую экспертизу сделки. Отчет содержит
+                        полную информацию о продавце и объекте.
+                      </p>
+                    </div>
+                    <a class="btn btn-blue" href="#request" data-request-modal="open">
+                      Получить консультацию
+                      <span class="btn-icon"
+                        ><img src="/static/landing/cta-arrow.svg" alt=""
+                      /></span>
+                    </a>
+                  </article>
+                  <article class="service-card reveal" style="--delay: 0.3s">
+                    <div class="service-card-block">
+                      <div class="service-media">
+                        <img
+                          src="/static/landing/service-photo-4.png"
+                          alt="Загородняя недвижимость"
+                        />
+                        <div class="service-label">Загородная недвижимость</div>
+                      </div>
+                      <p class="service-text">
+                        «СОЮЗ ЗАСТРОЙЩИКОВ СПБ» подготовил подборку загородных
+                        объектов для IT-специалистов и молодых семей. Объекты
+                        подходят под IT-ипотеку и семейную ипотеку.
+                      </p>
+                    </div>
+                    <a class="btn btn-blue" href="#request" data-request-modal="open">
+                      Получить подборку
+                      <span class="btn-icon"
+                        ><img src="/static/landing/cta-arrow.svg" alt=""
+                      /></span>
+                    </a>
+                  </article>
+                </div>
+              </div>
+              <div class="service-nav">
+                <button
+                  class="slider-btn slider-btn--prev"
+                  type="button"
+                  aria-label="Предыдущий"
+                >
+                  <img src="static/landing/review-icon-1.png" alt="" />
+                </button>
+                <button
+                  class="slider-btn slider-btn--accent"
+                  type="button"
+                  aria-label="Следующий"
+                >
+                  <img src="static/landing/review-icon-2.png" alt="" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="why">
+        <div class="page why-grid">
+          <div class="why-left">
+            <h2 class="section-title">Почему выбирают нас?</h2>
+            <p class="section-text">
+              Мы сделали процесс работы с нами, максимально простым и прозрачным
+            </p>
+            <div class="why-image reveal">
+              <img
+                src="/static/landing/why-photo.png"
+                alt="Счастливые клиенты"
+              />
+            </div>
+          </div>
+          <div class="why-right">
+            <div class="why-list-title">
+              5 ключевых критериев для принятия верного решения
+            </div>
+            <div class="why-list">
+              <div class="why-item">
+                <img src="/static/landing/why-icon-1.png" alt="" />
+                <div>
+                  <h4>Описание обьекта</h4>
+                  <p>
+                    Вы получаете привязку объекта к карте с описанием ЖК и фото
+                    мест для прогулок в парковых зонах, мест для барбекю, мест
+                    для занятия спортом и детских площадок
+                  </p>
+                </div>
+              </div>
+              <div class="why-item">
+                <img src="/static/landing/why-icon-5.png" alt="" />
+                <div>
+                  <h4>Транспортная доступность</h4>
+                  <p>
+                    Из полученных материалов вы сможете оценить удобность
+                    логистических маршрутов, расстояние до метро, близость
+                    Аэропорта, Авто-и ЖД вокзалов
+                  </p>
+                </div>
+              </div>
+              <div class="why-item">
+                <img src="/static/landing/why-icon-2.png" alt="" />
+                <div>
+                  <h4>Безопасность</h4>
+                  <p>
+                    Эксперты подберут ЖК с передовыми системами безопасности,
+                    видеонаблюдением, закрытой придомовой территорией и
+                    бесконтакным электронным пропуском
+                  </p>
+                </div>
+              </div>
+              <div class="why-item">
+                <img src="/static/landing/why-icon-3.png" alt="" />
+                <div>
+                  <h4>Паркинги и кладовые</h4>
+                  <p>
+                    У нас вы сможете выбрать удобное местоположение и приобрести
+                    парковочное место или кладовую со скидкой, или по удобной
+                    схеме расчетов
+                  </p>
+                </div>
+              </div>
+              <div class="why-item">
+                <img src="/static/landing/why-icon-4.png" alt="" />
+                <div>
+                  <h4>Аэропанорама</h4>
+                  <p>
+                    Эксперты предоставят вам ссылку на аэропанораму
+                    понравившегося объекта и вы сможете с высоты птичьего полета
+                    осмотреть объект строительства
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="partners">
+        <img
+          class="section-curve section-curve--partners"
+          src="/static/landing/line1.svg"
+          alt=""
+          aria-hidden="true"
+        />
+        <div class="page">
+          <div class="partners-text-block">
+            <h2 class="section-title">Наши партнеры</h2>
+            <p class="section-text">
+              Мы являемся партнерами проверенных застройщиков работающих по
+              214-ФЗ РФ с использованием эскроу счетов. При выборе квартиры по
+              запросу клиентов мы предоставляем разрешительные документы на
+              строительство и акты ввода в эксплуатацию. Для ознакомления с
+              расположением жилого комплекса проводим экскурсии по строительным
+              объектам, показываем варианты отделки в демонстрационных и готовых
+              квартирах
+            </p>
+          </div>
+          <div class="partners-marquee" aria-label="Партнеры">
+            <div class="partners-track">
+              <div class="partners-row">
+                <img src="/static/landing/partner-1.png" alt="Партнер 1" />
+                <img src="/static/landing/partner-2.png" alt="Партнер 2" />
+                <img src="/static/landing/partner-3.png" alt="Партнер 3" />
+                <img src="/static/landing/partner-4.png" alt="Партнер 4" />
+                <img src="/static/landing/partner-5.png" alt="Партнер 5" />
+                <img src="/static/landing/partner-6.png" alt="Партнер 6" />
+                <img src="/static/landing/partner-7.png" alt="Партнер 7" />
+              </div>
+              <div class="partners-row" aria-hidden="true">
+                <img src="/static/landing/partner-1.png" alt="" />
+                <img src="/static/landing/partner-2.png" alt="" />
+                <img src="/static/landing/partner-3.png" alt="" />
+                <img src="/static/landing/partner-4.png" alt="" />
+                <img src="/static/landing/partner-5.png" alt="" />
+                <img src="/static/landing/partner-6.png" alt="" />
+                <img src="/static/landing/partner-7.png" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="news">
+        <div class="page">
+          <h2 class="section-title">Новости мира недвижимости</h2>
+          <div class="news-viewport">
+            <div class="news-grid">
+              <div class="news-slide">
+                <article
+                  class="news-card news-card--wide reveal"
+                  style="--delay: 0.1s"
+                >
+                  <img src="/static/landing/news-1.png" alt="Новый ЖК" />
+                  <div class="news-arrow">
+                    <img src="/static/landing/cta-arrow.svg" alt="" />
+                  </div>
+                  <div class="overlay">
+                    <strong>Новый ЖК в 5 минутах от метро</strong>
+                    <span>12.11.2025</span>
+                  </div>
+                </article>
+                <article
+                  class="news-card news-card--pos-2 reveal"
+                  style="--delay: 0.15s"
+                >
+                  <img src="/static/landing/news-2.png" alt="Ставки" />
+                  <div class="news-arrow">
+                    <img src="/static/landing/cta-arrow.svg" alt="" />
+                  </div>
+                </article>
+                <article
+                  class="news-card news-card--pos-3 reveal"
+                  style="--delay: 0.2s"
+                >
+                  <img src="/static/landing/news-3.png" alt="Ипотека" />
+                  <div class="news-arrow">
+                    <img src="/static/landing/cta-arrow.svg" alt="" />
+                  </div>
+                </article>
+                <article class="news-card reveal" style="--delay: 0.25s">
+                  <img src="/static/landing/news-4.png" alt="Новости" />
+                  <div class="news-arrow">
+                    <img src="/static/landing/cta-arrow.svg" alt="" />
+                  </div>
+                </article>
+                <article class="news-card reveal" style="--delay: 0.3s">
+                  <img src="/static/landing/news-5.png" alt="Строительство" />
+                  <div class="news-arrow">
+                    <img src="/static/landing/cta-arrow.svg" alt="" />
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+          <div class="news-controls">
+            <button class="review-btn" type="button" aria-label="Предыдущий">
+              <img src="/static/landing/review-icon-1.png" alt="" />
+            </button>
+            <button
+              class="review-btn active"
+              type="button"
+              aria-label="Следующий"
+            >
+              <img src="/static/landing/review-icon-2.png" alt="" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="reviews" id="reviews">
+        <img
+          class="section-curve section-curve--reviews"
+          src="/static/landing/line2.svg"
+          alt=""
+          aria-hidden="true"
+        />
+        <div class="page">
+          <h2 class="section-title light">
+            Главный показатель качества нашей работы - довольный клиент
+          </h2>
+          <div class="reviews-viewport">
+            <div class="reviews-grid">
+              <article class="review-card reveal" style="--delay: 0.1s">
+                <div class="review-stars" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                </div>
+                <h4>Татьяна С.</h4>
+                <span>25 марта 2023</span>
+                <p>
+                  Прекрасная работа на все 100. Очень компетентны в своей
+                  деятельности. Спасибо большое все быстро без лишних справок и
+                  бумажной волокиты. Помогли подобрать объект, в подготовке
+                  документов, довели сделку до конца под ключ. Советую. Большое
+                  спасибо, большие профессионалы.
+                </p>
+              </article>
+              <article class="review-card reveal" style="--delay: 0.2s">
+                <div class="review-stars" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                </div>
+                <h4>Дмитрий С.</h4>
+                <span>27 ноября 2025</span>
+                <p>
+                  Алексей очень помог нам с выбором квартиры и оформлением всего
+                  от точки А до точки Б. Всегда отвечает, помогает не бросает,
+                  всегда на связи. Если что не понятно он все объяснит. Если вы
+                  не знаете какую квартиру взять, в каком районе, как оформить
+                  ипотеку и какие собирать документы он вам поможет!
+                </p>
+              </article>
+              <article class="review-card reveal" style="--delay: 0.3s">
+                <div class="review-stars" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                </div>
+                <h4>Владимир В.</h4>
+                <span>1 декабря 2025</span>
+                <p>
+                  Все прошло отлично. Алексей помогал, отвечал на все вопросы,
+                  все делал вовремя. Тут работают лучшие специалисты! Помогли
+                  подобрать и оформить все документы от и до. За ручку провели и
+                  все подсказали, были всегда на связи и отвечали на заданные
+                  вопросы. Спасибо большое! Рекомендую!
+                </p>
+              </article>
+              <article class="review-card reveal" style="--delay: 0.2s">
+                <div class="review-stars" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                </div>
+                <h4>Оксана В.</h4>
+                <span>3 декабря 2025</span>
+                <p>
+                  Долго выбирали с кем работать и остановились на данном
+                  застройщике. В процессе покупки особенно порадовала
+                  прозрачность условий оплаты, отсутствие скрытых платежей и
+                  оперативная помощь на каждом этапе — от выбора планировки до
+                  регистрации права собственности. . Рекомендую компанию.
+                </p>
+              </article>
+              <article class="review-card reveal" style="--delay: 0.2s">
+                <div class="review-stars" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                </div>
+                <h4>Дмитрий С.</h4>
+                <span>11 апреля 2024</span>
+                <p>
+                  Покупка рассмотрена как вложение: инфраструктура развита,
+                  потенциальная доходность при сдаче в аренду высокая. Важно
+                  проверить правоустанавливающие документы и условия оплаты, а
+                  также наличие гарантийного пакета и сроков сдачи. Снимаю одну
+                  звезду,так как долго ждали одобрение ипотеки.
+                </p>
+              </article>
+              <article class="review-card reveal" style="--delay: 0.2s">
+                <div class="review-stars" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                </div>
+                <h4>Александр М.</h4>
+                <span>27 июля 2024</span>
+                <p>
+                  Купил квартиру с помощью этой компании и не пожалел:
+                  планировка удобная, материал качественный, соседи дружелюбные.
+                  Менеджеры терпеливы, отвечали на все вопросы быстро. Надеюсь,
+                  буду рад жизни здесь долгие годы.
+                </p>
+              </article>
+              <article class="review-card reveal" style="--delay: 0.2s">
+                <div class="review-stars" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                </div>
+                <h4>Никита К.</h4>
+                <span>5 феврался 2025</span>
+                <p>
+                  Привлекла гибкая схема оплаты и возможность выбрать планировку
+                  до начала строительства. Консультации шли без навязывания,
+                  поддержки хватало на каждом этапе. Рекомендую!! Честная цена,
+                  прозрачные условия, достойный сервис. Покупка прошла без
+                  сюрпризов.
+                </p>
+              </article>
+              <article class="review-card reveal" style="--delay: 0.2s">
+                <div class="review-stars" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.6l1.2-6.6L2.5 9.4l6.6-.9L12 2.5z"
+                    />
+                  </svg>
+                </div>
+                <h4>Мария А.</h4>
+                <span>2 марта 2025</span>
+                <p>
+                  Понравился подход к работе,все сроки соблюдены,долго правда
+                  выбирали что нам подойдет,но с задачей менеджеры
+                  справились,спасибо им за это. Так же помогли в офомлении
+                  ипотеки
+                </p>
+              </article>
+            </div>
+          </div>
+          <div class="reviews-controls">
+            <button class="review-btn" type="button" aria-label="Предыдущий">
+              <img src="/static/landing/review-icon-1.png" alt="" />
+            </button>
+            <button
+              class="review-btn active"
+              type="button"
+              aria-label="Следующий"
+            >
+              <img src="/static/landing/review-icon-2.png" alt="" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="request">
+        <div class="page request-grid">
+          <div>
+            <h2 class="section-title">Остались вопросы?</h2>
+            <p class="section-text">
+              Получите бесплатную консультацию специалиста. Наши агенты свяжутся
+              с вами в течение 10-20 минут и помогут выбрать идеальное жилье.
+            </p>
+            <form
+              class="request-form"
+              action="mailto:spb_info@soyz-zastroi.ru"
+              method="post"
+              enctype="text/plain"
+            >
+              <input type="text" name="name" placeholder="Имя" required />
+              <input type="email" name="email" placeholder="Почта" />
+              <input type="tel" name="phone" placeholder="Телефон" required />
+              <label class="request-consent">
+                <input type="checkbox" required />
+                <span
+                  >Я соглашаюсь на обработку персональных данных и с политикой
+                  конфиденциальности</span
+                >
+              </label>
+              <button class="btn btn-primary" type="submit">Отправить</button>
+            </form>
+          </div>
+          <div class="request-photo reveal">
+            <img src="/static/landing/request-photo.png" alt="Консультация" />
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer" id="contacts">
+      <div class="footer-top">
+        <div class="footer-col">
+          <img
+            class="footer-logo"
+            src="/static/landing/footer-logo.png"
+            alt="Союз Застройщиков"
+          />
+          <h4>Юридическая информация</h4>
+          <p>ООО "СОЮЗ ЗАСТРОЙЩИКОВ САНКТ-ПЕТЕРБУРГ"</p>
+          <p>ИНН 7805718291</p>
+          <p>ОГРН 11778473883889</p>
+          <p class="underline" style="margin-top: 12px">
+            <a href="#">Политика конфиденциальности</a>
+          </p>
+          <p class="underline">Все права защищены 2026</p>
+        </div>
+        <div class="footer-col">
+          <h4>Навигация</h4>
+          <div class="footer-links">
+            <a href="#about">О компании</a>
+            <a href="#catalog">Каталог</a>
+            <a href="#services">Услуги</a>
+            <a href="#reviews">Отзывы</a>
+            <a href="#partners">Наши партнеры</a>
+            <a href="#contacts">Контакты</a>
+            <a href="/admin-panel/login/">Вход</a>
+          </div>
+          <div class="socials" style="margin-top: 12px">
+            <a
+              href="https://vk.com/soyz.zastroi"
+              target="_blank"
+              rel="noopener"
+              aria-label="VK"
+            >
+              <img src="/static/landing/social-1.png" alt="" />
+            </a>
+            <a
+              href="https://t.me/soyz_zastroi"
+              target="_blank"
+              rel="noopener"
+              aria-label="Telegram"
+            >
+              <img src="/static/landing/social-2.png" alt="" />
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Контакты</h4>
+          <div class="footer-contacts">
+            <div class="footer-contact-item">
+              <span class="footer-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 21s-6-5.7-6-11a6 6 0 1 1 12 0c0 5.3-6 11-6 11z"
+                  />
+                  <circle cx="12" cy="10" r="2.5" />
+                </svg>
+              </span>
+              <div>
+                <strong>198097 Санкт-Петербург</strong><br />Метро Кировский
+                завод,<br />Пр-т Стачек 47, лит А, БЦ Шереметьев, офис 352
+              </div>
+            </div>
+            <div class="footer-contact-item">
+              <span class="footer-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M4 6h16v12H4z" />
+                  <path d="M4 6l8 7 8-7" />
+                </svg>
+              </span>
+              <a href="mailto:spb_info@soyz-zastroi.ru"
+                >soyz-zastroi.ru@yandex.ru</a
+              >
+            </div>
+            <div class="footer-contact-item">
+              <span class="footer-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M12 7v6l3 2" />
+                </svg>
+              </span>
+              <span>Пн-Вс: 9:00-18:00</span>
+            </div>
+            <div class="footer-contact-item">
+              <span class="footer-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M5 4h3l2 5-2 1c1.2 2.4 3 4.3 5.4 5.4l1-2 5 2v3c0 0-1.2 2-4 2-6.6 0-12-5.4-12-12 0-2.8 2-4 2-4z"
+                  />
+                </svg>
+              </span>
+              <a href="tel:+79668552929">+7 (966) 855 29 29</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-map">
+          <img src="/static/landing/footer-map.png" alt="Карта" />
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>Сделано для Союза Застройщиков Санкт-Петербург</span>
+        <span>ООО "СОЮЗ ЗАСТРОЙЩИКОВ САНКТ-ПЕТЕРБУРГ"</span>
+      </div>
+    </footer>
+
+    <div class="request-modal" id="request-modal" aria-hidden="true">
+      <div class="request-modal__overlay" data-request-modal="close"></div>
+      <div
+        class="request-modal__dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="request-modal-title"
+      >
+        <div class="request-modal__header">
+          <h3 class="request-modal__title" id="request-modal-title">
+            Оставить заявку
+          </h3>
+          <button
+            class="request-modal__close"
+            type="button"
+            aria-label="Закрыть"
+            data-request-modal="close"
+          >
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="request-modal__body" id="request-modal-body"></div>
+      </div>
+    </div>
+
+    <script>
+      const toggle = document.querySelector(".nav-toggle");
+      const nav = document.querySelector(".site-nav");
+      const navLinks = document.querySelectorAll(".site-nav a");
+
+      if (toggle && nav) {
+        toggle.addEventListener("click", () => {
+          const isOpen = nav.classList.toggle("open");
+          toggle.setAttribute("aria-expanded", String(isOpen));
+        });
+      }
+
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          if (nav.classList.contains("open")) {
+            nav.classList.remove("open");
+            toggle.setAttribute("aria-expanded", "false");
+          }
+        });
+      });
+
+      const requestTriggers = document.querySelectorAll(
+        '[data-request-modal="open"]',
+      );
+      const requestModal = document.getElementById("request-modal");
+      const requestModalBody = document.getElementById("request-modal-body");
+      const requestCloseButtons = requestModal
+        ? requestModal.querySelectorAll('[data-request-modal="close"]')
+        : [];
+      let lastFocusedElement = null;
+
+      const buildRequestModal = () => {
+        if (!requestModalBody || requestModalBody.dataset.ready === "true") {
+          return;
+        }
+        const source = document.querySelector("#request .request-grid > div");
+        if (!source) return;
+        const clone = source.cloneNode(true);
+        clone.classList.add("request-modal__content");
+        requestModalBody.appendChild(clone);
+        requestModalBody.dataset.ready = "true";
+      };
+
+      const openRequestModal = () => {
+        if (!requestModal) return;
+        buildRequestModal();
+        requestModal.classList.add("is-open");
+        requestModal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("modal-open");
+        lastFocusedElement = document.activeElement;
+        const focusTarget = requestModal.querySelector(".request-modal__close");
+        if (focusTarget) {
+          focusTarget.focus();
+        }
+      };
+
+      const closeRequestModal = () => {
+        if (!requestModal) return;
+        requestModal.classList.remove("is-open");
+        requestModal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("modal-open");
+        if (
+          lastFocusedElement &&
+          typeof lastFocusedElement.focus === "function"
+        ) {
+          lastFocusedElement.focus();
+        }
+      };
+
+      requestTriggers.forEach((trigger) => {
+        trigger.addEventListener("click", (event) => {
+          event.preventDefault();
+          openRequestModal();
+        });
+      });
+
+      requestCloseButtons.forEach((button) => {
+        button.addEventListener("click", (event) => {
+          event.preventDefault();
+          closeRequestModal();
+        });
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (
+          event.key === "Escape" &&
+          requestModal &&
+          requestModal.classList.contains("is-open")
+        ) {
+          event.preventDefault();
+          closeRequestModal();
+        }
+      });
+
+      const reviewsGrid = document.querySelector(".reviews-grid");
+      const reviewButtons = document.querySelectorAll(
+        ".reviews-controls .review-btn",
+      );
+
+      if (reviewsGrid && reviewButtons.length >= 2) {
+        let currentIndex = 0;
+
+        const getVisibleCount = () => {
+          if (window.matchMedia("(max-width: 650px)").matches) {
+            return 1;
+          }
+          if (window.matchMedia("(max-width: 830px)").matches) {
+            return 2;
+          }
+          return 3;
+        };
+
+        const updatePosition = (animate = true) => {
+          const firstCard = reviewsGrid.querySelector(".review-card");
+          if (!firstCard) return;
+          const style = getComputedStyle(reviewsGrid);
+          const gap = parseFloat(style.columnGap || style.gap || "0") || 0;
+          const cardWidth = firstCard.getBoundingClientRect().width;
+          const step = cardWidth + gap;
+          const total = reviewsGrid.querySelectorAll(".review-card").length;
+          const maxIndex = Math.max(0, total - getVisibleCount());
+
+          currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
+
+          if (!animate) {
+            reviewsGrid.style.transition = "none";
+          }
+          reviewsGrid.style.transform = `translateX(${-currentIndex * step}px)`;
+          if (!animate) {
+            requestAnimationFrame(() => {
+              reviewsGrid.style.transition = "";
+            });
+          }
+
+          reviewButtons[0].disabled = currentIndex === 0;
+          reviewButtons[1].disabled = currentIndex === maxIndex;
+        };
+
+        const shiftNext = () => {
+          currentIndex += 1;
+          updatePosition(true);
+        };
+
+        const shiftPrev = () => {
+          currentIndex -= 1;
+          updatePosition(true);
+        };
+
+        reviewButtons[0].addEventListener("click", shiftPrev);
+        reviewButtons[1].addEventListener("click", shiftNext);
+        window.addEventListener("resize", () => updatePosition(false));
+        updatePosition(false);
+      }
+
+      const newsGrid = document.querySelector(".news-grid");
+      const newsButtons = document.querySelectorAll(
+        ".news-controls .review-btn",
+      );
+
+      if (newsGrid && newsButtons.length >= 2) {
+        const originalCards = Array.from(
+          newsGrid.querySelectorAll(".news-card"),
+        );
+        let newsIndex = 0;
+        let total = 0;
+
+        const getNewsChunk = () => {
+          if (window.matchMedia("(max-width: 650px)").matches) {
+            return 1;
+          }
+          if (window.matchMedia("(max-width: 830px)").matches) {
+            return 2;
+          }
+          return 5;
+        };
+
+        const buildNewsSlides = () => {
+          const chunk = getNewsChunk();
+          newsGrid.innerHTML = "";
+          for (let i = 0; i < originalCards.length; i += chunk) {
+            const slide = document.createElement("div");
+            slide.className = "news-slide";
+            const slice = originalCards.slice(i, i + chunk);
+            if (
+              slice.some((card) => card.classList.contains("news-card--wide"))
+            ) {
+              slide.classList.add("news-slide--wide");
+            }
+            slice.forEach((card) => {
+              slide.appendChild(card);
+            });
+            newsGrid.appendChild(slide);
+          }
+
+          let slides = Array.from(newsGrid.querySelectorAll(".news-slide"));
+          if (slides.length === 1) {
+            const clone = slides[0].cloneNode(true);
+            clone.setAttribute("aria-hidden", "true");
+            newsGrid.appendChild(clone);
+            slides = Array.from(newsGrid.querySelectorAll(".news-slide"));
+          }
+          total = slides.length;
+          newsIndex = Math.max(0, Math.min(newsIndex, total - 1));
+        };
+
+        const setNewsTransform = (index, animate = true) => {
+          if (!animate) {
+            newsGrid.style.transition = "none";
+          }
+          newsGrid.style.transform = `translateX(${-index * 100}%)`;
+          if (!animate) {
+            requestAnimationFrame(() => {
+              newsGrid.style.transition = "";
+            });
+          }
+        };
+
+        newsButtons[0].addEventListener("click", () => {
+          if (total <= 1) return;
+          if (newsIndex === 0) {
+            newsIndex = total - 1;
+            setNewsTransform(newsIndex, false);
+          }
+          newsIndex -= 1;
+          setNewsTransform(newsIndex, true);
+        });
+        newsButtons[1].addEventListener("click", () => {
+          if (total <= 1) return;
+          if (newsIndex === total - 1) {
+            newsIndex = 0;
+            setNewsTransform(newsIndex, false);
+          }
+          newsIndex += 1;
+          setNewsTransform(newsIndex, true);
+        });
+        window.addEventListener("resize", () => {
+          buildNewsSlides();
+          setNewsTransform(newsIndex, false);
+        });
+        buildNewsSlides();
+        setNewsTransform(newsIndex, false);
+      }
+
+      const catalogImages = document.querySelectorAll(".catalog-card img");
+      if (catalogImages.length) {
+        const updateCatalogFocus = () => {
+          const isMobile = window.matchMedia("(max-width: 650px)").matches;
+          catalogImages.forEach((img) => {
+            if (!isMobile) {
+              img.style.objectPosition = "center";
+              return;
+            }
+            const card = img.closest(".catalog-card");
+            if (!card) return;
+            const cardWidth = card.clientWidth || 320;
+            const baseWidth = 320;
+            const ratio = cardWidth / baseWidth;
+            img.style.objectPosition = "left center";
+          });
+        };
+
+        catalogImages.forEach((img) => {
+          if (!img.complete) {
+            img.addEventListener("load", updateCatalogFocus, { once: true });
+          }
+        });
+
+        if ("ResizeObserver" in window) {
+          const observer = new ResizeObserver(updateCatalogFocus);
+          document
+            .querySelectorAll(".catalog-card")
+            .forEach((card) => observer.observe(card));
+        } else {
+          window.addEventListener("resize", updateCatalogFocus);
+        }
+
+        updateCatalogFocus();
+      }
+
+      const startTrack = document.querySelector(".start-track");
+      const startButtons = document.querySelectorAll(".start-nav .slider-btn");
+
+      if (startTrack && startButtons.length >= 2) {
+        let startIndex = 0;
+
+        const updateStart = (animate = true) => {
+          const firstCard = startTrack.querySelector(".start-card");
+          if (!firstCard) return;
+          const style = getComputedStyle(startTrack);
+          const gap = parseFloat(style.columnGap || style.gap || "0") || 0;
+          const cardWidth = firstCard.getBoundingClientRect().width;
+          const step = cardWidth + gap;
+          const total = startTrack.querySelectorAll(".start-card").length;
+          const viewport = startTrack.closest(".start-viewport");
+          const viewportWidth = viewport
+            ? viewport.getBoundingClientRect().width
+            : cardWidth;
+          const visible = Math.max(1, Math.floor((viewportWidth + gap) / step));
+          const maxIndex = Math.max(0, total - visible);
+
+          startIndex = Math.max(0, Math.min(startIndex, maxIndex));
+
+          if (!animate) {
+            startTrack.style.transition = "none";
+          }
+          startTrack.style.transform = `translateX(${-startIndex * step}px)`;
+          if (!animate) {
+            requestAnimationFrame(() => {
+              startTrack.style.transition = "";
+            });
+          }
+
+          startButtons[0].disabled = startIndex === 0;
+          startButtons[1].disabled = startIndex === maxIndex;
+        };
+
+        startButtons[0].addEventListener("click", () => {
+          startIndex -= 1;
+          updateStart(true);
+        });
+        startButtons[1].addEventListener("click", () => {
+          startIndex += 1;
+          updateStart(true);
+        });
+        window.addEventListener("resize", () => updateStart(false));
+        updateStart(false);
+      }
+
+      const serviceTrack = document.querySelector(".service-track");
+      const serviceButtons = document.querySelectorAll(
+        ".service-nav .slider-btn",
+      );
+
+      if (serviceTrack && serviceButtons.length >= 2) {
+        let serviceIndex = 0;
+        const isServiceStacked = () =>
+          window.matchMedia("(max-width: 426px)").matches;
+
+        const updateService = (animate = true) => {
+          if (isServiceStacked()) {
+            serviceIndex = 0;
+            serviceTrack.style.transform = "none";
+            serviceButtons[0].disabled = true;
+            serviceButtons[1].disabled = true;
+            return;
+          }
+          serviceButtons[0].disabled = false;
+          serviceButtons[1].disabled = false;
+          const firstCard = serviceTrack.querySelector(".service-card");
+          if (!firstCard) return;
+          const style = getComputedStyle(serviceTrack);
+          const gap = parseFloat(style.columnGap || style.gap || "0") || 0;
+          const cardWidth = firstCard.getBoundingClientRect().width;
+          const step = cardWidth + gap;
+          const total = serviceTrack.querySelectorAll(".service-card").length;
+          const viewport = serviceTrack.closest(".service-viewport");
+          const viewportWidth = viewport
+            ? viewport.getBoundingClientRect().width
+            : cardWidth;
+          const visible = Math.max(1, Math.floor((viewportWidth + gap) / step));
+          const maxIndex = Math.max(0, total - visible);
+
+          serviceIndex = Math.max(0, Math.min(serviceIndex, maxIndex));
+
+          if (!animate) {
+            serviceTrack.style.transition = "none";
+          }
+          serviceTrack.style.transform = `translateX(${-serviceIndex * step}px)`;
+          if (!animate) {
+            requestAnimationFrame(() => {
+              serviceTrack.style.transition = "";
+            });
+          }
+
+          serviceButtons[0].disabled = serviceIndex === 0;
+          serviceButtons[1].disabled = serviceIndex === maxIndex;
+        };
+
+        serviceButtons[0].addEventListener("click", () => {
+          serviceIndex -= 1;
+          updateService(true);
+        });
+        serviceButtons[1].addEventListener("click", () => {
+          serviceIndex += 1;
+          updateService(true);
+        });
+        window.addEventListener("resize", () => updateService(false));
+        updateService(false);
+      }
+
+      const revealItems = document.querySelectorAll(".reveal");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12 },
+      );
+
+      revealItems.forEach((item) => observer.observe(item));
+    </script>
+
+    <!-- Yandex.Metrika counter 94273164 -->
+    <script type="text/javascript" data-tilda-cookie-type="analytics">
+      setTimeout(function () {
+        (function (m, e, t, r, i, k, a) {
+          m[i] =
+            m[i] ||
+            function () {
+              (m[i].a = m[i].a || []).push(arguments);
+            };
+          m[i].l = 1 * new Date();
+          ((k = e.createElement(t)),
+            (a = e.getElementsByTagName(t)[0]),
+            (k.async = 1),
+            (k.src = r),
+            a.parentNode.insertBefore(k, a));
+        })(
+          window,
+          document,
+          "script",
+          "https://mc.yandex.ru/metrika/tag.js",
+          "ym",
+        );
+        window.mainMetrikaId = "94273164";
+        ym(window.mainMetrikaId, "init", {
+          clickmap: true,
+          trackLinks: true,
+          accurateTrackBounce: true,
+          webvisor: true,
+          params: { __ym: { ymCms: { cms: "custom", cmsVersion: "1.0" } } },
+        });
+      }, 2000);
+    </script>
+    <noscript>
+      <div>
+        <img
+          src="https://mc.yandex.ru/watch/94273164"
+          style="position: absolute; left: -9999px"
+          alt=""
+        />
+      </div>
+    </noscript>
+    <!-- /Yandex.Metrika counter -->
+  </body>
+</html>
+

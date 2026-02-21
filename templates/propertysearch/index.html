@@ -1,0 +1,139 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Поиск недвижимости — Союз Застройщиков</title>
+  <link rel="stylesheet" href="{% static 'listings/styles.css' %}">
+  <style>
+    body {
+      margin: 0;
+      padding-top: 130px;
+      background: linear-gradient(180deg, #f7f9fc 0%, #eef3f8 100%);
+    }
+    #custom-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 120px;
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
+      align-items: center;
+      padding: 0 30px;
+      background: #ffffff;
+      z-index: 5000;
+    }
+    #custom-header .logo {display: flex; justify-content: flex-start; padding: 8px 12px;}
+    #custom-header a {
+      font-family: "ralewey", Arial, sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #00ceb1;
+      text-decoration: none;
+      text-align: center;
+      padding: 6px 8px;
+    }
+    #custom-header .nav a {
+      font-size: 18px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 2px solid #00ceb1;
+      background: #e6fffb;
+      min-width: 150px;
+      display: inline-flex;
+      justify-content: center;
+    }
+    #custom-header .nav a:hover {background: #00ceb1; color: #ffffff;}
+    #custom-header .logo img {height: 90px;}
+    #custom-header .nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      padding: 10px 14px;
+    }
+    #custom-header .phone {
+      display: flex;
+      justify-content: flex-end;
+      padding: 8px 12px;
+    }
+    @media (max-width: 1200px) {
+      #custom-header {padding: 0 16px; grid-template-columns: 1fr 2fr 1fr;}
+      #custom-header a {font-size: 18px;}
+    }
+    @media (max-width: 959px) {
+      #custom-header {
+        grid-template-columns: 1fr;
+        row-gap: 10px;
+        height: auto;
+        padding: 10px 16px;
+      }
+      #custom-header .logo {justify-content: center;}
+      #custom-header .nav {justify-content: center; flex-wrap: wrap;}
+      #custom-header .phone {justify-content: center;}
+      body {padding-top: 170px;}
+    }
+  </style>
+</head>
+<body>
+  <div id="custom-header">
+    <div class="logo">
+      <a href="/"><img src="/static/logo.png?v=1" alt="Союз Застройщиков"></a>
+    </div>
+    <div class="nav">
+      <a href="/search/complexes/">ЖК</a>
+      <a href="/#rec634479152">Районы</a>
+      <a href="/search/">Поиск</a>
+      <a href="/">На главную</a>
+    </div>
+    <div class="phone"><a href="tel:+79668552929">8(966) 855 29 29</a></div>
+  </div>
+
+  <main style="padding: 40px 20px;">
+    <section style="max-width: 1200px; margin: 0 auto 32px; position: relative; overflow: hidden; border-radius: 24px; box-shadow: 0 20px 45px rgba(0,0,0,0.1);">
+      <div style="position:absolute; inset:0; background: linear-gradient(120deg, rgba(0,206,177,0.85), rgba(13,110,253,0.75)); z-index:1;"></div>
+      <div style="position:absolute; inset:0; background: url('https://images.unsplash.com/photo-1529429617124-aee1f1650a5e?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat; filter: brightness(0.45);"></div>
+      <div style="position: relative; z-index: 2; padding: 48px 48px 56px; color: #fff;">
+        <p style="letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; margin: 0 0 12px;">Санкт‑Петербург и область</p>
+        <h1 style="margin: 0 0 16px; font-size: 38px; line-height: 1.2;">Подберём квартиру в лучших ЖК: от исторического центра до зелёных районов у Финского залива</h1>
+        <p style="margin: 0 0 22px; font-size: 18px; max-width: 760px;">Собираем новостройки бизнес‑класса на Петроградке, семейные проекты у метро, готовые квартиры рядом с парками и набережными. Доступ к акциям застройщиков, субсидированным ставкам и закрытым предложениям.</p>
+        <div style="display:flex; gap:14px; flex-wrap:wrap;">
+          <a href="/search/complexes/" style="background:#ffffff; color:#0f172a; padding:12px 18px; border-radius:12px; font-weight:700; text-decoration:none; box-shadow:0 10px 25px rgba(0,0,0,0.12);">Смотреть ЖК</a>
+          <a href="/search/" style="color:#ffffff; padding:12px 18px; border-radius:12px; border:1px solid #ffffff; text-decoration:none;">Запросить подбор</a>
+        </div>
+      </div>
+    </section>
+
+    <section style="max-width: 1200px; margin: 0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px;">
+      <article style="background:#ffffff; border-radius:18px; overflow:hidden; box-shadow:0 14px 30px rgba(0,0,0,0.08);">
+        <div style="height:180px; background:url('{% static 'piter_centre.jpg' %}?v=1') center/cover no-repeat;"></div>
+        <div style="padding:16px 18px;">
+          <h3 style="margin:0 0 8px; color:#0f172a;">Премиум в центре</h3>
+          <p style="margin:0; color:#475569; font-size:15px;">Видовые квартиры у каналов, рядом с театрами и музеями. Авторская архитектура, подземный паркинг, закрытые дворы.</p>
+        </div>
+      </article>
+      <article style="background:#ffffff; border-radius:18px; overflow:hidden; box-shadow:0 14px 30px rgba(0,0,0,0.08);">
+        <div style="height:180px; background:url('{% static 'piter_family.jpg' %}?v=1') center/cover no-repeat;"></div>
+        <div style="padding:16px 18px;">
+          <h3 style="margin:0 0 8px; color:#0f172a;">Семейные районы</h3>
+          <p style="margin:0; color:#475569; font-size:15px;">Уютные кварталы у метро: детские сады во дворе, школы, парки и спорт-площадки. Готовые и строящиеся варианты с отделкой.</p>
+        </div>
+      </article>
+      <article style="background:#ffffff; border-radius:18px; overflow:hidden; box-shadow:0 14px 30px rgba(0,0,0,0.08);">
+        <div style="height:180px; background:url('{% static 'zagorod_voda.png' %}?v=1') center/cover no-repeat;"></div>
+        <div style="padding:16px 18px;">
+          <h3 style="margin:0 0 8px; color:#0f172a;">Загород у воды</h3>
+          <p style="margin:0; color:#475569; font-size:15px;">Таунхаусы, дома и участки в коттеджных посёлках у озёр и рек ЛО. Коммуникации, благоустроенные улицы и быстрый выезд в город.</p>
+        </div>
+      </article>
+      <article style="background:#ffffff; border-radius:18px; overflow:hidden; box-shadow:0 14px 30px rgba(0,0,0,0.08);">
+        <div style="height:180px; background:url('{% static 'investicii.jpg' %}?v=1') center/cover no-repeat;"></div>
+        <div style="padding:16px 18px;">
+          <h3 style="margin:0 0 8px; color:#0f172a;">Инвестиции</h3>
+          <p style="margin:0; color:#475569; font-size:15px;">Стартовые очереди у крупных магистралей и метро, продуманная планировка и ликвидность для аренды или перепродажи.</p>
+        </div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

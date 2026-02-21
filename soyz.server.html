@@ -1,0 +1,1547 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Союз Застройщиков Санкт-Петербург - подбор недвижимости</title>
+  <meta name="description" content="Союз Застройщиков Санкт-Петербург - профессиональный подбор новостроек и сопровождение сделки. Бесплатная консультация и закрытая база объектов." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Союз Застройщиков Санкт-Петербург" />
+  <meta property="og:description" content="Ваш ключ к идеальному жилью. Подбор новостроек, ипотека, сопровождение сделки." />
+  <meta property="og:image" content="/static/landing/hero-building.png" />
+  <link rel="icon" type="image/png" href="/static/landing/logo-mark.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      color-scheme: light;
+      --font-display: "Cormorant Garamond", "Times New Roman", serif;
+      --font-body: "Manrope", "Segoe UI", sans-serif;
+      --page-width: 1240px;
+      --page-gutter: 28px;
+      --text-dark: #263246;
+      --text-muted: #6c7b90;
+      --blue-950: #10233c;
+      --blue-900: #1c3557;
+      --blue-800: #2b4f78;
+      --blue-700: #3b68a6;
+      --blue-600: #5a86c2;
+      --blue-400: #a8c0de;
+      --accent: #f3cc7a;
+      --accent-strong: #e7b95b;
+      --cream: #f7f2e9;
+      --white: #ffffff;
+      --shadow-soft: 0 18px 40px rgba(15, 32, 55, 0.16);
+      --shadow-card: 0 16px 30px rgba(13, 29, 53, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text-dark);
+      background: #f8f5f0;
+      min-height: 100vh;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+      height: auto;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    .page {
+      width: min(var(--page-width), 100%);
+      margin: 0 auto;
+      padding: 0 var(--page-gutter);
+      position: relative;
+    }
+
+    .section {
+      padding: 90px 0 0;
+      position: relative;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 44px;
+      font-weight: 500;
+      color: var(--blue-900);
+      line-height: 1.1;
+    }
+
+    .section-title.light {
+      color: var(--white);
+    }
+
+    .section-text {
+      margin-top: 14px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      height: 52px;
+      padding: 0 26px;
+      border-radius: 999px;
+      border: none;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #3b2f1b;
+      box-shadow: 0 16px 26px rgba(231, 185, 91, 0.35);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-strong);
+      transform: translateY(-2px);
+    }
+
+    .btn-blue {
+      background: var(--blue-700);
+      color: var(--white);
+      box-shadow: 0 18px 26px rgba(59, 104, 166, 0.35);
+    }
+
+    .btn-blue:hover {
+      background: #325b93;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid rgba(43, 79, 120, 0.2);
+      color: var(--blue-900);
+    }
+
+    .btn-outline:hover {
+      background: rgba(90, 134, 194, 0.12);
+    }
+
+    .btn-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.9);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .btn-icon img {
+      width: 14px;
+      height: 14px;
+    }
+
+    .site-header {
+      padding: 20px 0 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: linear-gradient(180deg, rgba(247, 242, 233, 0.95), rgba(247, 242, 233, 0.72) 60%, rgba(247, 242, 233, 0));
+      backdrop-filter: blur(6px);
+    }
+
+    .header-inner {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand img {
+      height: 32px;
+      width: auto;
+    }
+
+    .site-nav {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #7b8ca4;
+      font-weight: 500;
+    }
+
+    .site-nav a {
+      padding: 6px 4px;
+      position: relative;
+    }
+
+    .site-nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -2px;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.2s ease;
+    }
+
+    .site-nav a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: #72839a;
+      font-size: 14px;
+    }
+
+    .header-right .phone {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .phone-icon {
+      width: 18px;
+      height: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .phone-icon svg {
+      width: 12px;
+      height: 12px;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      fill: none;
+    }
+
+    .socials {
+      display: flex;
+      gap: 8px;
+    }
+
+    .socials a {
+      width: 28px;
+      height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--white);
+      box-shadow: 0 8px 16px rgba(15, 32, 55, 0.08);
+    }
+
+    .nav-toggle {
+      display: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(43, 79, 120, 0.2);
+      background: var(--white);
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .nav-toggle span {
+      width: 14px;
+      height: 2px;
+      background: #6f86a3;
+      border-radius: 999px;
+    }
+
+    .hero {
+      padding: 30px 0 0;
+    }
+
+    .hero-card {
+      background: linear-gradient(135deg, #7ea1c7, #a5bed9 55%, #d4e1ef 100%);
+      border-radius: 32px;
+      padding: 70px 64px 54px;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      right: -120px;
+      top: 40px;
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0));
+      opacity: 0.3;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 420px;
+      gap: 32px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: 64px;
+      color: var(--white);
+      line-height: 1.05;
+      font-weight: 500;
+    }
+
+    .hero-subtitle {
+      margin-top: 18px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .hero-actions {
+      margin-top: 24px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .hero-image {
+      width: 100%;
+      border-radius: 26px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(15, 32, 55, 0.2);
+      animation: heroFloat 6s ease-in-out infinite;
+    }
+
+    .hero-benefits {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .benefit-card {
+      background: rgba(255, 255, 255, 0.22);
+      border-radius: 20px;
+      padding: 16px 16px 14px;
+      color: var(--white);
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(6px);
+      min-height: 120px;
+    }
+
+    .benefit-card h4 {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .benefit-card p {
+      font-size: 12px;
+      line-height: 1.35;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .benefit-card img {
+      width: 38px;
+      height: 38px;
+    }
+
+    .about-grid,
+    .regulation-grid,
+    .request-grid,
+    .why-grid,
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 48px;
+      align-items: center;
+    }
+
+    .about-photo img,
+    .regulation-photo img,
+    .why-image img,
+    .request-photo img {
+      border-radius: 28px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .section-curve {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: min(1440px, 100%);
+      height: auto;
+      transform: translateX(-50%);
+      opacity: 0.3;
+      display: block;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .section-curve--catalog {
+      top: 220px;
+      width: min(1440px, 100%);
+      opacity: 0.35;
+    }
+
+    #catalog {
+      overflow: hidden;
+    }
+
+    .section .page {
+      position: relative;
+      z-index: 1;
+    }
+
+    .catalog-visual {
+      position: relative;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      min-height: 420px;
+    }
+
+    .catalog-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .catalog-cards {
+      position: absolute;
+      left: 24px;
+      bottom: 24px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.92);
+      padding: 12px;
+      border-radius: 18px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .catalog-card {
+      width: 150px;
+      height: 100px;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .catalog-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .catalog-card span {
+      position: absolute;
+      left: 8px;
+      bottom: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--white);
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+    }
+
+    .dark-section {
+      margin-top: 90px;
+      background: #0c0c0c url("/static/landing/wave-lines.svg") no-repeat center 160px;
+      background-size: 1600px auto;
+      color: var(--white);
+      padding: 90px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dark-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(59, 104, 166, 0.3), rgba(12, 12, 12, 0) 55%);
+      pointer-events: none;
+    }
+
+    .dark-title {
+      font-family: var(--font-display);
+      font-size: 36px;
+      color: #a9c0de;
+      line-height: 1.2;
+    }
+
+    .start-grid,
+    .service-grid {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+      position: relative;
+    }
+
+    .slider-btn {
+      position: absolute;
+      right: -8px;
+      top: 45%;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: none;
+      background: var(--accent);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      box-shadow: 0 10px 18px rgba(15, 32, 55, 0.2);
+    }
+
+    .slider-btn img {
+      width: 14px;
+      height: 14px;
+    }
+
+    .start-card,
+    .service-card {
+      border-radius: 22px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: var(--shadow-card);
+    }
+
+    .start-card img,
+    .service-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .start-card .info {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      background: rgba(94, 104, 116, 0.88);
+      border-radius: 14px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 13px;
+    }
+
+    .start-card .info span {
+      display: block;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.75);
+      margin-top: 4px;
+    }
+
+    .card-arrow {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--white);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .card-arrow img {
+      width: 12px;
+      height: 12px;
+    }
+
+    .service-label {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      background: rgba(88, 98, 110, 0.85);
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .dark-cta {
+      margin-top: 40px;
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .why-list-title {
+      margin-top: 18px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--blue-900);
+    }
+
+    .why-list {
+      display: grid;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .why-item {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(42, 66, 106, 0.15);
+    }
+
+    .why-item h4 {
+      font-size: 16px;
+      color: var(--blue-900);
+      margin-bottom: 6px;
+    }
+
+    .why-item p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .reviews {
+      margin-top: 90px;
+      background: linear-gradient(90deg, #1f4f86, #8db0d2), url("/static/landing/wave-lines.svg");
+      background-repeat: no-repeat;
+      background-position: center 120px;
+      background-size: 1800px auto;
+      padding: 80px 0 90px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .reviews-grid {
+      margin-top: 36px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .review-card {
+      background: var(--white);
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .review-card h4 {
+      font-size: 14px;
+      color: var(--blue-900);
+    }
+
+    .review-card span {
+      display: block;
+      margin-top: 6px;
+      font-size: 12px;
+      color: #96a4b8;
+    }
+
+    .review-card p {
+      margin-top: 10px;
+      font-size: 13px;
+      line-height: 1.5;
+      color: #5b6d83;
+    }
+
+    .reviews-controls {
+      position: absolute;
+      right: 120px;
+      top: 160px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .review-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid rgba(34, 54, 84, 0.45);
+      background: transparent;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+    }
+
+    .review-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .review-btn img {
+      width: 12px;
+      height: 12px;
+    }
+
+    .news-grid {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .news-card {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+    }
+
+    .news-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .news-card .overlay {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+      background: rgba(83, 97, 118, 0.85);
+      color: var(--white);
+      padding: 12px 14px;
+      border-radius: 16px;
+      font-size: 13px;
+    }
+
+    .news-card .overlay span {
+      font-size: 12px;
+      opacity: 0.8;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .news-card .news-arrow {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--white);
+      display: grid;
+      place-items: center;
+    }
+
+    .partners-grid {
+      margin-top: 36px;
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 20px;
+      align-items: center;
+    }
+
+    .partners-grid img {
+      width: 100%;
+      max-height: 36px;
+      object-fit: contain;
+      filter: grayscale(0.1);
+    }
+
+    .request-form {
+      margin-top: 16px;
+      display: grid;
+      gap: 12px;
+      max-width: 380px;
+    }
+
+    .request-form input {
+      height: 44px;
+      border-radius: 12px;
+      border: none;
+      background: #f4e2bc;
+      padding: 0 14px;
+      font-size: 14px;
+    }
+
+    .request-consent {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .request-consent input {
+      margin-top: 2px;
+    }
+
+    .footer {
+      margin-top: 90px;
+      background: linear-gradient(120deg, #2a4f7f, #7a9ac0 100%);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer-top {
+      padding: 60px var(--page-gutter) 40px;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1.1fr;
+      gap: 40px;
+    }
+
+    .footer-logo {
+      width: 180px;
+      margin-bottom: 18px;
+    }
+
+    .footer-col h4 {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 14px;
+    }
+
+    .footer-col p,
+    .footer-col a {
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 8px;
+    }
+
+    .footer-map img {
+      width: 100%;
+      border-radius: 18px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 16px var(--page-gutter) 20px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes heroFloat {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0); }
+    }
+
+    @media (max-width: 1150px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-image {
+        max-width: 520px;
+      }
+
+      .hero-benefits {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .reviews-controls {
+        position: static;
+        margin-top: 20px;
+      }
+
+      .news-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .news-card:last-child {
+        display: none;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .site-header {
+        position: static;
+      }
+
+      .header-inner {
+        grid-template-columns: auto auto;
+        justify-content: space-between;
+      }
+
+      .site-nav {
+        position: fixed;
+        inset: 70px 20px auto 20px;
+        background: var(--white);
+        padding: 20px;
+        border-radius: 20px;
+        flex-direction: column;
+        gap: 14px;
+        box-shadow: var(--shadow-card);
+        transform: translateY(-20px);
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.2s ease;
+      }
+
+      .site-nav.open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .nav-toggle {
+        display: inline-flex;
+      }
+
+      .header-right {
+        display: none;
+      }
+
+      .about-grid,
+      .regulation-grid,
+      .request-grid,
+      .why-grid,
+      .catalog-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .catalog-cards {
+        position: static;
+        margin-top: 16px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .dark-section {
+        padding: 70px 0 70px;
+      }
+
+      .start-grid,
+      .service-grid,
+      .reviews-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .partners-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 6px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      :root {
+        --page-gutter: 18px;
+      }
+
+      .section {
+        padding-top: 70px;
+      }
+
+      .section-title {
+        font-size: 34px;
+      }
+
+      .hero-card {
+        padding: 44px 24px 36px;
+      }
+
+      .hero-title {
+        font-size: 42px;
+      }
+
+      .hero-benefits {
+        grid-template-columns: 1fr;
+      }
+
+      .catalog-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .news-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .partners-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="page header-inner">
+      <a class="brand" href="#">
+        <img src="/static/landing/logo-main.png" alt="Союз Застройщиков Санкт-Петербург" />
+      </a>
+      <nav class="site-nav" aria-label="Основная навигация">
+        <a href="#about">О компании</a>
+        <a href="#catalog">Недвижимость</a>
+        <a href="#services">Услуги</a>
+        <a href="#reviews">Отзывы</a>
+        <a href="#news">Новости</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+      <div class="header-right">
+        <a class="phone" href="tel:+79668552929">
+          <span class="phone-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M5 4h3l2 5-2 1c1.2 2.4 3 4.3 5.4 5.4l1-2 5 2v3c0 0-1.2 2-4 2-6.6 0-12-5.4-12-12 0-2.8 2-4 2-4z" />
+            </svg>
+          </span>
+          +7 (966) 855-29-29
+        </a>
+        <div class="socials">
+          <a href="https://vk.com/soyz.zastroi" target="_blank" rel="noopener" aria-label="VK">
+            <img src="/static/landing/social-1.png" alt="" />
+          </a>
+          <a href="https://t.me/soyz_zastroi" target="_blank" rel="noopener" aria-label="Telegram">
+            <img src="/static/landing/social-2.png" alt="" />
+          </a>
+        </div>
+      </div>
+      <button class="nav-toggle" type="button" aria-label="Открыть меню" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="page hero-card reveal">
+        <div class="hero-grid">
+          <div>
+            <h1 class="hero-title">Ваш ключ к идеальному жилью</h1>
+            <div class="hero-subtitle">ООО "Союз Застройщиков Санкт-Петербург" — современные жилые решения</div>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#request">
+                Бесплатная консультация
+                <span class="btn-icon"><img src="/static/landing/cta-arrow.png" alt="" /></span>
+              </a>
+              <a class="btn btn-outline" href="/search/">Посмотреть каталог</a>
+            </div>
+          </div>
+          <div class="hero-image">
+            <img src="/static/landing/hero-building.png" alt="Современные жилые комплексы" />
+          </div>
+        </div>
+        <div class="hero-benefits">
+          <div class="benefit-card">
+            <img src="/static/landing/benefit-icon-1.png" alt="" />
+            <div>
+              <h4>8 лет на рынке новостроек</h4>
+              <p>Реализованы самые смелые мечты более 750 клиентов</p>
+            </div>
+          </div>
+          <div class="benefit-card">
+            <img src="/static/landing/benefit-icon-2.png" alt="" />
+            <div>
+              <h4>Безопасность сделки</h4>
+              <p>Юридическая проверка, официальные партнеры, проверенные застройщики</p>
+            </div>
+          </div>
+          <div class="benefit-card">
+            <img src="/static/landing/benefit-icon-3.png" alt="" />
+            <div>
+              <h4>Min ставка по ипотеке</h4>
+              <p>Компания сертифицированный партнер ведущих банков РФ</p>
+            </div>
+          </div>
+          <div class="benefit-card">
+            <img src="/static/landing/benefit-icon-4.png" alt="" />
+            <div>
+              <h4>146 жилых комплексов</h4>
+              <p>Закрытая база планировок с открытыми скидками.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      
+      <div class="page about-grid">
+        <div>
+          <h2 class="section-title">О компании</h2>
+          <p class="section-text">Агентство недвижимости ООО "Союз Застройщиков Санкт-Петербург" оказывает на протяжении 8 лет услуги в сфере покупки недвижимости для своих клиентов.</p>
+          <p class="section-text">Посетив офис компании, либо виртуально удаленно вы сможете ознакомиться с ценами на новостройки Санкт-Петербурга в режиме онлайн. Выбрать удобную для вас планировку, посмотреть аэросъемку жилого комплекса.</p>
+          <p class="section-text">Профессиональные эксперты посоветуют более перспективный вариант и подберут удобную форму оплаты.</p>
+          <p class="section-text">Ипотечные специалисты оценят ваши шансы на получение ипотеки и сделают вам расчет.</p>
+          <p class="section-text">Если в офисе не удастся прийти к однозначному решению, то на автомобиле компании вам проведут экскурсию по строительным площадкам с посещением демонстрационных квартир.</p>
+        </div>
+        <div class="about-photo reveal">
+          <img src="/static/landing/about-photo-1.png" alt="Команда Союз Застройщиков" />
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      
+      <div class="page regulation-grid">
+        <div class="regulation-photo reveal">
+          <img src="/static/landing/about-photo-2.png" alt="Регламент работы" />
+        </div>
+        <div>
+          <h2 class="section-title">О регламенте работы</h2>
+          <p class="section-text">Для того чтобы получить доступ к закрытой базе новостроек необходимо оставить свой номер телефона и имя в форме заявки.</p>
+          <p class="section-text">В течение 15 минут с вами свяжется эксперт и задаст уточняющие вопросы для более корректной подборки презентаций из всего количества недвижимости, после чего направит вам ссылку с интересующими вас объектами недвижимости по всему Санкт-Петербургу и Ленинградской области.</p>
+          <p class="section-text">Все услуги по подбору и сопровождению сделки в новостройках оказываются бесплатно.</p>
+          <a class="btn btn-blue" href="#request">
+            Получить консультацию
+            <span class="btn-icon"><img src="/static/landing/cta-arrow.png" alt="" /></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="catalog">
+      <svg class="section-curve section-curve--catalog" viewBox="0 0 1440 879" fill="none" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+<path fill="none" opacity="0.35" d="M-51 175.556C9.51604 215.965 180.562 272.537 380.618 175.556C437.838 147.818 526.663 97.8828 551.015 71.6879C691.819 -79.7779 7.63222 41.4561 358.013 206.667C430.774 234.024 551.015 273.029 738.063 247.434C913.218 223.466 960.578 141.549 1075.92 71.6879C1127.28 40.5767 1243.67 8.51175 1362.99 18.9471C1519.87 32.6684 1544.41 158.551 1577.15 193.417L1221.94 393.871C1315.18 393.871 1184.8 647.589 787.512 658.317C390.225 669.045 395.453 807.615 447.727 875.559" stroke="url(#paint0_linear_1065_666)" stroke-opacity="0.35" stroke-width="5.11849" stroke-linecap="round"/>
+<defs>
+<linearGradient id="paint0_linear_1065_666" x1="783.983" y1="599.131" x2="647.528" y2="875.888" gradientUnits="userSpaceOnUse">
+<stop stop-color="#0865FE"/>
+<stop offset="1" stop-color="white"/>
+</linearGradient>
+</defs>
+</svg>
+      <div class="page catalog-grid">
+        <div>
+          <h2 class="section-title">Новостройки Петербурга</h2>
+          <p class="section-text">Каталог создан так, чтобы вы чувствовали уверенность: понятные критерии отбора, прозрачные условия покупки и полный пакет документации.</p>
+          <a class="btn btn-primary" href="/search/">
+            Посмотреть каталог
+            <span class="btn-icon"><img src="/static/landing/cta-arrow.png" alt="" /></span>
+          </a>
+        </div>
+        <div class="catalog-visual reveal">
+          <img src="/static/landing/catalog-bg.png" alt="Каталог новостроек" />
+          <div class="catalog-cards">
+            <div class="catalog-card">
+              <img src="/static/landing/catalog-card-1.png" alt="" />
+              <span>База новостроек</span>
+            </div>
+            <div class="catalog-card">
+              <img src="/static/landing/catalog-card-2.png" alt="" />
+              <span>Рассрочка</span>
+            </div>
+            <div class="catalog-card">
+              <img src="/static/landing/catalog-card-3.png" alt="" />
+              <span>Квартиры у моря</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dark-section" id="services">
+      <div class="page">
+        <h2 class="dark-title">Ближайшие старты продаж и современные жилые комплексы Санкт-Петербурга</h2>
+        <div class="start-grid">
+          <div class="start-card reveal" style="--delay: 0.1s;">
+            <img src="/static/landing/start-card-1.png" alt="ЖК Дворцовый Фасад" />
+            <div class="info">
+              <div>
+                ЖК Дворцовый Фасад
+                <span>Красносельский р-н</span>
+              </div>
+              <span class="card-arrow"><img src="/static/landing/cta-arrow.png" alt="" /></span>
+            </div>
+          </div>
+          <div class="start-card reveal" style="--delay: 0.2s;">
+            <img src="/static/landing/start-card-2.png" alt="ЖК Парадный Ансамбль" />
+            <div class="info">
+              <div>
+                ЖК Парадный Ансамбль
+                <span>Московский р-н</span>
+              </div>
+              <span class="card-arrow"><img src="/static/landing/cta-arrow.png" alt="" /></span>
+            </div>
+          </div>
+          <div class="start-card reveal" style="--delay: 0.3s;">
+            <img src="/static/landing/start-card-3.png" alt="ЖК Живи в Рыбацком" />
+            <div class="info">
+              <div>
+                ЖК Живи в Рыбацком
+                <span>Невский р-н</span>
+              </div>
+              <span class="card-arrow"><img src="/static/landing/cta-arrow.png" alt="" /></span>
+            </div>
+          </div>
+          <button class="slider-btn" type="button" aria-label="Следующий">
+            <img src="/static/landing/cta-arrow.png" alt="" />
+          </button>
+        </div>
+
+        <div class="services-block">
+          <h2 class="dark-title" style="margin-top: 40px;">Наши услуги</h2>
+          <div class="service-grid">
+            <div class="service-card reveal" style="--delay: 0.1s;">
+              <img src="/static/landing/service-photo-1.png" alt="Дозаказ отделки" />
+              <div class="service-label">Дозаказ отделки и меблировка</div>
+            </div>
+            <div class="service-card reveal" style="--delay: 0.2s;">
+              <img src="/static/landing/service-photo-2.png" alt="Trade-in" />
+              <div class="service-label">Trade-in с вашей старой квартирой</div>
+            </div>
+          <div class="service-card reveal" style="--delay: 0.3s;">
+            <img src="/static/landing/service-photo-3.png" alt="Вторичная недвижимость" />
+            <div class="service-label">Подбор вторичной недвижимости</div>
+          </div>
+          <button class="slider-btn" type="button" aria-label="Следующий">
+            <img src="/static/landing/cta-arrow.png" alt="" />
+          </button>
+        </div>
+        </div>
+
+        <div class="dark-cta">
+          <a class="btn btn-blue" href="#request">
+            Оставить заявку
+            <span class="btn-icon"><img src="/static/landing/cta-arrow.png" alt="" /></span>
+          </a>
+          <a class="btn btn-blue" href="#request">
+            Получить консультацию
+            <span class="btn-icon"><img src="/static/landing/cta-arrow.png" alt="" /></span>
+          </a>
+          <a class="btn btn-blue" href="/search/">
+            Подобрать квартиру
+            <span class="btn-icon"><img src="/static/landing/cta-arrow.png" alt="" /></span>
+          </a>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="why">
+      <div class="page why-grid">
+        <div class="why-image reveal">
+          <img src="/static/landing/why-photo.png" alt="Счастливые клиенты" />
+        </div>
+        <div>
+          <h2 class="section-title">Почему выбирают нас</h2>
+          <p class="section-text">Мы сделали процесс работы с нами, максимально простым и прозрачным.</p>
+          <div class="why-list-title">5 ключевых критериев для принятия верного решения</div>
+          <div class="why-list">
+            <div class="why-item">
+              <img src="/static/landing/why-icon-1.png" alt="" />
+              <div>
+                <h4>Описание объекта</h4>
+                <p>Вы получаете привязку объекта к карте с описанием ЖК и фото мест для прогулок в парковых зонах, мест для барбекю, мест для занятия спортом и детских площадок</p>
+              </div>
+            </div>
+            <div class="why-item">
+              <img src="/static/landing/why-icon-2.png" alt="" />
+              <div>
+                <h4>Транспортная доступность</h4>
+                <p>Из полученных материалов вы сможете оценить удобность логистических маршрутов, расстояние до метро, близость Аэропорта, Авто- и ЖД вокзалов</p>
+              </div>
+            </div>
+            <div class="why-item">
+              <img src="/static/landing/why-icon-3.png" alt="" />
+              <div>
+                <h4>Безопасность</h4>
+                <p>Эксперты подберут ЖК с передовыми системами безопасности, видеонаблюдением, закрытой придомовой территорией и бесконтактным электронным пропуском</p>
+              </div>
+            </div>
+            <div class="why-item">
+              <img src="/static/landing/why-icon-4.png" alt="" />
+              <div>
+                <h4>Паркинги и кладовые</h4>
+                <p>У нас вы сможете выбрать удобное местоположение и приобрести парковочное место или кладовую со скидкой, или по удобной схеме расчетов</p>
+              </div>
+            </div>
+            <div class="why-item">
+              <img src="/static/landing/why-icon-5.png" alt="" />
+              <div>
+                <h4>Аэропанорама</h4>
+                <p>Эксперты предоставят вам ссылку на аэропанораму понравившегося объекта и вы сможете с высоты птичьего полета осмотреть объект строительства</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="reviews" id="reviews">
+      <div class="page">
+        <h2 class="section-title light">Главный показатель качества нашей работы - довольный клиент</h2>
+        <div class="reviews-grid">
+          <article class="review-card reveal" style="--delay: 0.1s;">
+            <h4>Татьяна С.</h4>
+            <span>25 марта 2023</span>
+            <p>Прекрасная работа на все 100. Очень компетентны в своей деятельности. Спасибо большое все быстро без лишних справок и бумажной волокиты. Помогли подобрать объект, в подготовке документов, довели сделку до конца под ключ. Советую. Большое спасибо, большие профессионалы.</p>
+          </article>
+          <article class="review-card reveal" style="--delay: 0.2s;">
+            <h4>Дмитрий С.</h4>
+            <span>27 ноября 2025</span>
+            <p>Алексей очень помог нам с выбором квартиры и оформлением всего от точки А до точки Б. Всегда отвечает, помогает не бросает, всегда на связи. Если что не понятно он все объяснит. Если вы не знаете какую квартиру взять, в каком районе, как оформить ипотеку и какие собирать документы он вам поможет!</p>
+          </article>
+          <article class="review-card reveal" style="--delay: 0.3s;">
+            <h4>Владимир В.</h4>
+            <span>1 декабря 2025</span>
+            <p>Все прошло отлично. Алексей помогал, отвечал на все вопросы, все делал вовремя. Тут работают лучшие специалисты! Помогли подобрать и оформить все документы от и до. За ручку провели и все подсказали, были всегда на связи и отвечали на заданные вопросы. Спасибо большое! Рекомендую!</p>
+          </article>
+        </div>
+        <div class="reviews-controls">
+          <button class="review-btn" type="button" aria-label="Предыдущий">
+            <img src="/static/landing/review-icon-1.png" alt="" />
+          </button>
+          <button class="review-btn active" type="button" aria-label="Следующий">
+            <img src="/static/landing/review-icon-2.png" alt="" />
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="news">
+      <div class="page">
+        <h2 class="section-title">Новости мира недвижимости</h2>
+        <div class="news-grid">
+          <article class="news-card reveal" style="--delay: 0.1s;">
+            <img src="/static/landing/news-1.png" alt="Новый ЖК" />
+            <div class="news-arrow"><img src="/static/landing/cta-arrow.png" alt="" /></div>
+            <div class="overlay">
+              <span>12.11.2025</span>
+              <strong>Новый ЖК в 5 минутах от метро</strong>
+            </div>
+          </article>
+          <article class="news-card reveal" style="--delay: 0.15s;">
+            <img src="/static/landing/news-2.png" alt="Ставки" />
+            <div class="news-arrow"><img src="/static/landing/cta-arrow.png" alt="" /></div>
+          </article>
+          <article class="news-card reveal" style="--delay: 0.2s;">
+            <img src="/static/landing/news-3.png" alt="Ипотека" />
+            <div class="news-arrow"><img src="/static/landing/cta-arrow.png" alt="" /></div>
+          </article>
+          <article class="news-card reveal" style="--delay: 0.25s;">
+            <img src="/static/landing/news-4.png" alt="Новости" />
+            <div class="news-arrow"><img src="/static/landing/cta-arrow.png" alt="" /></div>
+          </article>
+          <article class="news-card reveal" style="--delay: 0.3s;">
+            <img src="/static/landing/news-5.png" alt="Строительство" />
+            <div class="news-arrow"><img src="/static/landing/cta-arrow.png" alt="" /></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="partners">
+      <div class="page">
+        <h2 class="section-title">Наши партнеры</h2>
+        <p class="section-text">Мы являемся партнерами проверенных застройщиков работающих по 214-ФЗ РФ с использованием эскроу счетов. При выборе квартиры по запросу клиентов мы предоставляем разрешительные документы на строительство и акты ввода в эксплуатацию. Для ознакомления с расположением жилого комплекса проводим экскурсии по строительным объектам, показываем варианты отделки в демонстрационных и готовых квартирах</p>
+        <div class="partners-grid">
+          <img src="/static/landing/partner-1.png" alt="Партнер 1" />
+          <img src="/static/landing/partner-2.png" alt="Партнер 2" />
+          <img src="/static/landing/partner-3.png" alt="Партнер 3" />
+          <img src="/static/landing/partner-4.png" alt="Партнер 4" />
+          <img src="/static/landing/partner-5.png" alt="Партнер 5" />
+          <img src="/static/landing/partner-6.png" alt="Партнер 6" />
+          <img src="/static/landing/partner-7.png" alt="Партнер 7" />
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="request">
+      <div class="page request-grid">
+        <div>
+          <h2 class="section-title">Остались вопросы?</h2>
+          <p class="section-text">Получите бесплатную консультацию специалиста. Наши агенты свяжутся с вами в течение 10-20 минут и помогут выбрать идеальное жилье.</p>
+          <form class="request-form" action="mailto:spb_info@soyz-zastroi.ru" method="post" enctype="text/plain">
+            <input type="text" name="name" placeholder="Имя" required />
+            <input type="email" name="email" placeholder="Почта" />
+            <input type="tel" name="phone" placeholder="Телефон" required />
+            <label class="request-consent">
+              <input type="checkbox" required />
+              <span>Я соглашаюсь на обработку персональных данных и с политикой конфиденциальности</span>
+            </label>
+            <button class="btn btn-primary" type="submit">Отправить</button>
+          </form>
+        </div>
+        <div class="request-photo reveal">
+          <img src="/static/landing/request-photo.png" alt="Консультация" />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="contacts">
+    <div class="footer-top">
+      <div class="footer-col">
+        <img class="footer-logo" src="/static/landing/footer-logo.png" alt="Союз Застройщиков" />
+        <h4>Юридическая информация</h4>
+        <p>ООО "СОЮЗ ЗАСТРОЙЩИКОВ САНКТ-ПЕТЕРБУРГ"</p>
+        <p>ИНН 7805718291</p>
+        <p>ОГРН 11778473883889</p>
+        <p style="margin-top: 12px;"><a href="#">Политика конфиденциальности</a></p>
+        <p>Все права защищены 2026</p>
+      </div>
+      <div class="footer-col">
+        <h4>Навигация</h4>
+        <div class="footer-links">
+          <a href="#about">О компании</a>
+          <a href="#catalog">Каталог</a>
+          <a href="#services">Услуги</a>
+          <a href="#reviews">Отзывы</a>
+          <a href="#partners">Наши партнеры</a>
+          <a href="#contacts">Контакты</a>
+          <a href="/admin-panel/login/">Вход</a>
+        </div>
+        <div style="margin-top: 18px;">
+          <p><strong>198097 Санкт-Петербург</strong><br />Метро Кировский завод,<br />Пр-т Стачек 47, лит А, БЦ Шереметьев, офис 352</p>
+          <p>Пн-Вс: 9:00-18:00</p>
+          <p><a href="mailto:spb_info@soyz-zastroi.ru">SPB_INFO@SOYZ-ZASTROI.RU</a></p>
+          <p><a href="tel:+79668552929">+7 (966) 855-29-29</a></p>
+          <div class="socials" style="margin-top: 10px;">
+            <a href="https://vk.com/soyz.zastroi" target="_blank" rel="noopener" aria-label="VK">
+              <img src="/static/landing/social-1.png" alt="" />
+            </a>
+            <a href="https://t.me/soyz_zastroi" target="_blank" rel="noopener" aria-label="Telegram">
+              <img src="/static/landing/social-2.png" alt="" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-map">
+        <img src="/static/landing/footer-map.png" alt="Карта" />
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Сделано для Союза Застройщиков Санкт-Петербург</span>
+      <span>ООО "СОЮЗ ЗАСТРОЙЩИКОВ САНКТ-ПЕТЕРБУРГ"</span>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('.site-nav');
+    const navLinks = document.querySelectorAll('.site-nav a');
+
+    if (toggle && nav) {
+      toggle.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(isOpen));
+      });
+    }
+
+    navLinks.forEach((link) => {
+      link.addEventListener('click', () => {
+        if (nav.classList.contains('open')) {
+          nav.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+
+    const revealItems = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealItems.forEach((item) => observer.observe(item));
+  </script>
+
+  <!-- Yandex.Metrika counter 94273164 -->
+  <script type="text/javascript" data-tilda-cookie-type="analytics">
+    setTimeout(function () {
+      (function (m, e, t, r, i, k, a) {
+        m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments); };
+        m[i].l = 1 * new Date();
+        k = e.createElement(t),
+        a = e.getElementsByTagName(t)[0],
+        k.async = 1,
+        k.src = r,
+        a.parentNode.insertBefore(k, a);
+      })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+      window.mainMetrikaId = '94273164';
+      ym(window.mainMetrikaId, "init", {
+        clickmap: true,
+        trackLinks: true,
+        accurateTrackBounce: true,
+        webvisor: true,
+        params: { __ym: { "ymCms": { "cms": "custom", "cmsVersion": "1.0" } } }
+      });
+    }, 2000);
+  </script>
+  <noscript>
+    <div><img src="https://mc.yandex.ru/watch/94273164" style="position:absolute; left:-9999px;" alt="" /></div>
+  </noscript>
+  <!-- /Yandex.Metrika counter -->
+</body>
+</html>

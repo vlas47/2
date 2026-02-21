@@ -1,0 +1,35 @@
+# Python / Django
+__pycache__/
+*.py[cod]
+*.pyo
+*.sqlite3
+
+# Virtualenv
+venv/
+
+# Django files
+staticfiles/
+media/
+
+# OS
+.DS_Store
+Thumbs.db
+~$*
+
+# IDE
+.idea/
+.vscode/
+static/complexes_photos/
+id_ed25519
+id_ed25519.pub
+
+.figma_token
+static/landing/_figma/Дескоп.svg
+static/landing/_figma/Frame 219199135.svg
+static/landing/_figma/Планшет  830px.svg
+node_modules
+node_modules/
+
+
+static/landing/_figma/
+static/landing/_figma/*.svg
