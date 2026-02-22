@@ -13,8 +13,6 @@ from urllib.request import Request, urlopen
 from urllib.error import URLError, HTTPError
 
 from .models import RealtyOffer
-from complexes.services import get_active_complex_names
-
 SETL_CACHE = {'path': None, 'mtime': None, 'data': {}}
 
 
@@ -69,8 +67,6 @@ class RealEstateDashboardView(TemplateView):
             .distinct()
             .order_by('property_type')
         )
-        context['complex_options'] = get_active_complex_names()
-
         page_obj = None
         if self.paginate_by:
             paginator = Paginator(queryset, self.paginate_by)
@@ -111,9 +107,7 @@ class RealEstateDashboardView(TemplateView):
     def _build_queryset(self):
         params = self.request.GET
         qs = RealtyOffer.objects.all()
-        active_complexes = get_active_complex_names()
-        if active_complexes:
-            qs = qs.filter(building_name__in=active_complexes)
+
         search = params.get('q')
         if search:
             qs = qs.filter(
@@ -130,9 +124,6 @@ class RealEstateDashboardView(TemplateView):
         metro = params.get('metro')
         if metro:
             qs = qs.filter(metro_name__icontains=metro)
-        complex_filter = params.get('complex')
-        if complex_filter:
-            qs = qs.filter(building_name__iexact=complex_filter)
         rooms = params.get('rooms')
         if rooms and rooms.isdigit():
             qs = qs.filter(rooms=int(rooms))

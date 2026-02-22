@@ -25,6 +25,4 @@ urlpatterns = [
     path('zagorod/', include('countryside.urls')),
     path('admin-panel/', include('adminportal.urls')),
     path('realestate/', include('realestate.urls')),
-    path('complexes/', include(('complexes.urls', 'complexes'), namespace='complexes')),
-    path('search/', include(('propertysearch.urls', 'propertysearch'), namespace='propertysearch')),
 ]

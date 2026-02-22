@@ -52,8 +52,6 @@ INSTALLED_APPS = [
     'countryside',
     'adminportal',
     'realestate',
-    'complexes',
-    'propertysearch',
 ]
 
 MIDDLEWARE = [
@@ -134,34 +132,12 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
+
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-
-# Разрешаем большие загрузки фото, чтобы галерея ЖК принимала наборы высокоразрешённых снимков.
-DATA_UPLOAD_MAX_MEMORY_SIZE = 32 * 1024 * 1024  # 32 МБ лимит на весь POST-запрос
-FILE_UPLOAD_MAX_MEMORY_SIZE = 16 * 1024 * 1024  # 16 МБ буфер в памяти на один файл
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'file': {
-            'level': 'ERROR',
-            'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'django.log',
-        },
-    },
-    'loggers': {
-        'django.request': {
-            'handlers': ['file'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
-    },
-}

@@ -41,18 +41,3 @@ class StaffLoginView(LoginView):
         if user.is_superuser or user.groups.filter(name='Администратор').exists():
             return reverse('adminportal:dashboard')
         return reverse('realestate:dashboard')
-
-
-class ManagerCabinetView(TemplateView):
-    """Открытый кабинет главного менеджера."""
-
-    template_name = 'adminportal/dashboard.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['dashboard_cards'] = get_dashboard_cards()
-        context['partner_intro'] = get_partner_intro()
-        context['partner_points'] = get_partner_points()
-        context['steps'] = get_consult_steps()
-        context['is_demo'] = True
-        return context

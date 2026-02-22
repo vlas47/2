@@ -1,13 +1,29 @@
-from django.conf import settings
-from django.http import HttpResponse
-from django.views import View
+from django.views.generic import TemplateView
 
 
-class LandingView(View):
-    """Отдаёт HTML из файла soyz.html (экспорт с Tilda)."""
+class LandingView(TemplateView):
+    """Отображает промо-страницу о Петербурге и компании."""
 
-    source_path = settings.BASE_DIR / 'soyz.html'
+    template_name = 'listings/landing.html'
 
-    def get(self, request, *args, **kwargs):
-        content = self.source_path.read_text(encoding='utf-8')
-        return HttpResponse(content)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['city_highlights'] = [
+            {'title': 'Северная столица', 'text': 'Петербург — город каналов, дворцов и современной архитектуры.'},
+            {'title': 'Технологии и культура', 'text': 'IT-кластеры, музеи и театры формируют спрос на качественное жильё.'},
+            {'title': 'Комфортная среда', 'text': 'Развитая инфраструктура, парки и набережные для жизни и инвестиций.'},
+        ]
+        context['history'] = [
+            {'year': '2017', 'title': 'Старт Союза Застройщиков', 'text': 'Открыли первую консультационную студию и запустили подбор новостроек.'},
+            {'year': '2019', 'title': 'Партнёрская сеть', 'text': 'Заключили соглашения с ведущими девелоперами Петербурга и Ленобласти.'},
+            {'year': '2022', 'title': 'Digital-платформа', 'text': 'Запустили собственный онлайн‑каталог и видеопросмотры объектов.'},
+            {'year': '2024', 'title': 'Команда экспертов', 'text': 'Более 40 специалистов сопровождают сделки в новостройках и вторичке.'},
+        ]
+        context['achievements'] = [
+            {'value': '1400+', 'label': 'семей переехали с нами'},
+            {'value': '55 000', 'label': 'планировок в каталоге'},
+            {'value': '0 ₽', 'label': 'комиссия клиента'},
+            {'value': '24/7', 'label': 'поддержка'},
+        ]
+        context['year'] = 2025
+        return context
